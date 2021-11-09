@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.example.firsttv.R;
 
 public class LiveDetail extends FragmentActivity {
-    public static final String LIVE = "Movie";
+    public static String LIVE = "Movie";
     public static final String NOTIFICATION_ID = "0";
     public static final String SHARED_ELEMENT_NAME = null ;
 

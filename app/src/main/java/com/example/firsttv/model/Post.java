@@ -1,4 +1,4 @@
-package com.example.firsttv;
+package com.example.firsttv.model;
 
 public class Post {
 

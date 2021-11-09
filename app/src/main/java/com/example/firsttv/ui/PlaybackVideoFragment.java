@@ -9,8 +9,6 @@ import androidx.leanback.media.MediaPlayerAdapter;
 import androidx.leanback.media.PlaybackTransportControlGlue;
 import androidx.leanback.widget.PlaybackControlsRow;
 
-import com.example.firsttv.model.Live;
-
 /**
  * Handles video playback with media controls.
  */
@@ -22,8 +20,8 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final Live live =
-                (Live) getActivity().getIntent().getSerializableExtra(DetailsActivity.MOVIE);
+        //final Live live =
+                //(Live) getActivity().getIntent().getSerializableExtra(LiveDetail.LIVE);
 
         VideoSupportFragmentGlueHost glueHost =
                 new VideoSupportFragmentGlueHost(PlaybackVideoFragment.this);
@@ -33,10 +31,10 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
 
         mTransportControlGlue = new PlaybackTransportControlGlue<>(getActivity(), playerAdapter);
         mTransportControlGlue.setHost(glueHost);
-        mTransportControlGlue.setTitle(live.getTitle());
-        mTransportControlGlue.setSubtitle(live.getId());
+        mTransportControlGlue.setTitle("Movie");
+        //mTransportControlGlue.setSubtitle(live.getId());
         mTransportControlGlue.playWhenPrepared();
-        playerAdapter.setDataSource(Uri.parse(live.getLiveImageUrl()));
+        playerAdapter.setDataSource(Uri.parse(PlaybackActivity.URLL));
     }
 
     @Override

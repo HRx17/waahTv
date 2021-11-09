@@ -32,12 +32,12 @@ import androidx.leanback.widget.RowPresenter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.example.firsttv.JsonPlaceHolderApi;
-import com.example.firsttv.Post;
 import com.example.firsttv.R;
+import com.example.firsttv.RetrofitFiles.JsonPlaceHolderApi;
 import com.example.firsttv.data.MyHeaderList;
 import com.example.firsttv.model.HeaderItemModel;
 import com.example.firsttv.model.Live;
+import com.example.firsttv.model.Post;
 import com.example.firsttv.presenter.IconHeaderItemPresenter;
 import com.example.firsttv.presenter.LiveCatPresenter;
 
@@ -64,7 +64,7 @@ public class MainFragment extends BrowseSupportFragment {
     private Drawable mDefaultBackground;
     private DisplayMetrics mMetrics;
     private Timer mBackgroundTimer;
-    private String mBackgroundUri;
+    private int mBackgroundUri;
     private BackgroundManager mBackgroundManager;
 
     @Override
@@ -179,9 +179,9 @@ public class MainFragment extends BrowseSupportFragment {
 
         mBackgroundManager = BackgroundManager.getInstance(getActivity());
         mBackgroundManager.attach(getActivity().getWindow());
-        mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.darkk));
+        mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.images));
 
-        mDefaultBackground = ContextCompat.getDrawable(getActivity(), R.drawable.default_background);
+        mDefaultBackground = ContextCompat.getDrawable(getActivity(), R.color.background_gradient_end);
         mMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
     }
@@ -221,7 +221,7 @@ public class MainFragment extends BrowseSupportFragment {
         setOnItemViewSelectedListener(new ItemViewSelectedListener());
     }
 
-    private void updateBackground(String uri) {
+    private void updateBackground(int uri) {
         int width = mMetrics.widthPixels;
         int height = mMetrics.heightPixels;
         Glide.with(getActivity())
@@ -251,9 +251,10 @@ public class MainFragment extends BrowseSupportFragment {
         public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                                   RowPresenter.ViewHolder rowViewHolder, Row row) {
             if(item instanceof  Live){
-                //Live live = (Live) item;
+                Live live = (Live) item;
                 Intent intent = new Intent(getActivity(), LiveDetail.class);
-                intent.putExtra(LiveDetail.LIVE, String.valueOf(((Live) item).category));
+                LiveDetail.LIVE = live.getId() ;
+                //intent.putExtra(LiveDetail.LIVE, String.valueOf(((Live) item).id));
                 requireActivity().startActivity(intent);
             }
             else if (item instanceof String) {
@@ -275,7 +276,7 @@ public class MainFragment extends BrowseSupportFragment {
                 RowPresenter.ViewHolder rowViewHolder,
                 Row row) {
             if (item instanceof Live) {
-                //mBackgroundUri = ((Live) item).getLiveImageUrl();
+                mBackgroundUri = R.drawable.images;
                 startBackgroundTimer();
             }
         }

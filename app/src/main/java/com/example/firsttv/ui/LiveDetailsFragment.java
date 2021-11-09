@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.leanback.app.BackgroundManager;
 import androidx.leanback.app.BrowseSupportFragment;
 import androidx.leanback.widget.ArrayObjectAdapter;
+import androidx.leanback.widget.HeaderItem;
 import androidx.leanback.widget.ListRow;
 import androidx.leanback.widget.ListRowPresenter;
 import androidx.leanback.widget.OnItemViewClickedListener;
@@ -26,10 +27,12 @@ import androidx.leanback.widget.RowPresenter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.example.firsttv.JsonPlaceHolderApi;
-import com.example.firsttv.Post;
 import com.example.firsttv.R;
+import com.example.firsttv.RetrofitFiles.JsonPlaceHolderApi;
+import com.example.firsttv.RetrofitFiles.RetrofitClient;
+import com.example.firsttv.model.ChannelList;
 import com.example.firsttv.model.Live;
+import com.example.firsttv.model.SubPost;
 import com.example.firsttv.presenter.LiveCatPresenter;
 
 import java.util.List;
@@ -39,8 +42,7 @@ import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.Response;
 
 public class LiveDetailsFragment extends BrowseSupportFragment {
     private static final String TAG = "MainFragment";
@@ -50,7 +52,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
     private Drawable mDefaultBackground;
     private DisplayMetrics mMetrics;
     private Timer mBackgroundTimer;
-    private String mBackgroundUri;
+    private int mBackgroundUri;
     private BackgroundManager mBackgroundManager;
 
     @Override
@@ -58,13 +60,14 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         Log.i(TAG, "onCreate");
         super.onActivityCreated(savedInstanceState);
 
-        //mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.default_background));
+        //mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.images));
 
         prepareBackgroundManager();
 
         setupUIElements();
 
         loadRows();
+
         setupEventListeners();
     }
 
@@ -78,63 +81,57 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
     }
 
     private void loadRows() {
-       // List<Movie> list = MovieList.setupMovies();
         ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
-        //CardPresenter cardPresenter = new CardPresenter();
         LiveCatPresenter liveCatPresenter = new LiveCatPresenter();
 
-       // int i=0;
         ArrayObjectAdapter listRowAdapter1 = new ArrayObjectAdapter(liveCatPresenter);
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://parrot-tv.azurewebsites.net/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        Call<List<Post>> call = jsonPlaceHolderApi.getPosts();
-        call.enqueue(new Callback<List<Post>>() {
-            @Override
-            public void onResponse(Call<List<Post>> call, retrofit2.Response<List<Post>> response) {
 
-               // int img[] = {R.drawable.news,R.drawable.music,R.drawable.entertainement,R.drawable.sports};
-                if(!response.isSuccessful()){
-                    Toast.makeText(getActivity(), "Failed to get response!", Toast.LENGTH_SHORT).show();
+        RetrofitClient retrofitClient = new RetrofitClient();
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofitClient.getRetrofitInstance().create(JsonPlaceHolderApi.class);
+        Call<SubPost> call = jsonPlaceHolderApi.getSubPosts("a@a.com",LiveDetail.LIVE);
+        call.enqueue(new Callback<SubPost>() {
+            @Override
+            public void onResponse(Call<SubPost> call, Response<SubPost> response) {
+                if(!response.isSuccessful()) {
+                    Toast.makeText(getActivity(), "Failed to get Response!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                List<Post> posts = response.body();
-                //int k =0;
-                Toast.makeText(getActivity(), "Got response!", Toast.LENGTH_SHORT).show();
-                for(Post post : Objects.requireNonNull(posts)){
-                    if(post.getDisplayid() == null){
-                        Toast.makeText(getContext(), response.message(), Toast.LENGTH_SHORT).show();
+                List<ChannelList> posts = Objects.requireNonNull(response.body()).getChannelList();
+                System.out.println(posts);
+                for (ChannelList post : posts) {
+                    if (post == null) {
+                        Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     Live list1 = new Live();
-                    list1.setTitle(post.getDisplayid());
-                    list1.setLiveImageUrl(String.valueOf(post.getIconUrl()));
-                    list1.setId(post.getDisplayid());
-                    list1.setCategory(String.valueOf(post.getCategoryType()));
+                    list1.setTitle(post.getChannelName());
+                    list1.setLiveImageUrl(post.getChannellogo());
+                    list1.setId(post.getChannelurl());
+                    list1.setCategory(post.getChannelName());
                     listRowAdapter1.add(list1);
-
+                    //HeaderItem header = new HeaderItem(LiveDetail.LIVE);
                 }
-
             }
 
             @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage() , Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<SubPost> call, Throwable t) {
+                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
-        rowsAdapter.add(new ListRow(listRowAdapter1));
+        HeaderItem header = new HeaderItem(LiveDetail.LIVE);
+        rowsAdapter.add(new ListRow(header, listRowAdapter1));
         setAdapter(rowsAdapter);
     }
     private void setupUIElements() {
-        setBadgeDrawable(getActivity().getResources().getDrawable(R.drawable.adobe));
-        setTitle(getString(R.string.browse_title));
+        setBadgeDrawable(getActivity().getResources().getDrawable(R.drawable.ic_baseline_settings_24));
+        setTitle("Waah Tv");
         // Badge, when set, takes precedent
         // over title
         setHeadersState(HEADERS_ENABLED);
         setHeadersTransitionOnBackEnabled(true);
+
+
 
         // set fastLane (or headers) background color
         setBrandColor(ContextCompat.getColor(getActivity(), R.color.default_background));
@@ -160,14 +157,13 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
 
         mBackgroundManager = BackgroundManager.getInstance(getActivity());
         mBackgroundManager.attach(getActivity().getWindow());
-        mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.darkk));
-
+        mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.images));
         mDefaultBackground = ContextCompat.getDrawable(getActivity(), R.drawable.default_background);
         mMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
     }
 
-    private void updateBackground(String uri) {
+    private void updateBackground(int uri) {
         int width = mMetrics.widthPixels;
         int height = mMetrics.heightPixels;
         Glide.with(getActivity())
@@ -197,9 +193,9 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                                   RowPresenter.ViewHolder rowViewHolder, Row row) {
 
-            //    Live live = (Live) item;
-                Intent intent = new Intent(getActivity(),DetailsActivity.class);
-                intent.putExtra(DetailsActivity.MOVIE, String.valueOf(((Live) item).title));
+                Live live = (Live) item;
+                PlaybackActivity.URLL = live.getId();
+                Intent intent = new Intent(getActivity(),PlaybackActivity.class);
                 getActivity().startActivity(intent);
 
             /*if (item instanceof String) {
@@ -220,12 +216,10 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                 Object item,
                 RowPresenter.ViewHolder rowViewHolder,
                 Row row) {
-            if (item instanceof Live) {
-                mBackgroundUri = ((Live) item).getBackgroundImageUrl();
+                mBackgroundUri = R.drawable.images;
                 startBackgroundTimer();
-                Intent intent = new Intent(getActivity(),PlaybackActivity.class);
+                //Intent intent = new Intent(getActivity(),PlaybackActivity.class);
                 //startActivity(intent);
-            }
         }
     }
 

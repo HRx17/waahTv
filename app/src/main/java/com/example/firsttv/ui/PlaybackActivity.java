@@ -4,10 +4,12 @@ import android.os.Bundle;
 
 import androidx.fragment.app.FragmentActivity;
 
-/**
- * Loads {@link PlaybackVideoFragment}.
- */
+///**
+// * Loads {@link PlaybackVideoFragment}.
+// */
 public class PlaybackActivity extends FragmentActivity {
+
+    public static String URLL="";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
