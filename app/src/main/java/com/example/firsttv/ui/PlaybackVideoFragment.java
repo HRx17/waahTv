@@ -31,7 +31,7 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
 
         mTransportControlGlue = new PlaybackTransportControlGlue<>(getActivity(), playerAdapter);
         mTransportControlGlue.setHost(glueHost);
-        mTransportControlGlue.setTitle("Movie");
+        mTransportControlGlue.setTitle(PlaybackActivity.NAME);
         //mTransportControlGlue.setSubtitle(live.getId());
         mTransportControlGlue.playWhenPrepared();
         playerAdapter.setDataSource(Uri.parse(PlaybackActivity.URLL));

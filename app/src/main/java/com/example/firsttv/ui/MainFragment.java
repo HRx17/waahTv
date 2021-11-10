@@ -72,7 +72,7 @@ public class MainFragment extends BrowseSupportFragment {
         Log.i(TAG, "onCreate");
         super.onActivityCreated(savedInstanceState);
 
-        //mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.default_background));
+       // mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.default_background));
 
         prepareBackgroundManager();
 
@@ -130,10 +130,10 @@ public class MainFragment extends BrowseSupportFragment {
                     else if(post.getCategoryType().equals("LIVE")){
                         Live list1 = new Live();
                         list1.setTitle(post.getDisplayName());
-                        list1.setLiveImageUrl(post.getIconUrl());
+                        list1.setLiveImageUrl(String.valueOf(post.getIconUrl()));
                         list1.setId(post.getDisplayid());
                         list1.setCategory(post.getCategoryType());
-                        listRowAdapter1.add(i,list1);
+                        listRowAdapter1.add(list1);
                         i++;
                     }
                     else if(post.getCategoryType().equals("MOVIES")){
@@ -142,8 +142,7 @@ public class MainFragment extends BrowseSupportFragment {
                         list2.setLiveImageUrl(String.valueOf(post.getIconUrl()));
                         list2.setId(post.getDisplayid());
                         list2.setCategory(String.valueOf(post.getCategoryType()));
-                        listrowadapter2.add(j,list2);
-                        j++;
+                        listrowadapter2.add(list2);
                     }
                     else if(post.getCategoryType().equals("SERIES")){
                         Live list3 = new Live();
@@ -151,8 +150,7 @@ public class MainFragment extends BrowseSupportFragment {
                         list3.setLiveImageUrl(String.valueOf(post.getIconUrl()));
                         list3.setId(post.getDisplayid());
                         list3.setCategory(String.valueOf(post.getCategoryType()));
-                        listrowadapter3.add(a,list3);
-                        a++;
+                        listrowadapter3.add(list3);
                     }
 
                 }
@@ -275,10 +273,8 @@ public class MainFragment extends BrowseSupportFragment {
                 Object item,
                 RowPresenter.ViewHolder rowViewHolder,
                 Row row) {
-            if (item instanceof Live) {
                 mBackgroundUri = R.drawable.images;
                 startBackgroundTimer();
-            }
         }
     }
 

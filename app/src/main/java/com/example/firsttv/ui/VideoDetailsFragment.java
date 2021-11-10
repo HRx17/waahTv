@@ -33,7 +33,6 @@ import androidx.leanback.widget.RowPresenter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.example.firsttv.MovieList;
 import com.example.firsttv.R;
 import com.example.firsttv.model.Live;
 import com.example.firsttv.model.Movie;
@@ -41,8 +40,6 @@ import com.example.firsttv.presenter.CardPresenter;
 import com.example.firsttv.presenter.DetailsDescriptionPresenter;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.List;
 
 /*
  * LeanbackDetailsFragment extends DetailsFragment, a Wrapper fragment for leanback details screens.
@@ -184,12 +181,12 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
 
     private void setupRelatedMovieListRow() {
         String subcategories[] = {getString(R.string.related_movies)};
-        List<Movie> list = MovieList.getList();
+        ///List<Movie> list = MovieList.getList();
 
-        Collections.shuffle(list);
+       // Collections.shuffle(list);
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new CardPresenter());
         for (int j = 0; j < NUM_COLS; j++) {
-            listRowAdapter.add(list.get(j % 5));
+         //   listRowAdapter.add(list.get(j % 5));
         }
 
         HeaderItem header = new HeaderItem(0, subcategories[0]);

@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 public class PlaybackActivity extends FragmentActivity {
 
     public static String URLL="";
+    public static String NAME="";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

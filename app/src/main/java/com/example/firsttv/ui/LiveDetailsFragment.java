@@ -1,12 +1,17 @@
 package com.example.firsttv.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,7 +20,6 @@ import androidx.core.content.ContextCompat;
 import androidx.leanback.app.BackgroundManager;
 import androidx.leanback.app.BrowseSupportFragment;
 import androidx.leanback.widget.ArrayObjectAdapter;
-import androidx.leanback.widget.HeaderItem;
 import androidx.leanback.widget.ListRow;
 import androidx.leanback.widget.ListRowPresenter;
 import androidx.leanback.widget.OnItemViewClickedListener;
@@ -48,6 +52,11 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
     private static final String TAG = "MainFragment";
 
     private static final int BACKGROUND_UPDATE_DELAY = 300;
+    private static final int GRID_ITEM_WIDTH = 200;
+    private static final int GRID_ITEM_HEIGHT = 180;
+    // private static final int NUM_ROWS = 6;
+    //private static final int NUM_COLS = 15;
+
     private final Handler mHandler = new Handler();
     private Drawable mDefaultBackground;
     private DisplayMetrics mMetrics;
@@ -60,7 +69,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         Log.i(TAG, "onCreate");
         super.onActivityCreated(savedInstanceState);
 
-        //mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.images));
+        //mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.default_background));
 
         prepareBackgroundManager();
 
@@ -69,6 +78,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         loadRows();
 
         setupEventListeners();
+
     }
 
     @Override
@@ -81,6 +91,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
     }
 
     private void loadRows() {
+
         ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         LiveCatPresenter liveCatPresenter = new LiveCatPresenter();
 
@@ -109,7 +120,6 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                     list1.setId(post.getChannelurl());
                     list1.setCategory(post.getChannelName());
                     listRowAdapter1.add(list1);
-                    //HeaderItem header = new HeaderItem(LiveDetail.LIVE);
                 }
             }
 
@@ -119,22 +129,32 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
             }
         });
 
-        HeaderItem header = new HeaderItem(LiveDetail.LIVE);
-        rowsAdapter.add(new ListRow(header, listRowAdapter1));
+        //HeaderItem header = new HeaderItem(LiveDetail.LIVE);
+        rowsAdapter.add(new ListRow(listRowAdapter1));
         setAdapter(rowsAdapter);
+
     }
+
+    private void prepareBackgroundManager() {
+
+        mBackgroundManager = BackgroundManager.getInstance(getActivity());
+        mBackgroundManager.attach(getActivity().getWindow());
+        mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.images));
+
+        mDefaultBackground = ContextCompat.getDrawable(getActivity(), R.color.background_gradient_end);
+        mMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void setupUIElements() {
-        setBadgeDrawable(getActivity().getResources().getDrawable(R.drawable.ic_baseline_settings_24));
-        setTitle("Waah Tv");
+        setTitle(LiveDetail.LIVE);
         // Badge, when set, takes precedent
         // over title
         setHeadersState(HEADERS_ENABLED);
         setHeadersTransitionOnBackEnabled(true);
-
-
-
         // set fastLane (or headers) background color
-        setBrandColor(ContextCompat.getColor(getActivity(), R.color.default_background));
+        setBrandColor(ContextCompat.getColor(requireActivity(), R.color.default_background));
         // set search icon color
         setSearchAffordanceColor(ContextCompat.getColor(getActivity(), R.color.default_background));
     }
@@ -149,18 +169,8 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
             }
         });
 
-        setOnItemViewClickedListener(new LiveDetailsFragment.ItemViewClickedListener());
-        setOnItemViewSelectedListener(new LiveDetailsFragment.ItemViewSelectedListener());
-    }
-
-    private void prepareBackgroundManager() {
-
-        mBackgroundManager = BackgroundManager.getInstance(getActivity());
-        mBackgroundManager.attach(getActivity().getWindow());
-        mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.images));
-        mDefaultBackground = ContextCompat.getDrawable(getActivity(), R.drawable.default_background);
-        mMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
+        setOnItemViewClickedListener(new ItemViewClickedListener());
+        setOnItemViewSelectedListener(new ItemViewSelectedListener());
     }
 
     private void updateBackground(int uri) {
@@ -192,20 +202,22 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         @Override
         public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                                   RowPresenter.ViewHolder rowViewHolder, Row row) {
-
+            if(item instanceof  Live){
                 Live live = (Live) item;
                 PlaybackActivity.URLL = live.getId();
-                Intent intent = new Intent(getActivity(),PlaybackActivity.class);
-                getActivity().startActivity(intent);
-
-            /*if (item instanceof String) {
+                PlaybackActivity.NAME = live.getTitle();
+                Intent intent = new Intent(getActivity(), PlaybackActivity.class);
+                //intent.putExtra(LiveDetail.LIVE, String.valueOf(((Live) item).id));
+                requireActivity().startActivity(intent);
+            }
+            else if (item instanceof String) {
                 if (((String) item).contains(getString(R.string.error_fragment))) {
-                    Intent intent1 = new Intent(getActivity(), BrowseErrorActivity.class);
-                    startActivity(intent1);
+                    Intent intent = new Intent(getActivity(), BrowseErrorActivity.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(getActivity(), ((String) item), Toast.LENGTH_SHORT).show();
                 }
-            }*/
+            }
         }
     }
 
@@ -216,10 +228,8 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                 Object item,
                 RowPresenter.ViewHolder rowViewHolder,
                 Row row) {
-                mBackgroundUri = R.drawable.images;
-                startBackgroundTimer();
-                //Intent intent = new Intent(getActivity(),PlaybackActivity.class);
-                //startActivity(intent);
+            mBackgroundUri = R.drawable.images;
+            startBackgroundTimer();
         }
     }
 
@@ -233,6 +243,30 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                     updateBackground(mBackgroundUri);
                 }
             });
+        }
+    }
+
+    private class GridItemPresenter extends Presenter {
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent) {
+            TextView view = new TextView(parent.getContext());
+            view.setLayoutParams(new ViewGroup.LayoutParams(GRID_ITEM_WIDTH, GRID_ITEM_HEIGHT));
+            view.setFocusable(true);
+            view.setFocusableInTouchMode(true);
+            view.setBackgroundColor(
+                    ContextCompat.getColor(getActivity(), R.color.default_background));
+            view.setTextColor(Color.WHITE);
+            view.setGravity(Gravity.CENTER);
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder viewHolder, Object item) {
+            ((TextView) viewHolder.view).setText((String) item);
+        }
+
+        @Override
+        public void onUnbindViewHolder(ViewHolder viewHolder) {
         }
     }
 
