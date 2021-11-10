@@ -21,7 +21,7 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
         super.onCreate(savedInstanceState);
 
         //final Live live =
-                //(Live) getActivity().getIntent().getSerializableExtra(LiveDetail.LIVE);
+        //(Live) getActivity().getIntent().getSerializableExtra(LiveDetail.LIVE);
 
         VideoSupportFragmentGlueHost glueHost =
                 new VideoSupportFragmentGlueHost(PlaybackVideoFragment.this);

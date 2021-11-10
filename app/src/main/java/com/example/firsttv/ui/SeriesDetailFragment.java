@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import androidx.leanback.app.BackgroundManager;
 import androidx.leanback.app.BrowseSupportFragment;
 import androidx.leanback.widget.ArrayObjectAdapter;
+import androidx.leanback.widget.HeaderItem;
 import androidx.leanback.widget.ListRow;
 import androidx.leanback.widget.ListRowPresenter;
 import androidx.leanback.widget.OnItemViewClickedListener;
@@ -36,8 +37,9 @@ import com.example.firsttv.RetrofitFiles.JsonPlaceHolderApi;
 import com.example.firsttv.RetrofitFiles.RetrofitClient;
 import com.example.firsttv.model.ChannelList;
 import com.example.firsttv.model.Live;
+import com.example.firsttv.model.Seasons;
 import com.example.firsttv.model.SubPost;
-import com.example.firsttv. presenter.LiveCatPresenter;
+import com.example.firsttv.presenter.LiveCatPresenter;
 
 import java.util.List;
 import java.util.Objects;
@@ -48,12 +50,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LiveDetailsFragment extends BrowseSupportFragment {
-    private static final String TAG = "LiveDetailsFragment";
+public class SeriesDetailFragment extends BrowseSupportFragment {
+
+    public static String SERIESNAME;
+    private static final String TAG = "SeriesDetailsFragment";
 
     private static final int BACKGROUND_UPDATE_DELAY = 300;
     private static final int GRID_ITEM_WIDTH = 200;
     private static final int GRID_ITEM_HEIGHT = 180;
+    public static  List<Seasons> SERIES;
     // private static final int NUM_ROWS = 6;
     //private static final int NUM_COLS = 15;
 
@@ -95,15 +100,13 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         LiveCatPresenter liveCatPresenter = new LiveCatPresenter();
 
-        ArrayObjectAdapter listRowAdapter1 = new ArrayObjectAdapter(liveCatPresenter);
-
         RetrofitClient retrofitClient = new RetrofitClient();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofitClient.getRetrofitInstance().create(JsonPlaceHolderApi.class);
-        Call<SubPost> call = jsonPlaceHolderApi.getSubPosts("a@a.com",LiveDetail.LIVE);
+        Call<SubPost> call = jsonPlaceHolderApi.getSubPosts("a@a.com", LiveDetail.LIVE);
         call.enqueue(new Callback<SubPost>() {
             @Override
             public void onResponse(Call<SubPost> call, Response<SubPost> response) {
-                if(!response.isSuccessful()) {
+                if (!response.isSuccessful()) {
                     Toast.makeText(getActivity(), "Failed to get Response!", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -114,13 +117,22 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                         Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Live list1 = new Live();
-                    list1.setTitle(post.getChannelName());
-                    list1.setLiveImageUrl(post.getChannellogo());
-                    list1.setId(post.getChannelurl());
-                    list1.setCategory(post.getChannelName());
-                    list1.setSeasons(post.getSeasons());
-                    listRowAdapter1.add(list1);
+                    else if (post.getChannelName().equals(SERIESNAME)) {
+                        for (Seasons seasonsList : post.getSeasons()) {
+                            HeaderItem header = new HeaderItem(seasonsList.getSeason());
+                            ArrayObjectAdapter listRowAdapter1 = new ArrayObjectAdapter(liveCatPresenter);
+                            for (ChannelList data : seasonsList.getChannelListList() ) {
+                                Live list1 = new Live();
+                                list1.setTitle(data.getChannelName());
+                                list1.setLiveImageUrl(data.getChannellogo());
+                                list1.setId(data.getChannelurl());
+                                list1.setCategory(data.getChannelName());
+                                list1.setSeasons(data.getSeasons());
+                                listRowAdapter1.add(list1);
+                            }
+                            rowsAdapter.add(new ListRow(header,listRowAdapter1));
+                        }
+                    }
                 }
             }
 
@@ -131,7 +143,6 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         });
 
         //HeaderItem header = new HeaderItem(LiveDetail.LIVE);
-        rowsAdapter.add(new ListRow(listRowAdapter1));
         setAdapter(rowsAdapter);
 
     }
@@ -203,18 +214,11 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         @Override
         public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                                   RowPresenter.ViewHolder rowViewHolder, Row row) {
-            if(item instanceof  Live && ((Live) item).seasons.isEmpty()){
+            if (item instanceof Live) {
                 Live live = (Live) item;
                 PlaybackActivity.URLL = live.getId();
                 PlaybackActivity.NAME = live.getTitle();
                 Intent intent = new Intent(getActivity(), PlaybackActivity.class);
-                requireActivity().startActivity(intent);
-            }
-            else{
-                Live live = (Live) item;
-                SeriesDetailFragment.SERIESNAME = live.getTitle();
-                Intent intent = new Intent(getActivity(), SeriesDetailsActivity.class);
-                //intent.putExtra(String.valueOf(SeriesDetailFragment.SERIES), String.valueOf(((Live) item).seasons));
                 requireActivity().startActivity(intent);
             }
         }
@@ -227,10 +231,8 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                 Object item,
                 RowPresenter.ViewHolder rowViewHolder,
                 Row row) {
-            if(item instanceof Live) {
-                mBackgroundUri = R.drawable.images;
-                startBackgroundTimer();
-            }
+            mBackgroundUri = R.drawable.images;
+            startBackgroundTimer();
         }
     }
 
@@ -270,5 +272,4 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         public void onUnbindViewHolder(ViewHolder viewHolder) {
         }
     }
-
 }

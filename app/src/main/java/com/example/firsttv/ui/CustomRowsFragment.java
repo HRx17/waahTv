@@ -68,13 +68,13 @@ public class CustomRowsFragment extends RowsFragment implements
 			@Override
 			public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
 				Movie movie = (Movie) item;
-				Intent intent = new Intent(getActivity(), DetailsActivity.class);
-				intent.putExtra(DetailsActivity.MOVIE, movie);
+				Intent intent = new Intent(getActivity(), SeriesDetailsActivity.class);
+				intent.putExtra(SeriesDetailsActivity.MOVIE, movie);
 
 				Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
 						getActivity(),
 						((ImageCardView) itemViewHolder.view).getMainImageView(),
-						DetailsActivity.SHARED_ELEMENT_NAME).toBundle();
+						SeriesDetailsActivity.SHARED_ELEMENT_NAME).toBundle();
 				getActivity().startActivity(intent, bundle);
 			}
 		});

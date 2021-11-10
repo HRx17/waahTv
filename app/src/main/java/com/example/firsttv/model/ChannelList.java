@@ -18,7 +18,7 @@ public class ChannelList {
     private String channelurl;
     @SerializedName("seasons")
     @Expose
-    private List<Object> seasons = null;
+    private List<Seasons> seasons = null;
 
     public String getChannelName() {
         return channelName;
@@ -34,11 +34,11 @@ public class ChannelList {
         return channelurl;
     }
 
-    public List<Object> getSeasons() {
+    public List<Seasons> getSeasons() {
         return seasons;
     }
 
-    public void setSeasons(List<Object> seasons) {
+    public void setSeasons(List<Seasons> seasons) {
         this.seasons = seasons;
     }
 

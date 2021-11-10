@@ -72,7 +72,7 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
         mDetailsBackground = new DetailsSupportFragmentBackgroundController(this);
 
         Live live = new Live();
-        if(live.title.equals(requireActivity().getIntent().getSerializableExtra(DetailsActivity.MOVIE))){
+        if(live.title.equals(requireActivity().getIntent().getSerializableExtra(SeriesDetailsActivity.MOVIE))){
         mSelectedMovie = live;
         }
         if (mSelectedMovie != null) {
@@ -160,7 +160,7 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
         FullWidthDetailsOverviewSharedElementHelper sharedElementHelper =
                 new FullWidthDetailsOverviewSharedElementHelper();
         sharedElementHelper.setSharedElementEnterTransition(
-                getActivity(), DetailsActivity.SHARED_ELEMENT_NAME);
+                getActivity(), SeriesDetailsActivity.SHARED_ELEMENT_NAME);
         detailsPresenter.setListener(sharedElementHelper);
         detailsPresenter.setParticipatingEntranceTransition(true);
 
@@ -169,7 +169,7 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
             public void onActionClicked(Action action) {
                 if (action.getId() == ACTION_WATCH_TRAILER) {
                     Intent intent = new Intent(getActivity(), PlaybackActivity.class);
-                    intent.putExtra(DetailsActivity.MOVIE, (Serializable) mSelectedMovie);
+                    intent.putExtra(SeriesDetailsActivity.MOVIE, (Serializable) mSelectedMovie);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getActivity(), action.toString(), Toast.LENGTH_SHORT).show();
@@ -209,14 +209,14 @@ public class VideoDetailsFragment extends DetailsSupportFragment {
 
             if (item instanceof Movie) {
                 Log.d(TAG, "Item: " + item.toString());
-                Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                Intent intent = new Intent(getActivity(), SeriesDetailsActivity.class);
                 intent.putExtra(getResources().getString(R.string.movie), (Serializable) mSelectedMovie);
 
                 Bundle bundle =
                         ActivityOptionsCompat.makeSceneTransitionAnimation(
                                 getActivity(),
                                 ((ImageCardView) itemViewHolder.view).getMainImageView(),
-                                DetailsActivity.SHARED_ELEMENT_NAME)
+                                SeriesDetailsActivity.SHARED_ELEMENT_NAME)
                                 .toBundle();
                 getActivity().startActivity(intent, bundle);
             }

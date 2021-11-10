@@ -10,7 +10,7 @@
         android:id="@+id/details_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.DetailsActivity"
+        tools:context=".ui.SeriesDetailsActivity"
         android:background="@drawable/images"
         tools:deviceIds="tv"
         tools:ignore="MergeRootFrame"/>

@@ -66,6 +66,7 @@ public class MainFragment extends BrowseSupportFragment {
     private Timer mBackgroundTimer;
     private int mBackgroundUri;
     private BackgroundManager mBackgroundManager;
+    ListRowPresenter listRowPresenter = new ListRowPresenter();
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -198,6 +199,7 @@ public class MainFragment extends BrowseSupportFragment {
                 return new IconHeaderItemPresenter();
             }
         });
+        listRowPresenter.setShadowEnabled(false);
 
         // set fastLane (or headers) background color
         setBrandColor(ContextCompat.getColor(requireActivity(), R.color.default_background));
@@ -273,8 +275,10 @@ public class MainFragment extends BrowseSupportFragment {
                 Object item,
                 RowPresenter.ViewHolder rowViewHolder,
                 Row row) {
+            if(item instanceof Live) {
                 mBackgroundUri = R.drawable.images;
                 startBackgroundTimer();
+            }
         }
     }
 

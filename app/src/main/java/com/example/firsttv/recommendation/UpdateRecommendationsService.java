@@ -27,7 +27,7 @@ import android.util.Log;
 import com.example.firsttv.R;
 import com.example.firsttv.data.VideoProvider;
 import com.example.firsttv.model.Movie;
-import com.example.firsttv.ui.DetailsActivity;
+import com.example.firsttv.ui.SeriesDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,11 +93,11 @@ public class UpdateRecommendationsService extends IntentService {
     }
 
     private PendingIntent buildPendingIntent(Movie movie, int id) {
-        Intent detailsIntent = new Intent(this, DetailsActivity.class);
-        detailsIntent.putExtra(DetailsActivity.MOVIE, movie);
+        Intent detailsIntent = new Intent(this, SeriesDetailsActivity.class);
+        detailsIntent.putExtra(SeriesDetailsActivity.MOVIE, movie);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(DetailsActivity.class);
+        stackBuilder.addParentStack(SeriesDetailsActivity.class);
         stackBuilder.addNextIntent(detailsIntent);
         // Ensure a unique PendingIntents, otherwise all recommendations end up with the same
         // PendingIntent

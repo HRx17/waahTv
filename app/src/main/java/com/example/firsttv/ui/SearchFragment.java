@@ -213,13 +213,13 @@ public class SearchFragment extends androidx.leanback.app.SearchFragment
             if (item instanceof Movie) {
                 Movie movie = (Movie) item;
                 Log.d(TAG, "Movie: " + movie.toString());
-                Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                intent.putExtra(DetailsActivity.MOVIE, movie);
+                Intent intent = new Intent(getActivity(), SeriesDetailsActivity.class);
+                intent.putExtra(SeriesDetailsActivity.MOVIE, movie);
 
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         getActivity(),
                         ((ImageCardView) itemViewHolder.view).getMainImageView(),
-                        DetailsActivity.SHARED_ELEMENT_NAME).toBundle();
+                        SeriesDetailsActivity.SHARED_ELEMENT_NAME).toBundle();
                 getActivity().startActivity(intent, bundle);
             } else {
                 Toast.makeText(getActivity(), ((String) item), Toast.LENGTH_SHORT)

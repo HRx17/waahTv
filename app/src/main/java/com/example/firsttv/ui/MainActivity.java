@@ -17,9 +17,6 @@ public class MainActivity extends FragmentActivity {
     public static boolean isUsingStandardBrowseFragment() { return true;
     }
 
-    //public static boolean isUsingStandardBrowseFragment() {
-    //}
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

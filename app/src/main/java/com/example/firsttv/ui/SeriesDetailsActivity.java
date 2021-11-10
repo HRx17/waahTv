@@ -6,23 +6,17 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.example.firsttv.R;
 
-/*
- * Details activity class that loads LeanbackDetailsFragment class
- */
-public class DetailsActivity extends FragmentActivity {
+public class SeriesDetailsActivity extends FragmentActivity {
     public static final String SHARED_ELEMENT_NAME = "hero";
     public static final String MOVIE = "Movie";
 
-    /**
-     * Called when the activity is first created.
-     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
+        setContentView(R.layout.seriesdetail);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.details_fragment, new VideoDetailsFragment())
+                    .replace(R.id.series_browse_fragment, new SeriesDetailFragment())
                     .commitNow();
         }
     }

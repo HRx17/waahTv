@@ -1,10 +1,25 @@
 package com.example.firsttv.model;
 
+import java.util.List;
+
 public class Live {
     public String title;
     public String id;
     public String category;
     public String liveImageUrl;
+    public List<Seasons> seasons;
+
+    public Live(List<Seasons> seasons) {
+        this.seasons = seasons;
+    }
+
+    public List<Seasons> getSeasons() {
+        return seasons;
+    }
+
+    public void setSeasons(List<Seasons> seasons) {
+        this.seasons = seasons;
+    }
 
     public String getLiveImageUrl() {
         return liveImageUrl;
