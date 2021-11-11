@@ -54,7 +54,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainFragment extends BrowseSupportFragment {
     private static final String TAG = "MainFragment";
 
-    private static final int BACKGROUND_UPDATE_DELAY = 300;
+    private static final int BACKGROUND_UPDATE_DELAY = 200;
     private static final int GRID_ITEM_WIDTH = 200;
     private static final int GRID_ITEM_HEIGHT = 180;
    // private static final int NUM_ROWS = 6;
@@ -187,7 +187,7 @@ public class MainFragment extends BrowseSupportFragment {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void setupUIElements() {
-        setBadgeDrawable(requireActivity().getResources().getDrawable(R.drawable.ic_baseline_settings_24));
+        //setBadgeDrawable(requireActivity().getResources().getDrawable(R.drawable.ic_baseline_settings_24));
         setTitle(getString(R.string.browse_title));
         // Badge, when set, takes precedent
         // over title
