@@ -37,7 +37,7 @@ import com.example.firsttv.RetrofitFiles.RetrofitClient;
 import com.example.firsttv.model.ChannelList;
 import com.example.firsttv.model.Live;
 import com.example.firsttv.model.SubPost;
-import com.example.firsttv. presenter.LiveCatPresenter;
+import com.example.firsttv.presenter.LiveCatPresenter;
 
 import java.util.List;
 import java.util.Objects;
@@ -65,9 +65,9 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
     private BackgroundManager mBackgroundManager;
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate");
-        super.onActivityCreated(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
         //mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.default_background));
 
@@ -152,7 +152,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         setTitle(LiveDetail.LIVE);
         // Badge, when set, takes precedent
         // over title
-        setHeadersState(HEADERS_ENABLED);
+        setHeadersState(HEADERS_DISABLED);
         setHeadersTransitionOnBackEnabled(false);
         // set fastLane (or headers) background color
         setBrandColor(ContextCompat.getColor(requireActivity(), R.color.default_background));

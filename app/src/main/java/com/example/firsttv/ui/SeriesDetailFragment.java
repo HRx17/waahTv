@@ -119,7 +119,8 @@ public class SeriesDetailFragment extends BrowseSupportFragment {
                     }
                     else if (post.getChannelName().equals(SERIESNAME)) {
                         for (Seasons seasonsList : post.getSeasons()) {
-                            HeaderItem header = new HeaderItem(seasonsList.getSeason());
+                            String numberOnly = seasonsList.getSeason().replaceAll("[^0-9]", "");
+                            HeaderItem header = new HeaderItem("Season"+" "+numberOnly);
                             ArrayObjectAdapter listRowAdapter1 = new ArrayObjectAdapter(liveCatPresenter);
                             for (ChannelList data : seasonsList.getChannelListList() ) {
                                 Live list1 = new Live();

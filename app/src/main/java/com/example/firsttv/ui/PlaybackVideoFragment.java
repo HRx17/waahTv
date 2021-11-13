@@ -53,6 +53,7 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
                 call.enqueue(new Callback<FailResponse>() {
                     @Override
                     public void onResponse(Call<FailResponse> call, Response<FailResponse> response) {
+                        //Toast.makeText(getContext(), response.message(), Toast.LENGTH_SHORT).show();
                         Toast.makeText(getContext(), mp.toString(), Toast.LENGTH_SHORT).show();
                     }
 

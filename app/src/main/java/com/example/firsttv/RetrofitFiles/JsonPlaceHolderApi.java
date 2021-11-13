@@ -30,5 +30,4 @@ public interface JsonPlaceHolderApi {
             @Field("url") String url,
             @Field("error") String error
     );
-
 }
