@@ -253,7 +253,8 @@ public class MainFragment extends BrowseSupportFragment {
             if(item instanceof  Live){
                 Live live = (Live) item;
                 Intent intent = new Intent(getActivity(), LiveDetail.class);
-                LiveDetail.LIVE = live.getId() ;
+                LiveDetail.LIVE = live.getId();
+                LiveDetail.NOTIFICATION_ID = live.getCategory();
                 //intent.putExtra(LiveDetail.LIVE, String.valueOf(((Live) item).id));
                 requireActivity().startActivity(intent);
             }

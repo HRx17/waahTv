@@ -20,6 +20,7 @@ import retrofit2.Response;
 
 /**
  * Handles video playback with media controls.
+ * Another video [layer option with exo player library(implementation 'com.google.android.exoplayer:exoplayer:2.7.2')
  */
 public class PlaybackVideoFragment extends VideoSupportFragment {
 
@@ -28,22 +29,31 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //final Live live =
-        //(Live) getActivity().getIntent().getSerializableExtra(LiveDetail.LIVE);
-
         VideoSupportFragmentGlueHost glueHost =
                 new VideoSupportFragmentGlueHost(PlaybackVideoFragment.this);
 
         MediaPlayerAdapter playerAdapter = new MediaPlayerAdapter(getActivity());
-        playerAdapter.setRepeatAction(PlaybackControlsRow.RepeatAction.INDEX_NONE);
-
-        mTransportControlGlue = new PlaybackTransportControlGlue<>(getActivity(), playerAdapter);
-        mTransportControlGlue.setHost(glueHost);
-        mTransportControlGlue.setTitle(PlaybackActivity.NAME);
-        //mTransportControlGlue.setSubtitle(live.getId());
-        mTransportControlGlue.playWhenPrepared();
-        playerAdapter.setDataSource(Uri.parse(PlaybackActivity.URLL));
+        playerAdapter.setRepeatAction(PlaybackControlsRow.RepeatAction.INDEX_ONE);
+        if(LiveDetail.NOTIFICATION_ID.equals("LIVE")){
+            Toast.makeText(getContext(), "This is Live", Toast.LENGTH_SHORT).show();
+            mTransportControlGlue = new PlaybackTransportControlGlue<>(getActivity(), playerAdapter);
+            mTransportControlGlue.setHost(glueHost);
+            //mTransportControlGlue.setTitle(PlaybackActivity.NAME);
+            //mTransportControlGlue.setSubtitle(live.getId());
+            mTransportControlGlue.playWhenPrepared();
+            playerAdapter.setDataSource(Uri.parse(PlaybackActivity.URLL));
+            mTransportControlGlue.setControlsOverlayAutoHideEnabled(false);
+            hideControlsOverlay(false);
+        }
+        else {
+            mTransportControlGlue = new PlaybackTransportControlGlue<>(getActivity(), playerAdapter);
+            mTransportControlGlue.setHost(glueHost);
+            mTransportControlGlue.setTitle(PlaybackActivity.NAME);
+            //mTransportControlGlue.setSubtitle(live.getId());
+            mTransportControlGlue.playWhenPrepared();
+            playerAdapter.setDataSource(Uri.parse(PlaybackActivity.URLL));
+            mTransportControlGlue.setSeekEnabled(true);
+        }
 
         playerAdapter.getMediaPlayer().setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
@@ -65,6 +75,7 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
             }
         });
     }
+
 
     @Override
     public void onPause() {

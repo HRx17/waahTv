@@ -109,6 +109,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                 }
                 List<ChannelList> posts = Objects.requireNonNull(response.body()).getChannelList();
                 System.out.println(posts);
+                int i=0;
                 for (ChannelList post : posts) {
                     if (post == null) {
                         Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
