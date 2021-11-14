@@ -121,7 +121,6 @@ public class MainFragment extends BrowseSupportFragment {
                     return;
                 }
                 List<Post> posts = response.body();
-                Toast.makeText(getActivity(), "Got response!", Toast.LENGTH_SHORT).show();
                 int i = 0,k=0,j=0,a=0;
                 for(Post post : Objects.requireNonNull(posts)){
                     if(post.getDisplayid() == null){
@@ -254,6 +253,11 @@ public class MainFragment extends BrowseSupportFragment {
                 Live live = (Live) item;
                 Intent intent = new Intent(getActivity(), LiveDetail.class);
                 LiveDetail.LIVE = live.getId();
+                LiveDetail.SHARED_ELEMENT_NAME = live.getId();
+                String[] parts = LiveDetail.SHARED_ELEMENT_NAME.split("_");
+                for(int i=0;i< parts.length;i++){
+                    LiveDetail.SHARED_ELEMENT_NAME = parts[i] + " ";
+                }
                 LiveDetail.NOTIFICATION_ID = live.getCategory();
                 //intent.putExtra(LiveDetail.LIVE, String.valueOf(((Live) item).id));
                 requireActivity().startActivity(intent);

@@ -9,7 +9,7 @@ import com.example.firsttv.R;
 public class LiveDetail extends FragmentActivity {
     public static String LIVE = "Movie";
     public static String NOTIFICATION_ID = "0";
-    public static final String SHARED_ELEMENT_NAME = null ;
+    public static String SHARED_ELEMENT_NAME = null ;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

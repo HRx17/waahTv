@@ -51,6 +51,7 @@ import retrofit2.Response;
 public class LiveDetailsFragment extends BrowseSupportFragment {
     private static final String TAG = "LiveDetailsFragment";
 
+
     private static final int BACKGROUND_UPDATE_DELAY = 300;
     private static final int GRID_ITEM_WIDTH = 200;
     private static final int GRID_ITEM_HEIGHT = 180;
@@ -95,7 +96,6 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         LiveCatPresenter liveCatPresenter = new LiveCatPresenter();
 
-        ArrayObjectAdapter listRowAdapter1 = new ArrayObjectAdapter(liveCatPresenter);
 
         RetrofitClient retrofitClient = new RetrofitClient();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofitClient.getInstance().getApi();
@@ -109,19 +109,28 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                 }
                 List<ChannelList> posts = Objects.requireNonNull(response.body()).getChannelList();
                 System.out.println(posts);
-                int i=0;
+                int i=0,cnt=0;
+                ArrayObjectAdapter listRowAdapter1 = new ArrayObjectAdapter(liveCatPresenter);
                 for (ChannelList post : posts) {
                     if (post == null) {
                         Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Live list1 = new Live();
-                    list1.setTitle(post.getChannelName());
-                    list1.setLiveImageUrl(post.getChannellogo());
-                    list1.setId(post.getChannelurl());
-                    list1.setCategory(post.getChannelName());
-                    list1.setSeasons(post.getSeasons());
-                    listRowAdapter1.add(list1);
+                    else if(i<4) {
+                        Live list1 = new Live();
+                        list1.setTitle(post.getChannelName());
+                        list1.setLiveImageUrl(post.getChannellogo());
+                        list1.setId(post.getChannelurl());
+                        list1.setCategory(post.getChannelName());
+                        list1.setSeasons(post.getSeasons());
+                        listRowAdapter1.add(cnt,list1);
+                        cnt++;
+                        i++;
+                    }
+                    else{
+                        rowsAdapter.add(new ListRow(listRowAdapter1));
+                        i=1;
+                    }
                 }
             }
 
@@ -132,7 +141,6 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         });
 
         //HeaderItem header = new HeaderItem(LiveDetail.LIVE);
-        rowsAdapter.add(new ListRow(listRowAdapter1));
         setAdapter(rowsAdapter);
 
     }
@@ -150,7 +158,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void setupUIElements() {
-        setTitle(LiveDetail.LIVE);
+        setTitle(LiveDetail.SHARED_ELEMENT_NAME);
         // Badge, when set, takes precedent
         // over title
         setHeadersState(HEADERS_DISABLED);
