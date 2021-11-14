@@ -35,7 +35,6 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
         MediaPlayerAdapter playerAdapter = new MediaPlayerAdapter(getActivity());
         playerAdapter.setRepeatAction(PlaybackControlsRow.RepeatAction.INDEX_ONE);
         if(LiveDetail.NOTIFICATION_ID.equals("LIVE")){
-            Toast.makeText(getContext(), "This is Live", Toast.LENGTH_SHORT).show();
             mTransportControlGlue = new PlaybackTransportControlGlue<>(getActivity(), playerAdapter);
             mTransportControlGlue.setHost(glueHost);
             //mTransportControlGlue.setTitle(PlaybackActivity.NAME);
