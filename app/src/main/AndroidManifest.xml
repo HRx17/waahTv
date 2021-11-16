@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.firsttv" >
+    package="com.example.firsttv">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -18,19 +18,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.FirstTV"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:ignore="MissingTvBanner">
+        <activity android:name=".Splash">
 
+        </activity>
         <activity android:name=".ui.LiveDetail" />
         <activity android:name=".ui.PlaybackActivity" />
         <activity android:name=".ui.BrowseErrorActivity" />
-        <activity android:name=".ui.SeriesDetailsActivity"/>
+        <activity android:name=".ui.SeriesDetailsActivity" />
         <activity
             android:name=".ui.MainActivity"
             android:banner="@mipmap/ic_launcher"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:logo="@mipmap/ic_launcher"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -8,9 +8,9 @@ import androidx.core.content.ContextCompat;
 import androidx.leanback.widget.ImageCardView;
 import androidx.leanback.widget.Presenter;
 
-import com.bumptech.glide.Glide;
 import com.example.firsttv.R;
 import com.example.firsttv.model.Live;
+import com.squareup.picasso.Picasso;
 
 public class LiveCatPresenter extends Presenter {
     private static final String TAG = "LivePresenter";
@@ -67,11 +67,17 @@ public class LiveCatPresenter extends Presenter {
         if (live.getLiveImageUrl() !=null){
             cardView.setTitleText(live.getTitle());
             cardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT);
-            Glide.with(viewHolder.view.getContext())
+            Picasso.get()
                     .load(live.getLiveImageUrl())
+                    .resize(720,480)
+                    .into(cardView.getMainImageView());
+
+           /* Glide.with(viewHolder.view.getContext())
+                    .load(live.getLiveImageUrl())
+                    .override(720,480)
                     .centerCrop()
                     .error(mDefaultCardImage)
-                    .into(cardView.getMainImageView());
+                    .into(cardView.getMainImageView());*/
         }
     }
 

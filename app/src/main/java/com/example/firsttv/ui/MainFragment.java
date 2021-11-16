@@ -55,8 +55,8 @@ public class MainFragment extends BrowseSupportFragment {
     private static final String TAG = "MainFragment";
 
     private static final int BACKGROUND_UPDATE_DELAY = 200;
-    private static final int GRID_ITEM_WIDTH = 200;
-    private static final int GRID_ITEM_HEIGHT = 180;
+    private static final int GRID_ITEM_WIDTH = 300;
+    private static final int GRID_ITEM_HEIGHT = 280;
    // private static final int NUM_ROWS = 6;
     //private static final int NUM_COLS = 15;
 
@@ -175,11 +175,11 @@ public class MainFragment extends BrowseSupportFragment {
 
     private void prepareBackgroundManager() {
 
-        mBackgroundManager = BackgroundManager.getInstance(getActivity());
-        mBackgroundManager.attach(getActivity().getWindow());
+        mBackgroundManager = BackgroundManager.getInstance(requireActivity());
+        mBackgroundManager.attach(requireActivity().getWindow());
         mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.images));
 
-        mDefaultBackground = ContextCompat.getDrawable(getActivity(), R.color.background_gradient_end);
+        mDefaultBackground = ContextCompat.getDrawable(getActivity(), R.drawable.images);
         mMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
     }
@@ -223,7 +223,7 @@ public class MainFragment extends BrowseSupportFragment {
     private void updateBackground(int uri) {
         int width = mMetrics.widthPixels;
         int height = mMetrics.heightPixels;
-        Glide.with(getActivity())
+        Glide.with(requireActivity())
                 .load(uri)
                 .centerCrop()
                 .error(mDefaultBackground)
