@@ -10,11 +10,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.firsttv.ui.MainActivity;
 
-public class Splash extends AppCompatActivity {
+public class Splash extends FragmentActivity {
 
     ImageView imageView;
     ProgressBar progressBar;
@@ -50,7 +50,7 @@ public class Splash extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(Splash.this, MainActivity.class);
+                Intent intent = new Intent(Splash.this, Login.class);
                 startActivity(intent);
             }
         }, 7000);

@@ -108,12 +108,14 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                     return;
                 }
                 List<ChannelList> posts = Objects.requireNonNull(response.body()).getChannelList();
-                System.out.println(posts);
+                if (posts==null){
+                    Toast.makeText(getContext(), "Nothing Added yet!", Toast.LENGTH_SHORT).show();
+                }
                 int i=0,cnt=0;
                 ArrayObjectAdapter listRowAdapter1 = new ArrayObjectAdapter(liveCatPresenter);
                 for (ChannelList post : posts) {
                     if (post == null) {
-                        Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), response.message(), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     else if(i<4) {
@@ -136,7 +138,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
 
             @Override
             public void onFailure(Call<SubPost> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
