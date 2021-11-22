@@ -9,11 +9,17 @@ import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.firsttv.RetrofitFiles.LoginResponse;
+import com.example.firsttv.RetrofitFiles.RetrofitClient;
 import com.example.firsttv.ui.MainActivity;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Login extends FragmentActivity {
 
-    EditText log_enroll, log_pass;
+    EditText log_email, log_pass;
     Button login;
     Button skiptoo;
 
@@ -25,7 +31,7 @@ public class Login extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        log_enroll = findViewById(R.id.log_enroll);
+        log_email = findViewById(R.id.log_enroll);
         log_pass = findViewById(R.id.log_pass);
         login = findViewById(R.id.log_in);
         skiptoo = findViewById(R.id.skip);
@@ -34,7 +40,7 @@ public class Login extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 String tmp1,tmp2;
-                tmp1 = log_enroll.getText().toString();
+                tmp1 = log_email.getText().toString();
                 tmp2 = log_pass.getText().toString();
                 if(tmp1.isEmpty() || tmp2.isEmpty()){
                     Toast.makeText(Login.this, "Please enter details!", Toast.LENGTH_SHORT).show();
@@ -57,7 +63,28 @@ public class Login extends FragmentActivity {
     }
 
     private void userLogin() {
-        Intent intent = new Intent(Login.this, MainActivity.class);
-        startActivity(intent);
+
+        String email = log_email.getText().toString();
+        String password = log_pass.getText().toString();
+
+        Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(email,password);
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                LoginResponse loginResponse = response.body();
+                Toast.makeText(Login.this, response.message(), Toast.LENGTH_SHORT).show();
+                if(response.isSuccessful()){
+                    if(loginResponse.getIsActive().equals("true")) {
+                        Intent intent = new Intent(Login.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Toast.makeText(Login.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

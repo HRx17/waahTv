@@ -30,4 +30,16 @@ public interface JsonPlaceHolderApi {
             @Field("url") String url,
             @Field("error") String error
     );
+    @FormUrlEncoded
+    @POST("api/login")
+    Call<LoginResponse> login(
+            @Field("email") String email,
+            @Field("password") String password
+    );
+    @FormUrlEncoded
+    @POST("api/signup")
+    Call<SignupResponse> Signup(
+            @Field("email") String email,
+            @Field("password") String password
+    );
 }
