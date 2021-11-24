@@ -214,7 +214,6 @@ public class SearchFragment extends androidx.leanback.app.SearchFragment
                 Movie movie = (Movie) item;
                 Log.d(TAG, "Movie: " + movie.toString());
                 Intent intent = new Intent(getActivity(), SeriesDetailsActivity.class);
-                intent.putExtra(SeriesDetailsActivity.MOVIE, movie);
 
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         getActivity(),

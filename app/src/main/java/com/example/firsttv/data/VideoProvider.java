@@ -124,16 +124,8 @@ public class VideoProvider {
                                         String cardImageUrl,
                                         String bgImageUrl) {
         Movie movie = new Movie();
-        movie.setId(Movie.getCount());
-        Movie.incrementCount();
         movie.setTitle(title);
-        movie.setDescription(description);
-        movie.setStudio(studio);
         movie.setCategory(category);
-        movie.setCardImageUrl(cardImageUrl);
-        movie.setBackgroundImageUrl(bgImageUrl);
-        movie.setVideoUrl(videoUrl);
-
         return movie;
     }
 

@@ -16,163 +16,76 @@
 
 package com.example.firsttv.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.List;
 
 /*
  * Movie class represents video entity with title, description, image thumbs and video url.
  */
-public class Movie implements Parcelable {
-    private static final String TAG = "Movie";
-    static final long serialVersionUID = 727566175075960653L;
-    private static int sCount = 0;
-    private String mId;
-    private String mTitle;
-    private String mDescription;
-    private String mBgImageUrl;
-    private String mCardImageUrl;
-    private String mVideoUrl;
-    private String mStudio;
-    private String mCategory;
+public class Movie {
 
-    public Movie() {
+    public String title;
+    public String id;
+    public String category;
+    public String liveImageUrl;
+    public List<Seasons> seasons;
 
+    public Movie(List<Seasons> seasons) {
+        this.seasons = seasons;
     }
 
-    public Movie(Parcel in){
-        String[] data = new String[8];
-
-        in.readStringArray(data);
-        mId = data[0];
-        mTitle = data[1];
-        mDescription = data[2];
-        mBgImageUrl = data[3];
-        mCardImageUrl = data[4];
-        mVideoUrl = data[5];
-        mStudio = data[6];
-        mCategory = data[7];
+    public List<Seasons> getSeasons() {
+        return seasons;
     }
 
-    public static long getCount() {
-        return Long.parseLong(Integer.toString(sCount));
+    public void setSeasons(List<Seasons> seasons) {
+        this.seasons = seasons;
     }
 
-    public static void incrementCount() {
-        sCount++;
+    public String getLiveImageUrl() {
+        return liveImageUrl;
     }
 
-    public long getId() {
-        return Long.parseLong(mId);
-    }
-
-    public void setId(long id) {
-        mId = String.valueOf(id);
-    }
-
-    public String getTitle() {
-        return mTitle;
-    }
-
-    public void setTitle(String title) {
-        mTitle = title;
-    }
-
-    public String getDescription() {
-        return mDescription;
-    }
-
-    public void setDescription(String description) {
-        mDescription = description;
-    }
-
-    public String getStudio() {
-        return mStudio;
-    }
-
-    public void setStudio(String studio) {
-        mStudio = studio;
-    }
-
-    public String getVideoUrl() {
-        return mVideoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        mVideoUrl = videoUrl;
-    }
-
-    public String getBackgroundImageUrl() {
-        return mBgImageUrl;
-    }
-
-    public void setBackgroundImageUrl(String bgImageUrl) {
-        mBgImageUrl = bgImageUrl;
-    }
-
-    public String getCardImageUrl() {
-        return mCardImageUrl;
-    }
-
-    public void setCardImageUrl(String cardImageUrl) {
-        mCardImageUrl = cardImageUrl;
+    public void setLiveImageUrl(String liveImageUrl) {
+        this.liveImageUrl = liveImageUrl;
     }
 
     public String getCategory() {
-        return mCategory;
+        return category;
     }
 
     public void setCategory(String category) {
-        mCategory = category;
+        this.category = category;
     }
 
-    public URI getBackgroundImageURI() {
-        try {
-            return new URI(getBackgroundImageUrl());
-        } catch (URISyntaxException e) {
-            return null;
-        }
+    public void String(String id) {
+        this.id = id;
     }
 
-    public int describeContents() {
-        return 0;
+    public String getId() {
+        return id;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringArray(new String[] {mId,
-                mTitle,
-                mDescription,
-                mBgImageUrl,
-                mCardImageUrl,
-                mVideoUrl,
-                mStudio,
-                mCategory});
+    public void setId(String id) {
+        this.id = id;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder(200);
-        sb.append("Movie{");
-        sb.append("mId=" + mId);
-        sb.append(", mTitle='" + mTitle + '\'');
-        sb.append(", mVideoUrl='" + mVideoUrl + '\'');
-        sb.append(", backgroundImageUrl='" + mBgImageUrl + '\'');
-        sb.append(", backgroundImageURI='" + getBackgroundImageURI().toString() + '\'');
-        sb.append(", mCardImageUrl='" + mCardImageUrl + '\'');
-        sb.append('}');
-        return sb.toString();
+    public Movie() {
     }
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public Movie createFromParcel(Parcel in) {
-            return new Movie(in);
-        }
+    public Movie(String title, String liveImageUrl, String category) {
+        this.title = title;
+        this.category = category;
+        this.liveImageUrl = liveImageUrl;
+    }
 
-        public Movie[] newArray(int size) {
-            return new Movie[size];
-        }
-    };
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getBackgroundImageUrl() { return null;
+    }
 }

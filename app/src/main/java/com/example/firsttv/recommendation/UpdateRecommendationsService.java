@@ -83,7 +83,7 @@ public class UpdateRecommendationsService extends IntentService {
         for (int i = 0; i < flattenedRecommendations.size() && i < MAX_RECOMMENDATIONS; i++) {
             movie = (Movie) flattenedRecommendations.get(i);
             final RecommendationBuilder notificationBuilder = builder
-                    .setBackground(movie.getCardImageUrl())
+                    .setBackground(movie.getLiveImageUrl())
                     .setId(i+1)
                     .setPriority(MAX_RECOMMENDATIONS - i - 1)
                     .setTitle(movie.getTitle())
@@ -94,7 +94,6 @@ public class UpdateRecommendationsService extends IntentService {
 
     private PendingIntent buildPendingIntent(Movie movie, int id) {
         Intent detailsIntent = new Intent(this, SeriesDetailsActivity.class);
-        detailsIntent.putExtra(SeriesDetailsActivity.MOVIE, movie);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(SeriesDetailsActivity.class);

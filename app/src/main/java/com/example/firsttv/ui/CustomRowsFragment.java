@@ -69,7 +69,6 @@ public class CustomRowsFragment extends RowsFragment implements
 			public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
 				Movie movie = (Movie) item;
 				Intent intent = new Intent(getActivity(), SeriesDetailsActivity.class);
-				intent.putExtra(SeriesDetailsActivity.MOVIE, movie);
 
 				Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
 						getActivity(),

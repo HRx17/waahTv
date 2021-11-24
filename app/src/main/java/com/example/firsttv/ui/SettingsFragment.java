@@ -1,5 +1,10 @@
 package com.example.firsttv.ui;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -43,7 +48,7 @@ public class SettingsFragment extends GuidedStepFragment {
         super.onCreateActions(actions, savedInstanceState);
     }
 
-    /*public void onGuidedActionClicked(final GuidedAction action) {
+    public void onGuidedActionClicked(final GuidedAction action) {
         switch ((int) action.getId()) {
             case R.id.settings_toggle_nav_id :
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -76,5 +81,5 @@ public class SettingsFragment extends GuidedStepFragment {
         }
 
         super.onGuidedActionClicked(action);
-    }*/
+    }
 }

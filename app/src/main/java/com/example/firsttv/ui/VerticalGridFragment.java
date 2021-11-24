@@ -102,7 +102,7 @@ public class VerticalGridFragment extends androidx.leanback.app.VerticalGridFrag
                 Movie movie = (Movie) item;
                 Log.d(TAG, "Item: " + item.toString());
                 Intent intent = new Intent(getActivity(), SeriesDetailsActivity.class);
-                intent.putExtra(SeriesDetailsActivity.MOVIE, movie);
+                //intent.putExtra(SeriesDetailsActivity.MOVIE, movie);
 
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         getActivity(),

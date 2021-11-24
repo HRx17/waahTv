@@ -6,8 +6,7 @@ import com.example.firsttv.model.SubPost;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -23,23 +22,18 @@ public interface JsonPlaceHolderApi {
             @Query("email") String id,
             @Query("category") String cat);
 
-    @FormUrlEncoded
     @POST("api/reportfailedchannel")
     Call<FailResponse> response(
-            @Field("category") String category,
-            @Field("url") String url,
-            @Field("error") String error
+            @Query("category") String category,
+            @Query("url") String url,
+            @Query("error") String error
     );
-    @FormUrlEncoded
+
     @POST("api/login")
-    Call<LoginResponse> login(
-            @Field("email") String email,
-            @Field("password") String password
-    );
-    @FormUrlEncoded
+    Call<LoginResponse> login(@Body LoginResponse loginResponse);
     @POST("api/signup")
-    Call<SignupResponse> Signup(
-            @Field("email") String email,
-            @Field("password") String password
-    );
+    Call<SignupResponse> Signup(@Body SignupResponse signupResponse);
+
+    @GET("api/validatecoupon")
+    Call<Validate> validate(@Query("coupon") String coupon);
 }

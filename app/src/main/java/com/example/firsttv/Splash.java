@@ -32,8 +32,8 @@ public class Splash extends FragmentActivity {
 
         Animation animFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("token", 0);
-        String tmp = sharedPreferences.getString("token", null);
+        SharedPreferences sharedPreferences = getSharedPreferences("time", 0);
+        String tmp1 = sharedPreferences.getString("time", null);
 
 
         animFadeIn.reset();
@@ -47,11 +47,18 @@ public class Splash extends FragmentActivity {
         imageView.startAnimation(animFadeIn);
         progressBar.setVisibility(View.GONE);
 
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(Splash.this, Login.class);
-                startActivity(intent);
+                if(tmp1 != null){
+                    Intent intent = new Intent(Splash.this, MainActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(Splash.this, Signup.class);
+                    startActivity(intent);
+                }
             }
         }, 7000);
     }

@@ -1,6 +1,7 @@
 package com.example.firsttv;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -67,14 +68,19 @@ public class Login extends FragmentActivity {
         String email = log_email.getText().toString();
         String password = log_pass.getText().toString();
 
-        Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(email,password);
+        LoginResponse loginResponse = new LoginResponse(email,password);
+        Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(loginResponse);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 LoginResponse loginResponse = response.body();
-                Toast.makeText(Login.this, response.message(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
                 if(response.isSuccessful()){
                     if(loginResponse.getIsActive().equals("true")) {
+                        SharedPreferences sharedPreferences = getSharedPreferences("time", 0);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("time", loginResponse.getExpiryDate());
+                        editor.apply();
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
                     }

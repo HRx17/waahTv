@@ -14,6 +14,9 @@ import java.util.LinkedHashMap;
  * Main Activity class that loads {@link MainFragment}.
  */
 public class MainActivity extends FragmentActivity {
+    public static String PREFS_USE_STANDARD_BROWSE_FRAGMENT;
+    public static String PREFS_ROOT;
+
     public static boolean isUsingStandardBrowseFragment() { return true;
     }
 
