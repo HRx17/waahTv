@@ -47,12 +47,12 @@ public class Splash extends FragmentActivity {
         animFadeIn.reset();
         imageView.clearAnimation();
         imageView.startAnimation(animFadeIn);
-        progressBar.setVisibility(View.GONE);
 
 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                progressBar.setVisibility(View.GONE);
                 if(tmp1 != null){
                     Intent intent = new Intent(Splash.this, MainActivity.class);
                     startActivity(intent);
