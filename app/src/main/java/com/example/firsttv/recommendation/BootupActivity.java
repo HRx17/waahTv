@@ -17,7 +17,6 @@
 package com.example.firsttv.recommendation;
 
 import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -43,12 +42,6 @@ public class BootupActivity extends BroadcastReceiver {
         Log.d(TAG, "Scheduling recommendations update");
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent recommendationIntent = new Intent(context, UpdateRecommendationsService.class);
-        PendingIntent alarmIntent = PendingIntent.getService(context, 0, recommendationIntent, 0);
 
-        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                INITIAL_DELAY,
-                AlarmManager.INTERVAL_HALF_HOUR,
-                alarmIntent);
     }
 }

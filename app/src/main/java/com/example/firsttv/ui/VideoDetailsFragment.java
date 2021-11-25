@@ -46,6 +46,7 @@ import java.io.Serializable;
  * It shows a detailed view of video and its meta plus related videos.
  */
 public class VideoDetailsFragment extends DetailsSupportFragment {
+    public static final String VIDEO = "";
     private static final String TAG = "VideoDetailsFragment";
 
     private static final int ACTION_WATCH_TRAILER = 1;

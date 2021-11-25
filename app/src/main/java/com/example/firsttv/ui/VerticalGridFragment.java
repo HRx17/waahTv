@@ -30,15 +30,8 @@ import androidx.leanback.widget.RowPresenter;
 import androidx.leanback.widget.VerticalGridPresenter;
 
 import com.example.firsttv.R;
-import com.example.firsttv.data.VideoProvider;
 import com.example.firsttv.model.Movie;
 import com.example.firsttv.presenter.CardPresenter;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 /*
  * VerticalGridFragment shows a grid of videos
@@ -69,15 +62,6 @@ public class VerticalGridFragment extends androidx.leanback.app.VerticalGridFrag
 
         long seed = System.nanoTime();
 
-        HashMap<Object, List<List>> movies = VideoProvider.getMovieList();
-
-        for (Map.Entry<Object, List<List>> entry : movies.entrySet()) {
-            List<List> list = entry.getValue();
-            Collections.shuffle(list, new Random(seed));
-            for (List movie : list) {
-                mAdapter.add(movie);
-            }
-        }
 
         setAdapter(mAdapter);
 

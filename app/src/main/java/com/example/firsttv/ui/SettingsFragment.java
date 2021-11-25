@@ -59,9 +59,9 @@ public class SettingsFragment extends GuidedStepFragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 SharedPreferences prefs = getActivity().getSharedPreferences(MainActivity.PREFS_ROOT, Context.MODE_PRIVATE);
                                 prefs
-                                    .edit()
-                                    .putBoolean(MainActivity.PREFS_USE_STANDARD_BROWSE_FRAGMENT, action.isChecked())
-                                    .apply();
+                                        .edit()
+                                        .putBoolean(MainActivity.PREFS_USE_STANDARD_BROWSE_FRAGMENT, action.isChecked())
+                                        .apply();
                                 Intent i = new Intent(getActivity(), MainActivity.class);
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);

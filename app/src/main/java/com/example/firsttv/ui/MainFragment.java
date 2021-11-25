@@ -227,7 +227,7 @@ public class MainFragment extends BrowseSupportFragment {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),SearchActivity.class);
+                Intent intent = new Intent(getContext(),SettingsActivity.class);
                 startActivity(intent);
             }
         });

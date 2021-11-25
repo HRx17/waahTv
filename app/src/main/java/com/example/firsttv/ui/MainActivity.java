@@ -17,6 +17,10 @@ public class MainActivity extends FragmentActivity {
     public static String PREFS_USE_STANDARD_BROWSE_FRAGMENT;
     public static String PREFS_ROOT;
 
+    public void onBackPressed(){
+        return;
+    }
+
     public static boolean isUsingStandardBrowseFragment() { return true;
     }
 

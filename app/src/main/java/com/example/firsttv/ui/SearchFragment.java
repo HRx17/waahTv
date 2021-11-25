@@ -44,14 +44,11 @@ import androidx.leanback.widget.SpeechRecognitionCallback;
 
 import com.example.firsttv.BuildConfig;
 import com.example.firsttv.R;
-import com.example.firsttv.data.VideoProvider;
 import com.example.firsttv.model.Movie;
 import com.example.firsttv.presenter.CardPresenter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /*
  * This class demonstrates how to do in-app search
@@ -186,12 +183,7 @@ public class SearchFragment extends androidx.leanback.app.SearchFragment
             @Override
             protected ListRow doInBackground(String... params) {
                 final List<List> result = new ArrayList<>();
-                HashMap<Object, List<List>> movies = VideoProvider.getMovieList();
-                for (Map.Entry<Object, List<List>> entry : movies.entrySet()) {
-                    for (List movie : entry.getValue()) {
 
-                    }
-                }
                 ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new CardPresenter());
                 listRowAdapter.addAll(0, result);
                 HeaderItem header = new HeaderItem(getString(R.string.search_results, query));

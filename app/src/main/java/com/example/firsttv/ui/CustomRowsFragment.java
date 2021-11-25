@@ -24,10 +24,8 @@ import androidx.leanback.widget.RowPresenter;
 
 import com.example.firsttv.R;
 import com.example.firsttv.Utils;
-import com.example.firsttv.data.VideoProvider;
 import com.example.firsttv.model.Movie;
 import com.example.firsttv.presenter.CardPresenter;
-import com.example.firsttv.recommendation.UpdateRecommendationsService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -80,7 +78,6 @@ public class CustomRowsFragment extends RowsFragment implements
 	}
 
 	private void loadVideoData() {
-		VideoProvider.setContext(getActivity());
 		mVideosUrl = getActivity().getResources().getString(R.string.catalog_url);
 		getLoaderManager().initLoader(0, null, this);
 	}
@@ -135,7 +132,6 @@ public class CustomRowsFragment extends RowsFragment implements
 	}
 
 	private void updateRecommendations() {
-		Intent recommendationIntent = new Intent(getActivity(), UpdateRecommendationsService.class);
-		getActivity().startService(recommendationIntent);
+
 	}
 }
