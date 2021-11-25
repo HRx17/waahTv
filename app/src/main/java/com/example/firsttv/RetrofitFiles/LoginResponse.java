@@ -1,12 +1,20 @@
 package com.example.firsttv.RetrofitFiles;
 
 public class LoginResponse {
+    String macAddress;
+    public String deviceType;
+    public String modelNumner;
+    public String osVersion;
     String email;
     String password;
 
-    public LoginResponse(String email, String password) {
+    public LoginResponse(String email, String password,String macAddress, String deviceType, String modelNumner, String osVersion) {
         this.email = email;
         this.password = password;
+        this.macAddress = macAddress;
+        this.deviceType = deviceType;
+        this.modelNumner = modelNumner;
+        this.osVersion = osVersion;
     }
 
     public String getEmail() {
@@ -24,6 +32,40 @@ public class LoginResponse {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
+    public String getMacAddress() {
+        return macAddress;
+    }
+
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
+    }
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    public String getModelNumner() {
+        return modelNumner;
+    }
+
+    public void setModelNumner(String modelNumner) {
+        this.modelNumner = modelNumner;
+    }
+
+    public String getOsVersion() {
+        return osVersion;
+    }
+
+    public void setOsVersion(String osVersion) {
+        this.osVersion = osVersion;
+    }
+
 
     String emailId;
     String expiryDate;
