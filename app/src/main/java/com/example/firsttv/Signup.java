@@ -145,6 +145,9 @@ public class Signup extends FragmentActivity {
                 if(response.isSuccessful()){
                     Toast.makeText(Signup.this, "Successful! Please check your Mail to activate account", Toast.LENGTH_LONG).show();
                 }
+                else{
+                    Toast.makeText(Signup.this, signupResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
