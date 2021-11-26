@@ -2,6 +2,23 @@ package com.example.firsttv.RetrofitFiles;
 
 public class SignupResponse {
     String email;
+    String password;
+    String message;
+    String errorCode;
+    String macAddress;
+    public String deviceType;
+    public String modelNumner;
+
+    public SignupResponse(String email, String macAddress, String deviceType, String modelNumner, String osVersion, String password) {
+        this.email = email;
+        this.macAddress = macAddress;
+        this.deviceType = deviceType;
+        this.modelNumner = modelNumner;
+        this.osVersion = osVersion;
+        this.password = password;
+    }
+
+    public String osVersion;
 
     public String getEmail() {
         return email;
@@ -19,16 +36,6 @@ public class SignupResponse {
         this.password = password;
     }
 
-    String password;
-
-    public SignupResponse(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-    String message;
-    String error;
-
 
     public String getMessage() {
         return message;
@@ -39,10 +46,10 @@ public class SignupResponse {
     }
 
     public String getError() {
-        return error;
+        return errorCode;
     }
 
     public void setError(String error) {
-        this.error = error;
+        this.errorCode = error;
     }
 }

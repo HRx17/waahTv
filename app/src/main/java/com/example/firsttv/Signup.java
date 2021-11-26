@@ -1,7 +1,11 @@
 package com.example.firsttv;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -105,25 +109,41 @@ public class Signup extends FragmentActivity {
                     Toast.makeText(Signup.this, "Please enter details!", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    userSignup();
+                    if(emailValid(sign_email)) {
+                        userSignup();
+                    }
                 }
             }
         });
     }
 
+    private boolean emailValid(EditText sign_email) {
+        String emailToText = sign_email.getText().toString();
+
+        if (!emailToText.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()) {
+            return true;
+        } else {
+            Toast.makeText(this, "Enter valid Email address !", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
     private void userSignup() {
         String email = sign_email.getText().toString();
         String password = sign_pass.getText().toString();
+        WifiManager manager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo info = manager.getConnectionInfo();
+        String address = info.getMacAddress();
 
-        SignupResponse signupResponse = new SignupResponse(email,password);
+        SignupResponse signupResponse = new SignupResponse(email,password,null,android.os.Build.DEVICE,android.os.Build.PRODUCT,System.getProperty("os.version"));
         Call<SignupResponse> call = RetrofitClient.getInstance().getApi().Signup(signupResponse);
         call.enqueue(new Callback<SignupResponse>() {
             @Override
             public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
-                Toast.makeText(Signup.this, response.message(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Signup.this, response.message(), Toast.LENGTH_SHORT).show();
                 SignupResponse signupResponse = response.body();
                 if(response.isSuccessful()){
-                    Toast.makeText(Signup.this, "Successfully Signed Up!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Signup.this, "Successful! Please check your Mail to activate account", Toast.LENGTH_LONG).show();
                 }
             }
 

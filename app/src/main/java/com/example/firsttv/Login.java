@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +51,9 @@ public class Login extends FragmentActivity {
                     Toast.makeText(Login.this, "Please enter details!", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    userLogin();
+                    if(userValid(log_email)) {
+                        userLogin();
+                    }
                 }
             }
         });
@@ -66,6 +69,17 @@ public class Login extends FragmentActivity {
 
     }
 
+    private boolean userValid(EditText log_email) {
+        String emailToText = log_email.getText().toString();
+
+        if (!emailToText.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()) {
+            return true;
+        } else {
+            Toast.makeText(this, "Enter valid Email address !", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
     private void userLogin() {
 
         String email = log_email.getText().toString();
@@ -74,7 +88,7 @@ public class Login extends FragmentActivity {
         WifiInfo info = manager.getConnectionInfo();
         String address = info.getMacAddress();
 
-        LoginResponse loginResponse = new LoginResponse(email,password,address,android.os.Build.DEVICE,android.os.Build.PRODUCT,System.getProperty("os.version"));
+        LoginResponse loginResponse = new LoginResponse(email,password,null,android.os.Build.DEVICE,android.os.Build.PRODUCT,System.getProperty("os.version"));
         Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(loginResponse);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
@@ -89,6 +103,9 @@ public class Login extends FragmentActivity {
                         editor.apply();
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(Login.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
                 else{
