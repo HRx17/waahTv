@@ -71,9 +71,11 @@ public class Signup extends FragmentActivity {
                                 validatee.clearAnimation();
                                 validatee.startAnimation(animFadeOut);
                                 validatee.setVisibility(View.GONE);
+                                confirmpass.clearAnimation();
                                 sign_email.clearAnimation();
                                 sign.clearAnimation();
                                 sign_pass.clearAnimation();
+                                confirmpass.startAnimation(animFadeIn);
                                 sign_email.startAnimation(animFadeIn);
                                 sign.startAnimation(animFadeIn);
                                 sign_pass.startAnimation(animFadeIn);
@@ -115,11 +117,11 @@ public class Signup extends FragmentActivity {
                 }
                 else{
                     if(emailValid(sign_email)) {
-                        if(sign_pass.equals(confirmpass)) {
+                        if(sign_pass.getText().toString().equals(confirmpass.getText().toString())) {
                             userSignup();
                         }
                         else{
-                            Toast.makeText(Signup.this, "Please enter Correct Password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Signup.this, "Password Doesn't Match", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

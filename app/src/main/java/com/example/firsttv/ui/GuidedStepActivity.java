@@ -85,7 +85,7 @@ public class GuidedStepActivity extends Activity {
             String title = getString(R.string.guidedstep_first_title);
             String breadcrumb = getString(R.string.guidedstep_first_breadcrumb);
             String description = getString(R.string.guidedstep_first_description);
-            Drawable icon = getActivity().getDrawable(R.drawable.ic_main_icon);
+            Drawable icon = getActivity().getDrawable(R.drawable.images);
             return new GuidanceStylist.Guidance(title, description, breadcrumb, icon);
         }
 
@@ -117,7 +117,7 @@ public class GuidedStepActivity extends Activity {
             String title = getString(R.string.guidedstep_second_title);
             String breadcrumb = getString(R.string.guidedstep_second_breadcrumb);
             String description = getString(R.string.guidedstep_second_description);
-            Drawable icon = getActivity().getDrawable(R.drawable.ic_main_icon);
+            Drawable icon = getActivity().getDrawable(R.drawable.images);
             return new GuidanceStylist.Guidance(title, description, breadcrumb, icon);
         }
 
@@ -173,7 +173,7 @@ public class GuidedStepActivity extends Activity {
             String breadcrumb = getString(R.string.guidedstep_third_breadcrumb);
             String description = getString(R.string.guidedstep_third_command)
                     + OPTION_NAMES[mOption];
-            Drawable icon = getActivity().getDrawable(R.drawable.ic_main_icon);
+            Drawable icon = getActivity().getDrawable(R.drawable.images);
             return new GuidanceStylist.Guidance(title, description, breadcrumb, icon);
         }
 

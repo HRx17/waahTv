@@ -14,6 +14,7 @@ import androidx.leanback.widget.GuidanceStylist;
 import androidx.leanback.widget.GuidedAction;
 
 import com.example.firsttv.R;
+import com.example.firsttv.Splash;
 
 import java.util.List;
 
@@ -43,6 +44,12 @@ public class SettingsFragment extends GuidedStepFragment {
                 .title(getString(R.string.settings_toggle_nav_title))
                 .checked(!MainActivity.isUsingStandardBrowseFragment())
                 .description(getString(R.string.settings_toggle_nav_desc))
+                .build());
+        actions.add(new GuidedAction.Builder()
+                .id(R.id.logout)
+                .title("Logout")
+                .checked(!MainActivity.isUsingStandardBrowseFragment())
+                .description( null)
                 .build());
 
         super.onCreateActions(actions, savedInstanceState);
@@ -75,6 +82,14 @@ public class SettingsFragment extends GuidedStepFragment {
                         });
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
+                break;
+            case R.id.logout:
+                SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("time", 0);
+                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+                editor2.clear();
+                editor2.apply();
+                Intent intent = new Intent(getActivity(), Splash.class);
+                startActivity(intent);
                 break;
             default :
                 break;

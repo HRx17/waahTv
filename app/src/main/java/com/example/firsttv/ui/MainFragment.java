@@ -2,7 +2,6 @@ package com.example.firsttv.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -35,11 +34,9 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.firsttv.R;
 import com.example.firsttv.RetrofitFiles.JsonPlaceHolderApi;
-import com.example.firsttv.Splash;
 import com.example.firsttv.data.MyHeaderList;
 import com.example.firsttv.model.HeaderItemModel;
 import com.example.firsttv.model.Live;
-import com.example.firsttv.model.Movie;
 import com.example.firsttv.model.Post;
 import com.example.firsttv.presenter.CardPresenter;
 import com.example.firsttv.presenter.IconHeaderItemPresenter;
@@ -114,11 +111,6 @@ public class MainFragment extends BrowseSupportFragment {
         ArrayObjectAdapter listRowAdapter1 = new ArrayObjectAdapter(liveCatPresenter);
         ArrayObjectAdapter listrowadapter2 = new ArrayObjectAdapter(liveCatPresenter);
         ArrayObjectAdapter listrowadapter3 = new ArrayObjectAdapter(liveCatPresenter);
-        ArrayObjectAdapter listrowadapter4 = new ArrayObjectAdapter(cardPresenter);
-        Movie live = new Movie();
-        live.setLiveImageUrl("https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn1.iconfinder.com%2Fdata%2Ficons%2Fweb-and-mobile-ui-outline-icon-kit%2F512%2FUI_Icons_2-04-512.png&imgrefurl=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F877957%2Flog_out_sign_out_logout_log_out_sign_logout_sign_signout_signout_sign_icon&tbnid=bf7IGAVKfwfeqM&vet=12ahUKEwjF0PmL0rH0AhUEj-YKHW-cA9AQMygGegUIARDPAQ..i&docid=BDU8Usogqj9ZeM&w=512&h=512&itg=1&q=signout&ved=2ahUKEwjF0PmL0rH0AhUEj-YKHW-cA9AQMygGegUIARDPAQ");
-        listrowadapter4.add(live);
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://parrot-tv.azurewebsites.net/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -184,8 +176,6 @@ public class MainFragment extends BrowseSupportFragment {
         k++;
         header = new HeaderItemModel(k,MyHeaderList.HEADER_CATEGORY[k],MyHeaderList.HEADER_img[k]);
         rowsAdapter.add(new ListRow(header, listrowadapter3));
-        header = new HeaderItemModel(k,MyHeaderList.HEADER_CATEGORY[k],MyHeaderList.HEADER_img[k]);
-        rowsAdapter.add(new ListRow(header,listrowadapter4));
         setAdapter(rowsAdapter);
     }
 
@@ -202,7 +192,7 @@ public class MainFragment extends BrowseSupportFragment {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void setupUIElements() {
-        //setBadgeDrawable(requireActivity().getResources().getDrawable(R.drawable.ic_baseline_settings_24));
+        setBadgeDrawable(requireActivity().getResources().getDrawable(R.mipmap.ic_launcher));
         setTitle(getString(R.string.browse_title));
         // Badge, when set, takes precedent
         // over title
@@ -214,7 +204,7 @@ public class MainFragment extends BrowseSupportFragment {
                 return new IconHeaderItemPresenter();
             }
         });
-        listRowPresenter.setShadowEnabled(false);
+        listRowPresenter.setShadowEnabled(true);
 
         // set fastLane (or headers) background color
         setBrandColor(ContextCompat.getColor(requireActivity(), R.color.default_background));
@@ -277,14 +267,6 @@ public class MainFragment extends BrowseSupportFragment {
                 LiveDetail.NOTIFICATION_ID = live.getCategory();
                 //intent.putExtra(LiveDetail.LIVE, String.valueOf(((Live) item).id));
                 requireActivity().startActivity(intent);
-            }
-            else if(item instanceof  Movie){
-                SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("time", 0);
-                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
-                editor2.clear();
-                editor2.apply();
-                Intent intent = new Intent(getContext(), Splash.class);
-                startActivity(intent);
             }
             else if (item instanceof String) {
                 if (((String) item).contains(getString(R.string.error_fragment))) {
