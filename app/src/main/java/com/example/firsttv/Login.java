@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
@@ -27,6 +28,7 @@ public class Login extends FragmentActivity {
     EditText log_email, log_pass;
     Button login;
     Button skiptoo;
+    ProgressBar progressBar;
 
     public void onBackPressed(){
         return;
@@ -40,6 +42,8 @@ public class Login extends FragmentActivity {
         log_pass = findViewById(R.id.log_pass);
         login = findViewById(R.id.log_in);
         skiptoo = findViewById(R.id.skip);
+        progressBar = findViewById(R.id.progress_log);
+        progressBar.setVisibility(View.GONE);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +93,7 @@ public class Login extends FragmentActivity {
         String address = info.getMacAddress();
 
         LoginResponse loginResponse = new LoginResponse(email,password,null,android.os.Build.DEVICE,android.os.Build.PRODUCT,System.getProperty("os.version"));
+        progressBar.setVisibility(View.VISIBLE);
         Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(loginResponse);
         call.enqueue(new Callback<LoginResponse>() {
             @Override

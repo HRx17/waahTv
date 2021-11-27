@@ -25,7 +25,7 @@ import retrofit2.Response;
 
 public class Signup extends FragmentActivity {
 
-    EditText sign_email, sign_pass, validatee;
+    EditText sign_email, sign_pass, validatee, confirmpass;
     Button sign;
     Button check;
     Button skiptoo;
@@ -44,6 +44,8 @@ public class Signup extends FragmentActivity {
         sign_pass = findViewById(R.id.sign_pass);
         sign = findViewById(R.id.sign_up);
         skiptoo = findViewById(R.id.skip_login);
+        confirmpass = findViewById(R.id.sign_pass_confirm);
+        confirmpass.setVisibility(View.GONE);
 
         sign_email.setVisibility(View.GONE);
         sign_pass.setVisibility(View.GONE);
@@ -63,7 +65,6 @@ public class Signup extends FragmentActivity {
                             if(validate1.getValid().equals("true")){
                                 Toast.makeText(Signup.this, "Verified!", Toast.LENGTH_SHORT).show();
                                 Animation animFadeOut = AnimationUtils.loadAnimation(Signup.this, R.anim.fadeout);
-
                                 Animation animFadeIn = AnimationUtils.loadAnimation(Signup.this, R.anim.fadein);
                                 animFadeIn.reset();
                                 check.setVisibility(View.GONE);
@@ -80,6 +81,10 @@ public class Signup extends FragmentActivity {
                                 sign_email.setVisibility(View.VISIBLE);
                                 sign_pass.setVisibility(View.VISIBLE);
                                 sign.setVisibility(View.VISIBLE);
+                                confirmpass.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                Toast.makeText(Signup.this, validate1.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -110,7 +115,12 @@ public class Signup extends FragmentActivity {
                 }
                 else{
                     if(emailValid(sign_email)) {
-                        userSignup();
+                        if(sign_pass.equals(confirmpass)) {
+                            userSignup();
+                        }
+                        else{
+                            Toast.makeText(Signup.this, "Please enter Correct Password", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
@@ -143,10 +153,10 @@ public class Signup extends FragmentActivity {
                 //Toast.makeText(Signup.this, response.message(), Toast.LENGTH_SHORT).show();
                 SignupResponse signupResponse = response.body();
                 if(response.isSuccessful()){
-                    Toast.makeText(Signup.this, "Successful! Please check your Mail to activate account", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Signup.this, signupResponse.getMessage(), Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(Signup.this, signupResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Signup.this, response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
