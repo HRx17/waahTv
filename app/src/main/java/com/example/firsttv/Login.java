@@ -114,7 +114,12 @@ public class Login extends FragmentActivity {
                     }
                 }
                 else{
-                    Toast.makeText(Login.this, response.message(), Toast.LENGTH_SHORT).show();
+                    try {
+                        String errorMsg = response.errorBody().string();
+                        Toast.makeText(Login.this, errorMsg, Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                 }
             }
 

@@ -19,6 +19,8 @@ import com.example.firsttv.RetrofitFiles.RetrofitClient;
 import com.example.firsttv.RetrofitFiles.SignupResponse;
 import com.example.firsttv.RetrofitFiles.Validate;
 
+import org.json.JSONObject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -158,7 +160,16 @@ public class Signup extends FragmentActivity {
                     Toast.makeText(Signup.this, signupResponse.getMessage(), Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(Signup.this, response.message(), Toast.LENGTH_SHORT).show();
+                    try {
+                        String errorMsg = response.errorBody().string();
+                        Toast.makeText(Signup.this, errorMsg, Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(Signup.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                    sign_email.getText().clear();
+                    sign_pass.getText().clear();
+                    confirmpass.getText().clear();
+                    sign_email.requestFocus();
                 }
             }
 
