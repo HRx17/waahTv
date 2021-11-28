@@ -103,7 +103,7 @@
             android:id="@+id/Check"
             android:textColor="@color/black"
             android:background="@drawable/button_bg"
-            android:text="Check referral"
+            android:text="Validate"
             android:textSize="16dp" />
         <Button
             android:layout_width="200dp"
