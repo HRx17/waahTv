@@ -38,7 +38,7 @@
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:background="@drawable/edittext_background"
-            android:hint="Enter Referal Code"
+            android:hint="Enter referral code"
             android:textColorHint="@color/black"
             android:drawableLeft="@drawable/ic_baseline_assignment_ind_24"
             android:drawablePadding="10dp"/>
@@ -52,7 +52,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:background="@drawable/edittext_background"
-            android:hint="Email ID"
+            android:hint="Email Id"
             android:textColorHint="@color/black"
             android:drawableLeft="@drawable/ic_baseline_assignment_ind_24"
             android:drawablePadding="10dp"/>
@@ -85,7 +85,7 @@
             android:layout_marginBottom="10dp"
             android:layout_gravity="center"
             android:background="@drawable/edittext_background"
-            android:hint="Re-Enter Password"
+            android:hint="Re-enter password"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:padding="5dp"
@@ -103,7 +103,7 @@
             android:id="@+id/Check"
             android:textColor="@color/black"
             android:background="@drawable/button_bg"
-            android:text="Check Referal"
+            android:text="Check referral"
             android:textSize="16dp" />
         <Button
             android:layout_width="200dp"
@@ -114,7 +114,7 @@
             android:id="@+id/sign_up"
             android:textColor="@color/black"
             android:background="@drawable/button_bg"
-            android:text="Sign-Up"
+            android:text="Sign up"
             android:textSize="16dp" />
         <Button
             android:layout_width="200dp"
@@ -125,7 +125,7 @@
             android:id="@+id/skip_login"
             android:textColor="@color/black"
             android:background="@drawable/button_bg"
-            android:text="Log-in"
+            android:text="Back"
             android:textSize="16dp" />
 
     </LinearLayout>
