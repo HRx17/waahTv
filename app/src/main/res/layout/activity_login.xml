@@ -11,13 +11,32 @@
         android:layout_height="match_parent"
         android:background="@drawable/imageblurr"
         android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:alpha="70"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginLeft="450dp"
+            android:layout_marginTop="60dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="700dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:padding="5dp"
+        android:layout_marginLeft="133dp"
+        android:background="@drawable/border_bg"
+        android:orientation="vertical">
         <EditText
             android:paddingLeft="20dp"
             android:layout_width="500dp"
             android:layout_height="46dp"
             android:inputType="textEmailAddress"
             android:id="@+id/log_enroll"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:background="@drawable/edittext_background"
@@ -52,7 +71,7 @@
             android:gravity="center"
             android:id="@+id/log_in"
             android:textColor="@color/black"
-            android:backgroundTint="#5EE8E7E7"
+            android:background="@drawable/button_bg"
             android:text="Log-in"
             android:textSize="16dp" />
         <Button
@@ -60,11 +79,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/skip"
             android:textColor="@color/black"
-            android:backgroundTint="#5EE8E7E7"
+            android:background="@drawable/button_bg"
             android:text="Sign-Up"
             android:textSize="16dp" />
+    </LinearLayout>
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,5 +93,4 @@
             android:layout_marginTop="20dp"
             android:id="@+id/progress_log"/>
     </LinearLayout>
-
 </FrameLayout>

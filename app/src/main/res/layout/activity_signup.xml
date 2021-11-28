@@ -9,18 +9,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/imageblurr"
+        android:orientation="vertical"
+        android:background="@drawable/imageblurr">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"
+                android:layout_marginTop="50dp"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="700dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="133dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/border_bg"
         android:orientation="vertical">
         <EditText
             android:paddingLeft="20dp"
             android:layout_width="500dp"
             android:layout_height="46dp"
-            android:layout_marginLeft="35dp"
             android:inputType="textEmailAddress"
             android:id="@+id/validate"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
             android:background="@drawable/edittext_background"
             android:hint="Enter Referal Code"
             android:textColorHint="@color/black"
@@ -30,10 +46,9 @@
             android:paddingLeft="20dp"
             android:layout_width="500dp"
             android:layout_height="46dp"
-            android:layout_marginLeft="35dp"
             android:inputType="textEmailAddress"
             android:id="@+id/sign_email"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:background="@drawable/edittext_background"
@@ -45,7 +60,6 @@
             android:paddingLeft="20dp"
             android:layout_width="500dp"
             android:layout_height="46dp"
-            android:layout_marginLeft="35dp"
             android:inputType="textPassword"
             android:id="@+id/sign_pass"
             android:layout_marginTop="10dp"
@@ -65,7 +79,6 @@
             android:paddingLeft="20dp"
             android:layout_width="500dp"
             android:layout_height="46dp"
-            android:layout_marginLeft="35dp"
             android:inputType="textPassword"
             android:id="@+id/sign_pass_confirm"
             android:layout_marginTop="10dp"
@@ -87,10 +100,9 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:layout_marginLeft="30dp"
             android:id="@+id/Check"
             android:textColor="@color/black"
-            android:backgroundTint="#5EE8E7E7"
+            android:background="@drawable/button_bg"
             android:text="Check Referal"
             android:textSize="16dp" />
         <Button
@@ -99,24 +111,23 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:layout_marginLeft="30dp"
             android:id="@+id/sign_up"
             android:textColor="@color/black"
-            android:backgroundTint="#5EE8E7E7"
+            android:background="@drawable/button_bg"
             android:text="Sign-Up"
             android:textSize="16dp" />
         <Button
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:id="@+id/skip_login"
             android:textColor="@color/black"
-            android:backgroundTint="#5EE8E7E7"
+            android:background="@drawable/button_bg"
             android:text="Log-in"
             android:textSize="16dp" />
 
     </LinearLayout>
-
+    </LinearLayout>
 </FrameLayout>

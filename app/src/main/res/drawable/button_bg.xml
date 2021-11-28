@@ -3,7 +3,8 @@
 
     //#64FFDA
     //#FFFCFC
-    <solid android:color="#C4F8F7F7"/>
+    <solid android:color="#D3F66446" />
+    <gradient android:startColor="#B343BBFB" android:endColor="#B311FAFA"/>
     <corners android:radius="30dp"/>
     <padding android:bottom="5dp"
         android:left="7dp"
