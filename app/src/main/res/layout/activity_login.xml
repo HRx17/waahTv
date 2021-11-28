@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/ic_launcher_foreground"
             android:layout_marginLeft="450dp"
             android:layout_marginTop="60dp"/>
     </LinearLayout>
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:padding="5dp"
-        android:layout_marginLeft="133dp"
+        android:layout_marginLeft="140dp"
         android:background="@drawable/border_bg"
         android:orientation="vertical">
         <EditText
@@ -89,6 +89,7 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:id="@+id/progress_log"/>
