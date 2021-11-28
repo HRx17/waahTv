@@ -52,7 +52,7 @@ public class Login extends FragmentActivity {
                 tmp1 = log_email.getText().toString();
                 tmp2 = log_pass.getText().toString();
                 if(tmp1.isEmpty() || tmp2.isEmpty()){
-                    Toast.makeText(Login.this, "Please enter details!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Please enter email and password!", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     if(userValid(log_email)) {
@@ -79,7 +79,7 @@ public class Login extends FragmentActivity {
         if (!emailToText.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()) {
             return true;
         } else {
-            Toast.makeText(this, "Enter valid Email address !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter valid email address!", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
@@ -90,7 +90,7 @@ public class Login extends FragmentActivity {
         String password = log_pass.getText().toString();
         WifiManager manager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = manager.getConnectionInfo();
-        String address = info.getMacAddress();
+        String address = "mactemporary" ;//info.getMacAddress();
 
         LoginResponse loginResponse = new LoginResponse(email,password,null,android.os.Build.DEVICE,android.os.Build.PRODUCT,System.getProperty("os.version"));
         progressBar.setVisibility(View.VISIBLE);

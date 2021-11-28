@@ -113,7 +113,7 @@ public class Signup extends FragmentActivity {
                 tmp1 = sign_email.getText().toString();
                 tmp2 = sign_pass.getText().toString();
                 if(tmp1.isEmpty() || tmp2.isEmpty()){
-                    Toast.makeText(Signup.this, "Please enter details!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Signup.this, "Please enter emailId and password!", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     if(emailValid(sign_email)) {
@@ -121,7 +121,7 @@ public class Signup extends FragmentActivity {
                             userSignup();
                         }
                         else{
-                            Toast.makeText(Signup.this, "Password Doesn't Match", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Signup.this, "Password doesn't match", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -135,7 +135,7 @@ public class Signup extends FragmentActivity {
         if (!emailToText.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()) {
             return true;
         } else {
-            Toast.makeText(this, "Enter valid Email address !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter valid email address !", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
@@ -145,7 +145,7 @@ public class Signup extends FragmentActivity {
         String password = sign_pass.getText().toString();
         WifiManager manager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = manager.getConnectionInfo();
-        String address = info.getMacAddress();
+        String address = "mac temp";//info.getMacAddress();
 
         SignupResponse signupResponse = new SignupResponse(email,password,null,android.os.Build.DEVICE,android.os.Build.PRODUCT,System.getProperty("os.version"));
         Call<SignupResponse> call = RetrofitClient.getInstance().getApi().Signup(signupResponse);
