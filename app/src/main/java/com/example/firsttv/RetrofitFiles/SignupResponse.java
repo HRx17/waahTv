@@ -9,7 +9,7 @@ public class SignupResponse {
     public String deviceType;
     public String modelNumner;
 
-    public SignupResponse(String email, String macAddress, String deviceType, String modelNumner, String osVersion, String password) {
+    public SignupResponse(String email, String password, String deviceType, String modelNumner, String macAddress, String osVersion) {
         this.email = email;
         this.macAddress = macAddress;
         this.deviceType = deviceType;

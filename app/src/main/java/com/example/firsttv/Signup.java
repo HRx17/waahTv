@@ -148,8 +148,15 @@ public class Signup extends FragmentActivity {
         WifiManager manager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = manager.getConnectionInfo();
         String address = "mac temp";//info.getMacAddress();
+        if (password.contains(" ") || password.length() < 6 )
+        {
+            Toast.makeText(Signup.this, "Password length must be more than 6 characters.", Toast.LENGTH_LONG).show();
+            sign_pass.getText().clear();
+            confirmpass.getText().clear();
+            return;
+        }
 
-        SignupResponse signupResponse = new SignupResponse(email,password,null,android.os.Build.DEVICE,android.os.Build.PRODUCT,System.getProperty("os.version"));
+        SignupResponse signupResponse = new SignupResponse(email,password,android.os.Build.DEVICE,android.os.Build.PRODUCT, address , System.getProperty("os.version"));
         Call<SignupResponse> call = RetrofitClient.getInstance().getApi().Signup(signupResponse);
         call.enqueue(new Callback<SignupResponse>() {
             @Override
