@@ -27,16 +27,18 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="133dp"
         android:layout_marginTop="60dp"
+        android:padding="10dp"
         android:background="@drawable/border_bg"
         android:orientation="vertical">
         <EditText
             android:paddingLeft="20dp"
-            android:layout_width="500dp"
+            android:layout_width="400dp"
             android:layout_height="46dp"
             android:inputType="textEmailAddress"
             android:id="@+id/validate"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
+            android:textColor="@color/black"
             android:background="@drawable/edittext_background"
             android:hint="Enter Referal Code"
             android:textColorHint="@color/black"
@@ -44,10 +46,11 @@
             android:drawablePadding="10dp"/>
         <EditText
             android:paddingLeft="20dp"
-            android:layout_width="500dp"
+            android:layout_width="400dp"
             android:layout_height="46dp"
             android:inputType="textEmailAddress"
             android:id="@+id/sign_email"
+            android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
@@ -58,7 +61,7 @@
             android:drawablePadding="10dp"/>
         <EditText
             android:paddingLeft="20dp"
-            android:layout_width="500dp"
+            android:layout_width="400dp"
             android:layout_height="46dp"
             android:inputType="textPassword"
             android:id="@+id/sign_pass"
@@ -77,7 +80,7 @@
             android:drawablePadding="10dp"/>
         <EditText
             android:paddingLeft="20dp"
-            android:layout_width="500dp"
+            android:layout_width="400dp"
             android:layout_height="46dp"
             android:inputType="textPassword"
             android:id="@+id/sign_pass_confirm"
@@ -94,39 +97,50 @@
             android:shadowColor="@color/black"
             android:drawableLeft="@drawable/ic_baseline_article_24"
             android:drawablePadding="10dp"/>
-        <Button
-            android:layout_width="200dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:id="@+id/Check"
-            android:textColor="@color/black"
-            android:background="@drawable/button_bg"
-            android:text="Check Referal"
-            android:textSize="16dp" />
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:id="@+id/sign_up"
-            android:textColor="@color/black"
-            android:background="@drawable/button_bg"
-            android:text="Sign-Up"
-            android:textSize="16dp" />
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/skip_login"
-            android:textColor="@color/black"
-            android:background="@drawable/button_bg"
-            android:text="Log-in"
-            android:textSize="16dp" />
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="125dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:id="@+id/Check"
+                android:textColor="@color/black"
+                android:background="@drawable/button_bg"
+                android:text="Check Referal"
+                android:textSize="16dp" />
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="125dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:id="@+id/sign_up"
+                android:textColor="@color/black"
+                android:background="@drawable/button_bg"
+                android:text="Sign-Up"
+                android:textSize="16dp" />
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/skip_login"
+                android:textColor="@color/black"
+                android:background="@drawable/button_bg"
+                android:text="Log-in"
+                android:textSize="16dp" />
+        </LinearLayout>
 
     </LinearLayout>
     </LinearLayout>

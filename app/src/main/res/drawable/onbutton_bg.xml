@@ -4,10 +4,7 @@
     //#64FFDA
     //#FFFCFC
     <solid android:color="#D3F66446" />
-    <gradient android:startColor="#B343BBFB" android:endColor="#B311FAFA" />
-    <item android:state_selected="true">
-        <gradient android:startColor="#F42121" android:endColor="#F68420"/>
-    </item>
+    <gradient android:startColor="#B3FD4C2C" android:endColor="#B3FA7611"/>
     <corners android:radius="30dp"/>
     <padding android:bottom="5dp"
         android:left="7dp"

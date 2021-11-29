@@ -19,8 +19,6 @@ import com.example.firsttv.RetrofitFiles.RetrofitClient;
 import com.example.firsttv.RetrofitFiles.SignupResponse;
 import com.example.firsttv.RetrofitFiles.Validate;
 
-import org.json.JSONObject;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,6 +50,57 @@ public class Signup extends FragmentActivity {
         sign_email.setVisibility(View.GONE);
         sign_pass.setVisibility(View.GONE);
         sign.setVisibility(View.GONE);
+
+        check.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                check.setBackgroundResource(R.drawable.onbutton_bg);
+                skiptoo.setBackgroundResource(R.drawable.button_bg);
+            }
+        });
+        validatee.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                check.setBackgroundResource(R.drawable.button_bg);
+                skiptoo.setBackgroundResource(R.drawable.button_bg);
+            }
+        });
+        sign.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                sign.setBackgroundResource(R.drawable.onbutton_bg);
+                skiptoo.setBackgroundResource(R.drawable.button_bg);
+            }
+        });
+        skiptoo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                sign.setBackgroundResource(R.drawable.button_bg);
+                skiptoo.setBackgroundResource(R.drawable.onbutton_bg);
+                check.setBackgroundResource(R.drawable.button_bg);
+            }
+        });
+        sign_email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                sign.setBackgroundResource(R.drawable.button_bg);
+                skiptoo.setBackgroundResource(R.drawable.button_bg);
+            }
+        });
+        sign_pass.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                sign.setBackgroundResource(R.drawable.button_bg);
+                skiptoo.setBackgroundResource(R.drawable.button_bg);
+            }
+        });
+        confirmpass.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                sign.setBackgroundResource(R.drawable.button_bg);
+                skiptoo.setBackgroundResource(R.drawable.button_bg);
+            }
+        });
 
         check.setOnClickListener(new View.OnClickListener() {
             @Override

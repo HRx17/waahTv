@@ -8,6 +8,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -31,6 +32,12 @@ public class Login extends FragmentActivity {
     ProgressBar progressBar;
 
     public void onBackPressed(){
+
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
         return;
     }
 
@@ -44,6 +51,36 @@ public class Login extends FragmentActivity {
         skiptoo = findViewById(R.id.skip);
         progressBar = findViewById(R.id.progress_log);
         progressBar.setVisibility(View.GONE);
+
+        login.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                login.setBackgroundResource(R.drawable.onbutton_bg);
+                skiptoo.setBackgroundResource(R.drawable.button_bg);
+            }
+        });
+        skiptoo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                login.setBackgroundResource(R.drawable.button_bg);
+                skiptoo.setBackgroundResource(R.drawable.onbutton_bg);
+            }
+        });
+        log_email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                login.setBackgroundResource(R.drawable.button_bg);
+                skiptoo.setBackgroundResource(R.drawable.button_bg);
+            }
+        });
+        log_pass.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                login.setBackgroundResource(R.drawable.button_bg);
+                skiptoo.setBackgroundResource(R.drawable.button_bg);
+            }
+        });
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
