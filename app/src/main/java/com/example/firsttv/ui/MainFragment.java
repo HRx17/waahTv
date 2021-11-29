@@ -192,7 +192,7 @@ public class MainFragment extends BrowseSupportFragment {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void setupUIElements() {
-        setBadgeDrawable(requireActivity().getResources().getDrawable(R.mipmap.ic_launcher));
+        setBadgeDrawable(requireActivity().getResources().getDrawable(R.mipmap.ic_launcher_foreground));
         setTitle(getString(R.string.browse_title));
         // Badge, when set, takes precedent
         // over title

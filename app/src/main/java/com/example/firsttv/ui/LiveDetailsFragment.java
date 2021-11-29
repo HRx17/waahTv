@@ -111,8 +111,9 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                 if (posts==null){
                     Toast.makeText(getContext(), "Nothing Added yet!", Toast.LENGTH_SHORT).show();
                 }
-                int i=0,cnt=0;
+                int i=0;
                 ArrayObjectAdapter listRowAdapter1 = new ArrayObjectAdapter(liveCatPresenter);
+                assert posts != null;
                 for (ChannelList post : posts) {
                     if (post == null) {
                         Toast.makeText(getActivity(), response.message(), Toast.LENGTH_SHORT).show();
@@ -125,13 +126,13 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                         list1.setId(post.getChannelurl());
                         list1.setCategory(post.getChannelName());
                         list1.setSeasons(post.getSeasons());
-                        listRowAdapter1.add(cnt,list1);
-                        cnt++;
+                        listRowAdapter1.add(list1);
                         i++;
                     }
                     else{
                         rowsAdapter.add(new ListRow(listRowAdapter1));
-                        i=1;
+                        listRowAdapter1.removeItems(0,3);
+                        i=0;
                     }
                 }
             }
