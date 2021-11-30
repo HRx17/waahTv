@@ -106,7 +106,11 @@ public class Signup extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 String tmp = validatee.getText().toString();
-
+                if ( tmp.isEmpty() || tmp.contains(" ") || !tmp.startsWith("WAAH"))
+                {
+                    Toast.makeText(Signup.this, "Invalid referral code!!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Call<Validate> call = RetrofitClient.getInstance().getApi().validate(tmp);
                 call.enqueue(new Callback<Validate>() {
                     @Override
@@ -186,7 +190,7 @@ public class Signup extends FragmentActivity {
         if (!emailToText.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()) {
             return true;
         } else {
-            Toast.makeText(this, "Enter valid email address !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter valid email address!", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
