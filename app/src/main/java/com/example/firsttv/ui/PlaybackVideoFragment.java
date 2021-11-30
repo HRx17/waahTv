@@ -57,17 +57,26 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
         playerAdapter.getMediaPlayer().setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
+                FailResponse failResponse = new FailResponse(PlaybackActivity.NAME,PlaybackActivity.URLL,mp.toString());
                 Call<FailResponse> call = RetrofitClient
-                        .getInstance().getApi().response(PlaybackActivity.NAME,PlaybackActivity.URLL,mp.toString());
+                        .getInstance().getApi().response(failResponse);
                 call.enqueue(new Callback<FailResponse>() {
                     @Override
                     public void onResponse(Call<FailResponse> call, Response<FailResponse> response) {
-                        //Toast.makeText(getContext(), response.message(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getContext(), mp.toString(), Toast.LENGTH_SHORT).show();
+                        if(response.isSuccessful()) {
+                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        else{
+                            Toast.makeText(getContext(), response.message(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<FailResponse> call, Throwable t) {
+                        Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        return;
                     }
                 });
                 return false;
