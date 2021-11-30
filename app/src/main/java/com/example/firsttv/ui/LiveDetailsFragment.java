@@ -111,15 +111,17 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                 if (posts==null){
                     Toast.makeText(getContext(), "Nothing Added yet!", Toast.LENGTH_SHORT).show();
                 }
-                int i=0;
                 ArrayObjectAdapter listRowAdapter1 = new ArrayObjectAdapter(liveCatPresenter);
+                ArrayObjectAdapter listrowadapter2 = new ArrayObjectAdapter(liveCatPresenter);
+                ArrayObjectAdapter listrowadapter3 = new ArrayObjectAdapter(liveCatPresenter);
                 assert posts != null;
+                int i= posts.size();
                 for (ChannelList post : posts) {
                     if (post == null) {
                         Toast.makeText(getActivity(), response.message(), Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    else if(i<4) {
+                    else if(i%2==0){
                         Live list1 = new Live();
                         list1.setTitle(post.getChannelName());
                         list1.setLiveImageUrl(post.getChannellogo());
@@ -127,14 +129,32 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                         list1.setCategory(post.getChannelName());
                         list1.setSeasons(post.getSeasons());
                         listRowAdapter1.add(list1);
-                        i++;
+                        i--;
+                    }
+                    else if(i%3==0){
+                        Live list2 = new Live();
+                        list2.setTitle(post.getChannelName());
+                        list2.setLiveImageUrl(post.getChannellogo());
+                        list2.setId(post.getChannelurl());
+                        list2.setCategory(post.getChannelName());
+                        list2.setSeasons(post.getSeasons());
+                        listrowadapter2.add(list2);
+                        i--;
                     }
                     else{
-                        rowsAdapter.add(new ListRow(listRowAdapter1));
-                        listRowAdapter1.removeItems(0,3);
-                        i=0;
+                        Live list1 = new Live();
+                        list1.setTitle(post.getChannelName());
+                        list1.setLiveImageUrl(post.getChannellogo());
+                        list1.setId(post.getChannelurl());
+                        list1.setCategory(post.getChannelName());
+                        list1.setSeasons(post.getSeasons());
+                        listrowadapter3.add(list1);
+                        i--;
                     }
                 }
+                rowsAdapter.add(new ListRow(listRowAdapter1));
+                rowsAdapter.add(new ListRow(listrowadapter3));
+                rowsAdapter.add(new ListRow(listrowadapter2));
             }
 
             @Override
@@ -142,7 +162,6 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
         //HeaderItem header = new HeaderItem(LiveDetail.LIVE);
         setAdapter(rowsAdapter);
 
