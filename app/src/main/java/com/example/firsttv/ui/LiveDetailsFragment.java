@@ -93,9 +93,9 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
 
     private void loadRows() {
 
+        //BaseGridView baseGridView = new HorizontalGridView(getContext());
         ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         LiveCatPresenter liveCatPresenter = new LiveCatPresenter();
-
 
         RetrofitClient retrofitClient = new RetrofitClient();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofitClient.getInstance().getApi();
@@ -196,8 +196,8 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
 
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Implement your own in-app search", Toast.LENGTH_LONG)
-                        .show();
+                Intent intent = new Intent(getContext(),MainActivity.class);
+                startActivity(intent);
             }
         });
 
