@@ -65,11 +65,15 @@ public class LiveCatPresenter extends Presenter {
         ImageCardView cardView = (ImageCardView) viewHolder.view;
         Log.d(TAG, "onBindViewHolder");
         if (live.getLiveImageUrl() !=null){
+            if(live.getLiveImageUrl().isEmpty()){
+                live.setLiveImageUrl(String.valueOf(R.drawable.movie));
+            }
             cardView.setTitleText(live.getTitle());
             cardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT);
             Picasso.get()
                     .load(live.getLiveImageUrl())
                     .resize(720,480)
+                    .error(mDefaultCardImage)
                     .into(cardView.getMainImageView());
 
            /* Glide.with(viewHolder.view.getContext())

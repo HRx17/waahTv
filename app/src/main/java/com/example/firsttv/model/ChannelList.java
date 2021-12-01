@@ -1,5 +1,6 @@
 package com.example.firsttv.model;
 
+import com.example.firsttv.R;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,6 +14,13 @@ public class ChannelList {
     @SerializedName("channellogo")
     @Expose
     private String channellogo;
+
+    public ChannelList(String channelName, String channellogo, String channelurl) {
+        this.channelName = channelName;
+        this.channellogo = String.valueOf(R.drawable.movie);
+        this.channelurl = channelurl;
+    }
+
     @SerializedName("channelurl")
     @Expose
     private String channelurl;
