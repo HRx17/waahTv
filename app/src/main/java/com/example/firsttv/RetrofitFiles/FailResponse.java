@@ -1,7 +1,7 @@
 package com.example.firsttv.RetrofitFiles;
 
 public class FailResponse {
-    String message;
+    String email;
     String category;
     String url;
     String error;
@@ -36,11 +36,11 @@ public class FailResponse {
         this.error = error;
     }
 
-    public String getMessage() {
-        return message;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

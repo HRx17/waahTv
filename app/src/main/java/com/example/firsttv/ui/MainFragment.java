@@ -28,6 +28,7 @@ import androidx.leanback.widget.Presenter;
 import androidx.leanback.widget.PresenterSelector;
 import androidx.leanback.widget.Row;
 import androidx.leanback.widget.RowPresenter;
+import androidx.leanback.widget.SearchOrbView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -72,6 +73,7 @@ public class MainFragment extends BrowseSupportFragment {
     private Timer mBackgroundTimer;
     private int mBackgroundUri;
     private BackgroundManager mBackgroundManager;
+    SearchOrbView searchOrbView;
     ListRowPresenter listRowPresenter = new ListRowPresenter();
 
     @Override
@@ -192,6 +194,8 @@ public class MainFragment extends BrowseSupportFragment {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void setupUIElements() {
+//        searchOrbView.getContext().getResources().getAssets();
+//        searchOrbView.setOrbIcon(null);
         setBadgeDrawable(requireActivity().getResources().getDrawable(R.mipmap.ic_launcher_foreground));
         setTitle(getString(R.string.browse_title));
         // Badge, when set, takes precedent

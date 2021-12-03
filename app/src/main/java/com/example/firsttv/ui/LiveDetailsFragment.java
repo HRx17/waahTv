@@ -53,8 +53,8 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
 
 
     private static final int BACKGROUND_UPDATE_DELAY = 300;
-    private static final int GRID_ITEM_WIDTH = 200;
-    private static final int GRID_ITEM_HEIGHT = 180;
+    private static final int GRID_ITEM_WIDTH = 250;
+    private static final int GRID_ITEM_HEIGHT = 210;
     // private static final int NUM_ROWS = 6;
     //private static final int NUM_COLS = 15;
 
@@ -79,7 +79,6 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         loadRows();
 
         setupEventListeners();
-
     }
 
     @Override
@@ -111,50 +110,37 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                 if (posts==null){
                     Toast.makeText(getContext(), "Nothing Added yet!", Toast.LENGTH_SHORT).show();
                 }
-                ArrayObjectAdapter listRowAdapter1 = new ArrayObjectAdapter(liveCatPresenter);
                 ArrayObjectAdapter listrowadapter2 = new ArrayObjectAdapter(liveCatPresenter);
                 ArrayObjectAdapter listrowadapter3 = new ArrayObjectAdapter(liveCatPresenter);
                 assert posts != null;
-                int i= posts.size();
-                for (ChannelList post : posts) {
-                    if (post == null) {
-                        Toast.makeText(getActivity(), response.message(), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    else if(i%2==0){
-                        Live list1 = new Live();
-                        list1.setTitle(post.getChannelName());
-                        list1.setLiveImageUrl(post.getChannellogo());
-                        list1.setId(post.getChannelurl());
-                        list1.setCategory(post.getChannelName());
-                        list1.setSeasons(post.getSeasons());
-                        listRowAdapter1.add(list1);
-                        i--;
-                    }
-                    else if(i%3==0){
-                        Live list2 = new Live();
-                        list2.setTitle(post.getChannelName());
-                        list2.setLiveImageUrl(post.getChannellogo());
-                        list2.setId(post.getChannelurl());
-                        list2.setCategory(post.getChannelName());
-                        list2.setSeasons(post.getSeasons());
-                        listrowadapter2.add(list2);
-                        i--;
-                    }
-                    else{
-                        Live list1 = new Live();
-                        list1.setTitle(post.getChannelName());
-                        list1.setLiveImageUrl(post.getChannellogo());
-                        list1.setId(post.getChannelurl());
-                        list1.setCategory(post.getChannelName());
-                        list1.setSeasons(post.getSeasons());
-                        listrowadapter3.add(list1);
-                        i--;
-                    }
-                }
-                rowsAdapter.add(new ListRow(listRowAdapter1));
-                rowsAdapter.add(new ListRow(listrowadapter3));
-                rowsAdapter.add(new ListRow(listrowadapter2));
+                int ln = posts.size();
+                int i=0;
+                int m=0;
+                 while(i<ln) {
+                     int k = 1;
+                     ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(liveCatPresenter);
+                     for (ChannelList post : posts) {
+                         if (post == null) {
+                             Toast.makeText(getActivity(), response.message(), Toast.LENGTH_SHORT).show();
+                             return;
+                         } else if (k > i * 5 && k <= (i + 1) * 5) {
+                             Live list1 = new Live();
+                             list1.setTitle(post.getChannelName());
+                             list1.setLiveImageUrl(post.getChannellogo());
+                             list1.setId(post.getChannelurl());
+                             list1.setCategory(post.getChannelName());
+                             list1.setSeasons(post.getSeasons());
+                             listRowAdapter.add(list1);
+                         }
+                         k++;
+                     }
+                     i++;
+                     if (listRowAdapter.size() == 0) {
+                         return;
+                     } else {
+                         rowsAdapter.add(new ListRow(listRowAdapter));
+                     }
+                 }
             }
 
             @Override
