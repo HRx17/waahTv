@@ -143,6 +143,10 @@ public class Login extends FragmentActivity {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("time", loginResponse.getExpiryDate());
                         editor.apply();
+                        SharedPreferences sharedPreferences1 = getSharedPreferences("email", 0);
+                        SharedPreferences.Editor editorr = sharedPreferences1.edit();
+                        editorr.putString("email", email);
+                        editorr.apply();
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
                     }

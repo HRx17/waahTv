@@ -5,42 +5,21 @@ public class FailResponse {
     String category;
     String url;
     String error;
+    String message;
 
-    public FailResponse(String category, String url, String error) {
-        this.category = category;
-        this.url = url;
-        this.error = error;
+    public String getMessage() {
+        return message;
     }
 
-    public String getCategory() {
-        return category;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
+    public FailResponse(String email, String category, String url, String error) {
         this.email = email;
+        this.category = category;
+        this.url = url;
+        this.error = error;
     }
+
 }

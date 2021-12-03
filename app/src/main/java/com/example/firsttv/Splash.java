@@ -16,11 +16,17 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.example.firsttv.ui.MainActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Splash extends FragmentActivity {
 
     ImageView imageView;
     ProgressBar progressBar;
     Handler handler = new Handler();
+    int tmp=1;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -37,6 +43,7 @@ public class Splash extends FragmentActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("time", 0);
         String tmp1 = sharedPreferences.getString("time",null);
+        System.out.println(tmp1);
 
         animFadeIn.reset();
         imageView.clearAnimation();
@@ -48,12 +55,28 @@ public class Splash extends FragmentActivity {
         imageView.clearAnimation();
         imageView.startAnimation(animFadeIn);
 
+        Calendar cal = Calendar.getInstance();
+
+        int year = Integer.parseInt(tmp1.substring(6)); // this is deprecated
+        int month = Integer.parseInt(tmp1.substring(3,5));
+        int day = Integer.parseInt(tmp1.substring(0,2));
+
+        Calendar validDate = Calendar.getInstance();
+        validDate.set(year, month, day);
+        System.out.println(validDate);
+
+        Calendar currentDate = Calendar.getInstance();
+
+        if (currentDate.after(validDate)) {
+            tmp = 0;
+        }
+
 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 progressBar.setVisibility(View.GONE);
-                if(tmp1 != null){
+                if(tmp != 0){
                     Intent intent = new Intent(Splash.this, MainActivity.class);
                     startActivity(intent);
                 }

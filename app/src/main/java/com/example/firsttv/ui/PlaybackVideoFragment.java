@@ -1,5 +1,6 @@
 package com.example.firsttv.ui;
 
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import androidx.leanback.widget.PlaybackControlsRow;
 
 import com.example.firsttv.RetrofitFiles.FailResponse;
 import com.example.firsttv.RetrofitFiles.RetrofitClient;
+
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,7 +60,8 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
         playerAdapter.getMediaPlayer().setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                FailResponse failResponse = new FailResponse(PlaybackActivity.NAME,PlaybackActivity.URLL,String.valueOf(what));
+
+                FailResponse failResponse = new FailResponse(PlaybackActivity.EMAIL,PlaybackActivity.NAME,PlaybackActivity.URLL,String.valueOf(what));
                 Call<FailResponse> call = RetrofitClient
                         .getInstance().getApi().response(failResponse);
                 call.enqueue(new Callback<FailResponse>() {
