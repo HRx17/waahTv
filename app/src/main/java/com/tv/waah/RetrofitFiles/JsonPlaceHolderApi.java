@@ -24,7 +24,7 @@ public interface JsonPlaceHolderApi {
             @Query("category") String cat);
 
     @POST("api/reportfailedchannel")
-    Call<FailResponse> response(@Body FailResponse failResponse);
+    Call<Void> response(@Body FailResponse failResponse);
 
     @POST("api/login")
     Call<LoginResponse> login(@Body LoginResponse loginResponse);
