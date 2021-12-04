@@ -1,7 +1,10 @@
 package com.Beta1.waahTv.RetrofitFiles;
 
+import android.content.SharedPreferences;
+
 import com.Beta1.waahTv.model.Post;
 import com.Beta1.waahTv.model.SubPost;
+import com.Beta1.waahTv.ui.PlaybackActivity;
 
 import java.util.List;
 
@@ -13,9 +16,10 @@ import retrofit2.http.Query;
 
 public interface JsonPlaceHolderApi {
 
-
-    @GET("api/getCategoryByUser?email=a@a.com")
-    Call<List<Post>> getPosts();
+    @GET("api/getCategoryByUser")
+    Call<List<Post>> getPosts(
+            @Query("email") String id
+    );
 
     @GET("api/getChannelByCatUser")
     Call<SubPost> getSubPosts(

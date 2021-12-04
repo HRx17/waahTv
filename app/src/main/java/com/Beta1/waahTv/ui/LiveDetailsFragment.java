@@ -98,7 +98,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
 
         RetrofitClient retrofitClient = new RetrofitClient();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofitClient.getInstance().getApi();
-        Call<SubPost> call = jsonPlaceHolderApi.getSubPosts("a@a.com",LiveDetail.LIVE);
+        Call<SubPost> call = jsonPlaceHolderApi.getSubPosts(MainActivity.USER,LiveDetail.LIVE);
         call.enqueue(new Callback<SubPost>() {
             @Override
             public void onResponse(Call<SubPost> call, Response<SubPost> response) {

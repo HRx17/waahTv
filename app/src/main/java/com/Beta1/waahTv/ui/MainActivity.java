@@ -1,5 +1,6 @@
 package com.Beta1.waahTv.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import java.util.LinkedHashMap;
 public class MainActivity extends FragmentActivity {
     public static String PREFS_USE_STANDARD_BROWSE_FRAGMENT;
     public static String PREFS_ROOT;
+    public static String USER;
 
     public void onBackPressed(){
         return;
@@ -32,6 +34,8 @@ public class MainActivity extends FragmentActivity {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.main_browse_fragment, new MainFragment())
                             .commitNow();
+                    SharedPreferences sharedPreferences = getSharedPreferences("email", 0);
+                    USER = sharedPreferences.getString("email",null);
                 }
             }
 
