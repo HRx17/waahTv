@@ -23,7 +23,7 @@ public class Splash extends FragmentActivity {
     ImageView imageView;
     ProgressBar progressBar;
     Handler handler = new Handler();
-    int tmp=1;
+    int check=1;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -52,7 +52,7 @@ public class Splash extends FragmentActivity {
         imageView.startAnimation(animFadeIn);
 
         if(userValidityDate.isEmpty()){
-            tmp=0;
+            check=0;
         }
         else {
             Calendar cal = Calendar.getInstance();
@@ -67,7 +67,7 @@ public class Splash extends FragmentActivity {
             Calendar currentDate = Calendar.getInstance();
 
             if (currentDate.after(validDate)) {
-                tmp = 0;
+                check = 0;
             }
 
         }
@@ -75,7 +75,7 @@ public class Splash extends FragmentActivity {
             @Override
             public void run() {
                 progressBar.setVisibility(View.GONE);
-                if(tmp != 0){
+                if(check != 0){
                     Intent intent = new Intent(Splash.this, MainActivity.class);
                     startActivity(intent);
                 }
