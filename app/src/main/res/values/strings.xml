@@ -110,8 +110,8 @@
     <string name="settings_category">General settings</string>
     <string name="settings_toggle_nav_title">Use custom navigation</string>
     <string name="settings_toggle_nav_desc">Switches between the custom BrowseFragment implementation and the stock one.</string>
-    <string name="app_name">WaahTv</string>
-    <string name="browse_title">Waah Tv</string>
+    <string name="app_name">WaahTV</string>
+    <string name="browse_title">Waah TV</string>
     <string name="related_movies">Related Videos</string>
     <string name="grid_view">Grid View</string>
     <string name="error_fragment">Error Fragment</string>

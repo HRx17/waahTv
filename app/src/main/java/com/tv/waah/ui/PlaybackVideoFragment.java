@@ -55,30 +55,41 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
         }
 
         playerAdapter.getMediaPlayer().setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            private String convertMessageToString(int input)
+            {
+                switch (input) {
+                    case MediaPlayer.MEDIA_ERROR_SERVER_DIED:
+                        return "MEDIA_ERROR_SERVER_DIED";
+                    case MediaPlayer.MEDIA_ERROR_UNKNOWN:
+                        return "MEDIA_ERROR_UNKNOWN";
+                    case MediaPlayer.MEDIA_ERROR_IO:
+                        return "MEDIA_ERROR_IO";
+                    case MediaPlayer.MEDIA_ERROR_MALFORMED:
+                        return "MEDIA_ERROR_MALFORMED";
+                    case MediaPlayer.MEDIA_ERROR_UNSUPPORTED:
+                        return "MEDIA_ERROR_UNSUPPORTED";
+                    case MediaPlayer.MEDIA_ERROR_TIMED_OUT:
+                        return "MEDIA_ERROR_TIMED_OUT";
+                }
+                return "Unknown";
+            }
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-
-                FailResponse failResponse = new FailResponse(PlaybackActivity.EMAIL,PlaybackActivity.NAME,PlaybackActivity.URLL,String.valueOf(what));
+                String error = String.format("what[%s], extra[%s]",convertMessageToString(what), convertMessageToString(extra));
+                FailResponse failResponse = new FailResponse(PlaybackActivity.EMAIL,PlaybackActivity.NAME,PlaybackActivity.URLL,error);
                 Call<Void> call = RetrofitClient
                         .getInstance().getApi().response(failResponse);
                 call.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if(response.isSuccessful()) {
-                            Toast.makeText(getContext(), mp.toString(), Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getContext(), response.message(), Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        else{
-                            Toast.makeText(getContext(), "response not successfull:"+response.message(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Channel is down, please try after some time.", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(getContext(), "fail:"+t.getMessage(), Toast.LENGTH_LONG).show();
-                        System.out.println(t.getMessage());
                         return;
                     }
                 });

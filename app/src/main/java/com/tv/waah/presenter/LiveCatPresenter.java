@@ -15,8 +15,11 @@ import com.squareup.picasso.Picasso;
 public class LiveCatPresenter extends Presenter {
     private static final String TAG = "LivePresenter";
 
-    private static final int CARD_WIDTH = 400;
-    private static final int CARD_HEIGHT = 250;
+    // change screen  width height to accomodate channells.
+    // i think 70inch screen will have issue, so we need to check the screen height and according adjust.
+    // to do for future as we can show more channels in bigger screen.
+    private static final int CARD_WIDTH = 333;
+    private static final int CARD_HEIGHT = 240;
     private static int sSelectedBackgroundColor;
     private static int sDefaultBackgroundColor;
     private Drawable mDefaultCardImage;

@@ -118,7 +118,8 @@ public class Signup extends FragmentActivity {
                         if(response.isSuccessful()){
                             Validate validate1 = response.body();
                             if(validate1.getValid().equals("true")){
-                                Toast.makeText(Signup.this, "Verified!", Toast.LENGTH_SHORT).show();
+                                // No need for success message
+                                //Toast.makeText(Signup.this, "Verified!", Toast.LENGTH_SHORT).show();
                                 Animation animFadeOut = AnimationUtils.loadAnimation(Signup.this, R.anim.fadeout);
                                 Animation animFadeIn = AnimationUtils.loadAnimation(Signup.this, R.anim.fadein);
                                 animFadeIn.reset();
