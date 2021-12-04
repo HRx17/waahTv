@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.Beta1.waahTv">
+    package="com.tv.waah">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -21,23 +21,23 @@
         android:theme="@style/Theme.FirstTV"
         android:usesCleartextTraffic="true"
         tools:ignore="MissingTvBanner">
-        <activity android:name="com.Beta1.waahTv.Signup"></activity>
-        <activity android:name="com.Beta1.waahTv.Login" />
-        <activity android:name="com.Beta1.waahTv.Splash">
+        <activity android:name="com.tv.waah.Signup"></activity>
+        <activity android:name="com.tv.waah.Login" />
+        <activity android:name="com.tv.waah.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.Beta1.waahTv.ui.LiveDetail" />
-        <activity android:name="com.Beta1.waahTv.ui.PlaybackActivity" />
-        <activity android:name="com.Beta1.waahTv.ui.BrowseErrorActivity" />
-        <activity android:name="com.Beta1.waahTv.ui.SearchActivity" />
-        <activity android:name="com.Beta1.waahTv.ui.SettingsActivity" />
-        <activity android:name="com.Beta1.waahTv.ui.SeriesDetailsActivity" />
+        <activity android:name="com.tv.waah.ui.LiveDetail" />
+        <activity android:name="com.tv.waah.ui.PlaybackActivity" />
+        <activity android:name="com.tv.waah.ui.BrowseErrorActivity" />
+        <activity android:name="com.tv.waah.ui.SearchActivity" />
+        <activity android:name="com.tv.waah.ui.SettingsActivity" />
+        <activity android:name="com.tv.waah.ui.SeriesDetailsActivity" />
         <activity
-            android:name="com.Beta1.waahTv.ui.MainActivity"
+            android:name="com.tv.waah.ui.MainActivity"
             android:banner="@mipmap/ic_launcher"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
