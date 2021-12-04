@@ -106,9 +106,7 @@ public class MainFragment extends BrowseSupportFragment {
         //List<Movie> list = MovieList.setupMovies();
 
         ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
-        //CardPresenter cardPresenter = new CardPresenter();
         LiveCatPresenter liveCatPresenter = new LiveCatPresenter();
-        CardPresenter cardPresenter = new CardPresenter();
 
         ArrayObjectAdapter listRowAdapter1 = new ArrayObjectAdapter(liveCatPresenter);
         ArrayObjectAdapter listrowadapter2 = new ArrayObjectAdapter(liveCatPresenter);
@@ -123,7 +121,6 @@ public class MainFragment extends BrowseSupportFragment {
             @Override
             public void onResponse(Call<List<Post>> call, retrofit2.Response<List<Post>> response) {
 
-                //int img[] = {R.drawable.news,R.drawable.music,R.drawable.entertainement,R.drawable.sports};
                 if(!response.isSuccessful()){
                     Toast.makeText(getActivity(), "Failed to get response!", Toast.LENGTH_SHORT).show();
                     return;
