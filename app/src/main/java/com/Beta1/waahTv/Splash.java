@@ -51,7 +51,7 @@ public class Splash extends FragmentActivity {
         imageView.clearAnimation();
         imageView.startAnimation(animFadeIn);
 
-        if(userValidityDate.isEmpty()){
+        if(userValidityDate == null){
             check=0;
         }
         else {
