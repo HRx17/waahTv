@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
     private static final int GRID_ITEM_HEIGHT = 210;
     // private static final int NUM_ROWS = 6;
     //private static final int NUM_COLS = 15;
+    ProgressBar progressBar;
 
     private final Handler mHandler = new Handler();
     private Drawable mDefaultBackground;
@@ -70,6 +72,8 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         Log.i(TAG, "onCreate");
         super.onCreate(savedInstanceState);
 
+        progressBar = getActivity().findViewById(R.id.progres);
+        progressBar.setVisibility(View.VISIBLE);
         //mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.default_background));
 
         prepareBackgroundManager();
@@ -131,6 +135,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                              list1.setCategory(post.getChannelName());
                              list1.setSeasons(post.getSeasons());
                              listRowAdapter.add(list1);
+                             progressBar.setVisibility(View.GONE);
                          }
                          k++;
                      }
@@ -231,7 +236,6 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                 Live live = (Live) item;
                 SeriesDetailFragment.SERIESNAME = live.getTitle();
                 Intent intent = new Intent(getActivity(), SeriesDetailsActivity.class);
-                //intent.putExtra(String.valueOf(SeriesDetailFragment.SERIES), String.valueOf(((Live) item).seasons));
                 requireActivity().startActivity(intent);
             }
         }

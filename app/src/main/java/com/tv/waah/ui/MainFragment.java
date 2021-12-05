@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +66,7 @@ public class MainFragment extends BrowseSupportFragment {
    // private static final int NUM_ROWS = 6;
     //private static final int NUM_COLS = 15;
 
+    ProgressBar progressBar;
     private final Handler mHandler = new Handler();
     private Drawable mDefaultBackground;
     private DisplayMetrics mMetrics;
@@ -77,6 +79,9 @@ public class MainFragment extends BrowseSupportFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate");
         super.onActivityCreated(savedInstanceState);
+
+        progressBar = getActivity().findViewById(R.id.progresswait);
+        progressBar.setVisibility(View.VISIBLE);
 
        // mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.default_background));
 
@@ -137,6 +142,7 @@ public class MainFragment extends BrowseSupportFragment {
                         list1.setCategory(post.getCategoryType());
                         listRowAdapter1.add(list1);
                         i++;
+                        progressBar.setVisibility(View.GONE);
                     }
                     else if(post.getCategoryType().equals("MOVIES")){
                         Live list2 = new Live();

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +62,7 @@ public class SeriesDetailFragment extends BrowseSupportFragment {
     public static  List<Seasons> SERIES;
     // private static final int NUM_ROWS = 6;
     //private static final int NUM_COLS = 15;
+    ProgressBar progressBar;
 
     private final Handler mHandler = new Handler();
     private Drawable mDefaultBackground;
@@ -73,6 +75,8 @@ public class SeriesDetailFragment extends BrowseSupportFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate");
         super.onActivityCreated(savedInstanceState);
+        progressBar = getActivity().findViewById(R.id.progg);
+        progressBar.setVisibility(View.VISIBLE);
 
         //mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.default_background));
 
@@ -130,6 +134,7 @@ public class SeriesDetailFragment extends BrowseSupportFragment {
                                 list1.setCategory(data.getChannelName());
                                 list1.setSeasons(data.getSeasons());
                                 listRowAdapter1.add(list1);
+                                progressBar.setVisibility(View.GONE);
                             }
                             rowsAdapter.add(new ListRow(header,listRowAdapter1));
                         }
