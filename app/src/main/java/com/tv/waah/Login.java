@@ -138,7 +138,8 @@ public class Login extends FragmentActivity {
                 LoginResponse loginResponse = response.body();
                 if(response.isSuccessful()){
                     if(loginResponse.getIsActive().equals("true")) {
-                        Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        // no need for success message
+                       // Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
                         SharedPreferences sharedPreferences = getSharedPreferences("time", 0);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("time", loginResponse.getExpiryDate());

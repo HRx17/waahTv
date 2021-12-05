@@ -1,6 +1,5 @@
 package com.tv.waah.ui;
 
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -68,7 +67,6 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
                         if(response.isSuccessful()) {
                             Toast.makeText(getContext(), mp.toString(), Toast.LENGTH_SHORT).show();
                             Toast.makeText(getContext(), response.message(), Toast.LENGTH_SHORT).show();
-                            getActivity().finish();
                             return;
                         }
                         else{
