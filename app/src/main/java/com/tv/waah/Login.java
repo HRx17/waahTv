@@ -87,8 +87,10 @@ public class Login extends FragmentActivity {
             public void onClick(View v) {
                 String tmp1,tmp2;
                 View view = getCurrentFocus();
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                if(view.getWindowToken()!=null){
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
                 tmp1 = log_email.getText().toString();
                 tmp2 = log_pass.getText().toString();
                 if(tmp1.isEmpty() || tmp2.isEmpty()){

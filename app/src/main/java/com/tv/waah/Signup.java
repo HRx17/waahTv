@@ -111,8 +111,10 @@ public class Signup extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 View view = getCurrentFocus();
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                if(view.getWindowToken()!=null){
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
                 progressBar.setVisibility(View.VISIBLE);
                 String tmp = validatee.getText().toString();
                 if ( tmp.isEmpty() || tmp.contains(" ") || !tmp.startsWith("WAAH"))
