@@ -45,6 +45,7 @@ public class SettingsFragment extends GuidedStepFragment {
                 .checked(!MainActivity.isUsingStandardBrowseFragment())
                 .description(getString(R.string.settings_toggle_nav_desc))
                 .build());
+
         actions.add(new GuidedAction.Builder()
                 .id(R.id.logout)
                 .title("Logout")

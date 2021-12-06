@@ -3,4 +3,5 @@
     <item name="settings_category_id" type="id" />
     <item name="settings_toggle_nav_id" type="id" />
     <item name="logout" type="id" />
+    <item name="channels" type="id"/>
 </resources>

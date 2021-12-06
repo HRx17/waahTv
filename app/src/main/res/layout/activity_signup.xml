@@ -142,6 +142,11 @@
                 android:text="Back"
                 android:textSize="16dp" />
         </LinearLayout>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progsin"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
     </LinearLayout>

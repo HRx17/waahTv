@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
@@ -29,6 +30,7 @@ public class Signup extends FragmentActivity {
     Button sign;
     Button check;
     Button skiptoo;
+    ProgressBar progressBar;
 
     public void onBackPressed(){
         return;
@@ -38,6 +40,8 @@ public class Signup extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        progressBar = findViewById(R.id.progsin);
+        progressBar.setVisibility(View.GONE);
         check = findViewById(R.id.Check);
         validatee = findViewById(R.id.validate);
         sign_email = findViewById(R.id.sign_email);
@@ -105,6 +109,7 @@ public class Signup extends FragmentActivity {
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 String tmp = validatee.getText().toString();
                 if ( tmp.isEmpty() || tmp.contains(" ") || !tmp.startsWith("WAAH"))
                 {
@@ -140,6 +145,7 @@ public class Signup extends FragmentActivity {
                                 sign_pass.setVisibility(View.VISIBLE);
                                 sign.setVisibility(View.VISIBLE);
                                 confirmpass.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
                             }
                             else{
                                 Toast.makeText(Signup.this, validate1.getMessage(), Toast.LENGTH_SHORT).show();
@@ -175,6 +181,7 @@ public class Signup extends FragmentActivity {
                     if(emailValid(sign_email)) {
                         if(sign_pass.getText().toString().equals(confirmpass.getText().toString())) {
                             userSignup();
+                            progressBar.setVisibility(View.VISIBLE);
                         }
                         else{
                             Toast.makeText(Signup.this, "Password doesn't match", Toast.LENGTH_SHORT).show();
@@ -219,6 +226,7 @@ public class Signup extends FragmentActivity {
                 SignupResponse signupResponse = response.body();
                 if(response.isSuccessful()){
                     Toast.makeText(Signup.this, signupResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
                 }
                 else{
                     try {

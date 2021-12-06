@@ -66,7 +66,7 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if(response.isSuccessful()) {
                             Toast.makeText(getContext(), mp.toString(), Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getContext(), response.message(), Toast.LENGTH_SHORT).show();
+                            getActivity().finish();
                             return;
                         }
                         else{
