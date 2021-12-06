@@ -8,8 +8,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_marginTop="25dp"
-            android:layout_height="50dp"
-            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
             android:layout_marginLeft="50dp"
             android:id="@+id/header_icon">
         </de.hdodenhof.circleimageview.CircleImageView>

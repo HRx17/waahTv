@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -109,6 +110,9 @@ public class Signup extends FragmentActivity {
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                View view = getCurrentFocus();
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 progressBar.setVisibility(View.VISIBLE);
                 String tmp = validatee.getText().toString();
                 if ( tmp.isEmpty() || tmp.contains(" ") || !tmp.startsWith("WAAH"))
@@ -173,6 +177,9 @@ public class Signup extends FragmentActivity {
         sign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                View view = getCurrentFocus();
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 String tmp1,tmp2;
                 tmp1 = sign_email.getText().toString();
                 tmp2 = sign_pass.getText().toString();
