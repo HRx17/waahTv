@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentActivity;
 
 import com.tv.waah.ui.MainActivity;
+import com.tv.waah.ui.SettingsFragment;
 
 import java.util.Calendar;
 
@@ -40,6 +41,7 @@ public class Splash extends FragmentActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("time", 0);
         String userValidityDate = sharedPreferences.getString("time",null);
+        SettingsFragment.LANG = sharedPreferences.getString("language","English (default)");
 
         animFadeIn.reset();
         imageView.clearAnimation();
