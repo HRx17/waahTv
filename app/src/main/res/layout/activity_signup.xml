@@ -97,6 +97,12 @@
             android:shadowColor="@color/black"
             android:drawableLeft="@drawable/ic_baseline_article_24"
             android:drawablePadding="10dp"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progsin"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -142,12 +148,6 @@
                 android:text="Back"
                 android:textSize="16dp" />
         </LinearLayout>
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progsin"
-            android:layout_gravity="center"/>
-
     </LinearLayout>
     </LinearLayout>
 </FrameLayout>

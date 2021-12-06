@@ -149,6 +149,7 @@ public class Signup extends FragmentActivity {
                             }
                             else{
                                 Toast.makeText(Signup.this, validate1.getMessage(), Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
                             }
                         }
                     }
@@ -156,6 +157,7 @@ public class Signup extends FragmentActivity {
                     @Override
                     public void onFailure(Call<Validate> call, Throwable t) {
                         Toast.makeText(Signup.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
             }

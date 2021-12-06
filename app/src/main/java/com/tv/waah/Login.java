@@ -94,6 +94,7 @@ public class Login extends FragmentActivity {
                 else{
                     if(userValid(log_email)) {
                         userLogin();
+                        progressBar.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -130,7 +131,6 @@ public class Login extends FragmentActivity {
         String address = "mactemporary" ;//info.getMacAddress();
 
         LoginResponse loginResponse = new LoginResponse(email,password,null,android.os.Build.DEVICE,android.os.Build.PRODUCT,System.getProperty("os.version"));
-        progressBar.setVisibility(View.VISIBLE);
         Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(loginResponse);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
@@ -150,16 +150,20 @@ public class Login extends FragmentActivity {
                         editorr.apply();
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
+                        progressBar.setVisibility(View.GONE);
                     }
                     else{
                         Toast.makeText(Login.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                     }
                 }
                 else{
                     try {
                         String errorMsg = response.errorBody().string();
                         Toast.makeText(Login.this, errorMsg, Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
                     } catch (Exception e) {
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
@@ -167,6 +171,7 @@ public class Login extends FragmentActivity {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(Login.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

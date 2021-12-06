@@ -65,6 +65,13 @@
             android:shadowColor="@color/black"
             android:drawableLeft="@drawable/ic_baseline_article_24"
             android:drawablePadding="10dp"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/progress_log"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,12 +105,5 @@
                 android:textSize="16dp" />
         </LinearLayout>
     </LinearLayout>
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/progress_log"/>
     </LinearLayout>
 </FrameLayout>
