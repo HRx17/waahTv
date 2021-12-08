@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.Point;
 import android.media.MediaMetadataRetriever;
 import android.os.Build;
+import android.provider.Settings;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -78,5 +79,18 @@ public class Utils {
             mmr.setDataSource(videoUrl);
         }
         return Long.parseLong(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+    }
+
+    // Function to get the device ID, must be passed during login
+    // Apart from login API, the deviceId must be passed as header in all apis.
+    // keep in mind that device_id changes on device format.
+    public static String getDeviceId(Context context) {
+        String deviceId = null;
+        try {
+            deviceId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return deviceId;
     }
 }

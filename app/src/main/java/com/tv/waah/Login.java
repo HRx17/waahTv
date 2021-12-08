@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -13,12 +14,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
+import android.provider.Settings.Secure;
 import androidx.fragment.app.FragmentActivity;
 
 import com.tv.waah.RetrofitFiles.LoginResponse;
 import com.tv.waah.RetrofitFiles.RetrofitClient;
 import com.tv.waah.ui.MainActivity;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Collections;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -127,15 +133,39 @@ public class Login extends FragmentActivity {
         }
     }
 
+    public static String getIPAddress() {
+        try {
+            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface intf : interfaces) {
+                List<InetAddress> addrs = Collections.list(intf.getInetAddresses());
+                for (InetAddress addr : addrs) {
+                    if (!addr.isLoopbackAddress()) {
+                        String sAddr = addr.getHostAddress();
+                        boolean isIPv4 = sAddr.indexOf(':')<0;
+                        if (isIPv4)
+                                return sAddr;
+                        else {
+                            int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
+                            return delim < 0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
     private void userLogin() {
 
         String email = log_email.getText().toString();
         String password = log_pass.getText().toString();
         WifiManager manager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        WifiInfo info = manager.getConnectionInfo();
-        String address = "mactemporary" ;//info.getMacAddress();
 
-        LoginResponse loginResponse = new LoginResponse(email,password,null,android.os.Build.DEVICE,android.os.Build.PRODUCT,System.getProperty("os.version"));
+        String deviceId = Utils.getDeviceId(getApplicationContext());
+        String ip = getIPAddress();
+
+        LoginResponse loginResponse = new LoginResponse(email,password,ip, deviceId, Build.DEVICE + ":" +Build.MODEL, "");
         Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(loginResponse);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
