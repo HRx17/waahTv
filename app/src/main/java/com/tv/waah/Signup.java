@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -111,7 +112,7 @@ public class Signup extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 View view = getCurrentFocus();
-                if(view.getWindowToken()!=null){
+                if(view != null && view.getWindowToken()!=null){
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
@@ -180,8 +181,10 @@ public class Signup extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 View view = getCurrentFocus();
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
                 String tmp1,tmp2;
                 tmp1 = sign_email.getText().toString();
                 tmp2 = sign_pass.getText().toString();
@@ -227,8 +230,9 @@ public class Signup extends FragmentActivity {
             confirmpass.getText().clear();
             return;
         }
-
-        SignupResponse signupResponse = new SignupResponse(email,password,android.os.Build.DEVICE,android.os.Build.PRODUCT, address , System.getProperty("os.version"));
+        String deviceId = Utils.getDeviceId(getApplicationContext());
+        String ip = Utils.getIPAddress();
+        SignupResponse signupResponse = new SignupResponse(email,password, deviceId, Build.DEVICE + ":" +Build.MODEL, ip);
         Call<SignupResponse> call = RetrofitClient.getInstance().getApi().Signup(signupResponse);
         call.enqueue(new Callback<SignupResponse>() {
             @Override

@@ -5,20 +5,17 @@ public class SignupResponse {
     String password;
     String message;
     String errorCode;
-    String macAddress;
+    String ipAddress;
     public String deviceType;
     public String modelNumner;
 
-    public SignupResponse(String email, String password, String deviceType, String modelNumner, String macAddress, String osVersion) {
+    public SignupResponse(String email, String password, String deviceType, String modelNumner, String ipAddress) {
         this.email = email;
-        this.macAddress = macAddress;
+        this.ipAddress = ipAddress;
         this.deviceType = deviceType;
         this.modelNumner = modelNumner;
-        this.osVersion = osVersion;
         this.password = password;
     }
-
-    public String osVersion;
 
     public String getEmail() {
         return email;

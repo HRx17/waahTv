@@ -1,10 +1,9 @@
 package com.tv.waah.RetrofitFiles;
 
 public class LoginResponse {
-    public String macAddress;
+    public String ipAddress;
     public String deviceType;
     public String modelNumner;
-    public String osVersion;
     String errorCode;
     String message;
 
@@ -27,13 +26,12 @@ public class LoginResponse {
     String email;
     String password;
 
-    public LoginResponse(String email, String password,String macAddress, String deviceType, String modelNumner, String osVersion) {
+    public LoginResponse(String email, String password,String ipAddress, String deviceType, String modelNumner) {
         this.email = email;
         this.password = password;
-        this.macAddress = macAddress;
+        this.ipAddress = ipAddress;
         this.deviceType = deviceType;
         this.modelNumner = modelNumner;
-        this.osVersion = osVersion;
     }
 
     public String getEmail() {
@@ -53,12 +51,12 @@ public class LoginResponse {
     }
 
 
-    public String getMacAddress() {
-        return macAddress;
+    public String getIpAddress() {
+        return ipAddress;
     }
 
-    public void setMacAddress(String macAddress) {
-        this.macAddress = macAddress;
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 
     public String getDeviceType() {
@@ -76,15 +74,6 @@ public class LoginResponse {
     public void setModelNumner(String modelNumner) {
         this.modelNumner = modelNumner;
     }
-
-    public String getOsVersion() {
-        return osVersion;
-    }
-
-    public void setOsVersion(String osVersion) {
-        this.osVersion = osVersion;
-    }
-
 
     String emailId;
     String expiryDate;
