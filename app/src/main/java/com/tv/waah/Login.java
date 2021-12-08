@@ -87,7 +87,7 @@ public class Login extends FragmentActivity {
             public void onClick(View v) {
                 String tmp1,tmp2;
                 View view = getCurrentFocus();
-                if(view.getWindowToken()!=null){
+                if(view != null && view.getWindowToken()!=null){
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
