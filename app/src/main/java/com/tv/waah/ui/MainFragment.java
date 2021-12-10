@@ -146,7 +146,7 @@ public class MainFragment extends BrowseSupportFragment {
                     }
                     else if(post.getCategoryType().equals("MOVIES")){
                         Live list2 = new Live();
-                        list2.setTitle(String.valueOf(post.getDisplayName()));
+                        list2.setTitle(post.getDisplayName());
                         list2.setLiveImageUrl(String.valueOf(post.getIconUrl()));
                         list2.setId(post.getDisplayid());
                         list2.setCategory(String.valueOf(post.getCategoryType()));
@@ -154,7 +154,7 @@ public class MainFragment extends BrowseSupportFragment {
                     }
                     else if(post.getCategoryType().equals("SERIES")){
                         Live list3 = new Live();
-                        list3.setTitle(post.getDisplayid());
+                        list3.setTitle(post.getDisplayName());
                         list3.setLiveImageUrl(String.valueOf(post.getIconUrl()));
                         list3.setId(post.getDisplayid());
                         list3.setCategory(String.valueOf(post.getCategoryType()));
@@ -263,11 +263,13 @@ public class MainFragment extends BrowseSupportFragment {
                 Live live = (Live) item;
                 Intent intent = new Intent(getActivity(), LiveDetail.class);
                 LiveDetail.LIVE = live.getId();
+                /*
                 LiveDetail.SHARED_ELEMENT_NAME = live.getId();
                 String[] parts = LiveDetail.SHARED_ELEMENT_NAME.split("_");
                 for(int i=0;i< parts.length;i++){
                     LiveDetail.SHARED_ELEMENT_NAME = parts[i] + " ";
-                }
+                } */
+                LiveDetail.SHARED_ELEMENT_NAME = live.getTitle();
                 LiveDetail.NOTIFICATION_ID = live.getCategory();
                 //intent.putExtra(LiveDetail.LIVE, String.valueOf(((Live) item).id));
                 requireActivity().startActivity(intent);

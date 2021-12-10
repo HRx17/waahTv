@@ -166,7 +166,7 @@ public class SeriesDetailFragment extends BrowseSupportFragment {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void setupUIElements() {
-        setTitle(LiveDetail.LIVE);
+        setTitle(LiveDetail.SHARED_ELEMENT_NAME);
         // Badge, when set, takes precedent
         // over title
         setHeadersState(HEADERS_ENABLED);
