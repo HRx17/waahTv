@@ -107,7 +107,8 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
             @Override
             public void onResponse(Call<SubPost> call, Response<SubPost> response) {
                 if(!response.isSuccessful()) {
-                    Toast.makeText(getActivity(), "Failed to get Response!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Server is down, please try after sometime!", Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
                     return;
                 }
                 List<ChannelList> posts = Objects.requireNonNull(response.body()).getChannelList();

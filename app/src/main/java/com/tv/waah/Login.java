@@ -171,12 +171,13 @@ public class Login extends FragmentActivity {
                 }
                 else{
                     try {
-                        String errorMsg = response.errorBody().string();
+                        String errorMsg = "Server not reachable, please try after sometime!";
                         Toast.makeText(Login.this, errorMsg, Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                     } catch (Exception e) {
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        String errorMsg = "Unhandled error, please try after sometime!";
+                        Toast.makeText(Login.this, errorMsg, Toast.LENGTH_LONG).show();
                     }
                 }
             }

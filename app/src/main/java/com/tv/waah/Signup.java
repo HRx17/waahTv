@@ -158,6 +158,10 @@ public class Signup extends FragmentActivity {
                                 Toast.makeText(Signup.this, validate1.getMessage(), Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
                             }
+                        } else {
+                            String errorMsg = "Server not reachable, please try after sometime!";
+                            Toast.makeText(Signup.this, errorMsg, Toast.LENGTH_LONG).show();
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
 
