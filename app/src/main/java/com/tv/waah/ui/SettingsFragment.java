@@ -6,16 +6,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.leanback.app.GuidedStepFragment;
 import androidx.leanback.widget.GuidanceStylist;
 import androidx.leanback.widget.GuidedAction;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import com.tv.waah.Login;
 import com.tv.waah.R;
+import com.tv.waah.RetrofitFiles.LoginResponse;
+import com.tv.waah.RetrofitFiles.RetrofitClient;
 import com.tv.waah.Splash;
 
 import java.util.List;
@@ -122,6 +130,23 @@ public class SettingsFragment extends GuidedStepFragment {
                                 editor2.apply();
                                 Intent intent = new Intent(getActivity(), Splash.class);
                                 startActivity(intent);
+                                // call the logout api
+                                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("email", 0);
+                                String email = sharedPreferences.getString("email",null);
+                                LoginResponse loginResponse = new LoginResponse(email,null,null, null, null);
+                                Call<LoginResponse> call = RetrofitClient.getInstance().getApi().logout(loginResponse);
+                                call.enqueue(new Callback<LoginResponse>() {
+                                    @Override
+                                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                                        if (!response.isSuccessful())
+                                            Toast.makeText(getActivity().getApplicationContext(), "Error when logging out.!!", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                                        Toast.makeText(getActivity().getApplicationContext(), "Error when logging out!!", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

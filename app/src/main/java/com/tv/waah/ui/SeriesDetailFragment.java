@@ -36,6 +36,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.tv.waah.R;
 import com.tv.waah.RetrofitFiles.JsonPlaceHolderApi;
 import com.tv.waah.RetrofitFiles.RetrofitClient;
+import com.tv.waah.Utils;
 import com.tv.waah.model.ChannelList;
 import com.tv.waah.model.Live;
 import com.tv.waah.model.Seasons;
@@ -106,7 +107,7 @@ public class SeriesDetailFragment extends BrowseSupportFragment {
 
         RetrofitClient retrofitClient = new RetrofitClient();
         JsonPlaceHolderApi jsonPlaceHolderApi = RetrofitClient.getInstance().getApi();
-        Call<SubPost> call = jsonPlaceHolderApi.getSubPosts(MainActivity.USER, LiveDetail.LIVE);
+        Call<SubPost> call = jsonPlaceHolderApi.getSubPosts(Utils.getEncryptedDeviceId(getActivity().getApplicationContext()),MainActivity.USER, LiveDetail.LIVE);
         call.enqueue(new Callback<SubPost>() {
             @Override
             public void onResponse(Call<SubPost> call, Response<SubPost> response) {

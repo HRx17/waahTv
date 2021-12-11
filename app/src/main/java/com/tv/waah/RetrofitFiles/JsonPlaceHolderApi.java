@@ -8,23 +8,24 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface JsonPlaceHolderApi {
 
     @GET("api/getCategoryByUser")
-    Call<List<Post>> getPosts(
+    Call<List<Post>> getPosts(@Header("access") String access,
             @Query("email") String id
     );
 
     @GET("api/getChannelByCatUser")
-    Call<SubPost> getSubPosts(
+    Call<SubPost> getSubPosts(@Header("access") String access,
             @Query("email") String id,
             @Query("category") String cat);
 
     @POST("api/reportfailedchannel")
-    Call<Void> response(@Body FailResponse failResponse);
+    Call<Void> response(@Header("access") String access,@Body FailResponse failResponse);
 
     @POST("api/login")
     Call<LoginResponse> login(@Body LoginResponse loginResponse);
@@ -33,4 +34,7 @@ public interface JsonPlaceHolderApi {
 
     @GET("api/validatecoupon")
     Call<Validate> validate(@Query("coupon") String coupon);
+
+    @POST("api/logout")
+    Call<LoginResponse> logout(@Body LoginResponse loginResponse);
 }

@@ -35,6 +35,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.tv.waah.R;
 import com.tv.waah.RetrofitFiles.JsonPlaceHolderApi;
+import com.tv.waah.Utils;
 import com.tv.waah.data.MyHeaderList;
 import com.tv.waah.model.HeaderItemModel;
 import com.tv.waah.model.Live;
@@ -118,7 +119,8 @@ public class MainFragment extends BrowseSupportFragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        Call<List<Post>> call = jsonPlaceHolderApi.getPosts(MainActivity.USER);
+        String encryptedDeviceId = Utils.getEncryptedDeviceId(getActivity().getApplicationContext());
+        Call<List<Post>> call = jsonPlaceHolderApi.getPosts(encryptedDeviceId,MainActivity.USER);
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, retrofit2.Response<List<Post>> response) {

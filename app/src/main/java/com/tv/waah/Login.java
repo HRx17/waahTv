@@ -137,8 +137,6 @@ public class Login extends FragmentActivity {
 
         String email = log_email.getText().toString();
         String password = log_pass.getText().toString();
-        WifiManager manager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-
         String deviceId = Utils.getDeviceId(getApplicationContext());
         String ip = Utils.getIPAddress();
 
@@ -147,8 +145,8 @@ public class Login extends FragmentActivity {
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                LoginResponse loginResponse = response.body();
                 if(response.isSuccessful()){
+                    LoginResponse loginResponse = response.body();
                     if(loginResponse.getIsActive().equals("true")) {
                         // no need for success message
                        // Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
@@ -165,14 +163,19 @@ public class Login extends FragmentActivity {
                         progressBar.setVisibility(View.GONE);
                     }
                     else{
-                        Toast.makeText(Login.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
+                            Toast.makeText(Login.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                     }
                 }
                 else{
                     try {
-                        String errorMsg = "Server not reachable, please try after sometime!";
-                        Toast.makeText(Login.this, errorMsg, Toast.LENGTH_LONG).show();
+                        String msg = "";
+                        if (response.code() == 403) {
+                            msg = "Server is not reachable, please try after sometime!!";
+                        } else {
+                            msg = response.errorBody().string();
+                        }
+                        Toast.makeText(Login.this, msg, Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                     } catch (Exception e) {
                         progressBar.setVisibility(View.GONE);

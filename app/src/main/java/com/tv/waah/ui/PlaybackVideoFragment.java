@@ -13,6 +13,7 @@ import androidx.leanback.widget.PlaybackControlsRow;
 
 import com.tv.waah.RetrofitFiles.FailResponse;
 import com.tv.waah.RetrofitFiles.RetrofitClient;
+import com.tv.waah.Utils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,7 +79,7 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
                 String error = String.format("what[%s], extra[%s]",convertMessageToString(what), convertMessageToString(extra));
                 FailResponse failResponse = new FailResponse(PlaybackActivity.EMAIL,PlaybackActivity.NAME,PlaybackActivity.URLL,error);
                 Call<Void> call = RetrofitClient
-                        .getInstance().getApi().response(failResponse);
+                        .getInstance().getApi().response(Utils.getEncryptedDeviceId(getActivity().getApplicationContext()),failResponse);
                 call.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {

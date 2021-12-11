@@ -27,15 +27,20 @@ import android.widget.Toast;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import android.util.Base64;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+
+import androidx.annotation.RequiresApi;
 
 /**
  * A collection of utility methods, all static.
  */
 public class Utils {
 
+    private static String deviceId = "";
+    private  static  String encryptedDeviceId = "";
     /*
      * Making sure public utility methods remain static
      */
@@ -113,12 +118,23 @@ public class Utils {
     // Apart from login API, the deviceId must be passed as header in all apis.
     // keep in mind that device_id changes on device format.
     public static String getDeviceId(Context context) {
-        String deviceId = null;
-        try {
+        if ( deviceId == null || deviceId == "")
             deviceId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return deviceId;
+    }
+    // Function to get the device ID, must be passed during login
+    // Apart from login API, the deviceId must be passed as header in all apis.
+    // keep in mind that device_id changes on device format.
+    public static String getEncryptedDeviceId(Context context) {
+        if (encryptedDeviceId == "" || encryptedDeviceId == null) {
+            try {
+                String tempDeviceId = getDeviceId(context);
+                byte[] data = deviceId.getBytes("UTF-8");
+                encryptedDeviceId = Base64.encodeToString(data, Base64.NO_WRAP | Base64.URL_SAFE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return encryptedDeviceId;
     }
 }

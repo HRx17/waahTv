@@ -224,9 +224,6 @@ public class Signup extends FragmentActivity {
     private void userSignup() {
         String email = sign_email.getText().toString();
         String password = sign_pass.getText().toString();
-        WifiManager manager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        WifiInfo info = manager.getConnectionInfo();
-        String address = "mac temp";//info.getMacAddress();
         if (password.contains(" ") || password.length() < 6 )
         {
             Toast.makeText(Signup.this, "Password length must be more than 6 characters.", Toast.LENGTH_LONG).show();
