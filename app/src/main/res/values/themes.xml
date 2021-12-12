@@ -1,4 +1,4 @@
 <resources>
 
-    <style name="Theme.FirstTV" parent="@style/Theme.Leanback" />
+    <style name="Theme.WaahTV" parent="@style/Theme.Leanback" />
 </resources>

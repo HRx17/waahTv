@@ -118,45 +118,29 @@ public class SettingsFragment extends GuidedStepFragment {
                 alertDialog.show();
                 break;
             case R.id.logout:
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                builder1.setTitle("Logout")
-                        .setMessage("Are You Sure You Want To Logout?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("time", 0);
-                                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
-                                editor2.clear();
-                                editor2.apply();
-                                Intent intent = new Intent(getActivity(), Splash.class);
-                                startActivity(intent);
-                                // call the logout api
-                                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("email", 0);
-                                String email = sharedPreferences.getString("email",null);
-                                LoginResponse loginResponse = new LoginResponse(email,null,null, null, null);
-                                Call<LoginResponse> call = RetrofitClient.getInstance().getApi().logout(loginResponse);
-                                call.enqueue(new Callback<LoginResponse>() {
-                                    @Override
-                                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                                        if (!response.isSuccessful())
-                                            Toast.makeText(getActivity().getApplicationContext(), "Error when logging out.!!", Toast.LENGTH_SHORT).show();
-                                    }
+                SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("time", 0);
+                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+                editor2.clear();
+                editor2.apply();
+                Intent intent = new Intent(getActivity(), Splash.class);
+                startActivity(intent);
+                // call the logout api
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("email", 0);
+                String email = sharedPreferences.getString("email",null);
+                LoginResponse loginResponse = new LoginResponse(email,null,null, null, null);
+                Call<LoginResponse> call = RetrofitClient.getInstance().getApi().logout(loginResponse);
+                call.enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                        if (!response.isSuccessful())
+                            Toast.makeText(getActivity().getApplicationContext(), "Error when logging out.!!", Toast.LENGTH_SHORT).show();
+                    }
 
-                                    @Override
-                                    public void onFailure(Call<LoginResponse> call, Throwable t) {
-                                        Toast.makeText(getActivity().getApplicationContext(), "Error when logging out!!", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                AlertDialog alertDialog1 = builder1.create();
-                alertDialog1.show();
+                    @Override
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Error when logging out!!", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
             default :
                 break;
