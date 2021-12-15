@@ -7,7 +7,7 @@ public class RetrofitClient {
 
     private static Retrofit retrofit;
     private static RetrofitClient retrofitClient;
-    private static String BASE_URL = "https://parrot-tv.azurewebsites.net/";
+    public static String BASE_URL = "https://parrot-tv.azurewebsites.net/";
 
     public RetrofitClient() {
         retrofit = new Retrofit.Builder()

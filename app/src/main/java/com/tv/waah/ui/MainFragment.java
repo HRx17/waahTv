@@ -35,6 +35,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.tv.waah.R;
 import com.tv.waah.RetrofitFiles.JsonPlaceHolderApi;
+import com.tv.waah.RetrofitFiles.RetrofitClient;
 import com.tv.waah.Utils;
 import com.tv.waah.data.MyHeaderList;
 import com.tv.waah.model.HeaderItemModel;
@@ -111,11 +112,11 @@ public class MainFragment extends BrowseSupportFragment {
         ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         LiveCatPresenter liveCatPresenter = new LiveCatPresenter();
 
-        ArrayObjectAdapter listRowAdapter1 = new ArrayObjectAdapter(liveCatPresenter);
-        ArrayObjectAdapter listrowadapter2 = new ArrayObjectAdapter(liveCatPresenter);
-        ArrayObjectAdapter listrowadapter3 = new ArrayObjectAdapter(liveCatPresenter);
+        ArrayObjectAdapter liveRowAdapter = new ArrayObjectAdapter(liveCatPresenter);
+        ArrayObjectAdapter moviesRowAdapter = new ArrayObjectAdapter(liveCatPresenter);
+        ArrayObjectAdapter seriesRowAdapter = new ArrayObjectAdapter(liveCatPresenter);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://parrot-tv.azurewebsites.net/")
+                .baseUrl(RetrofitClient.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
@@ -130,37 +131,35 @@ public class MainFragment extends BrowseSupportFragment {
                     return;
                 }
                 List<Post> posts = response.body();
-                int i = 0,k=0,j=0,a=0;
                 for(Post post : Objects.requireNonNull(posts)){
                     if(post.getDisplayid() == null){
                         Toast.makeText(getContext(), response.message(), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     else if(post.getCategoryType().equals("LIVE")){
-                        Live list1 = new Live();
-                        list1.setTitle(post.getDisplayName());
-                        list1.setLiveImageUrl(String.valueOf(post.getIconUrl()));
-                        list1.setId(post.getDisplayid());
-                        list1.setCategory(post.getCategoryType());
-                        listRowAdapter1.add(list1);
-                        i++;
+                        Live liveItem = new Live();
+                        liveItem.setTitle(post.getDisplayName());
+                        liveItem.setLiveImageUrl(String.valueOf(post.getIconUrl()));
+                        liveItem.setId(post.getDisplayid());
+                        liveItem.setCategory(post.getCategoryType());
+                        liveRowAdapter.add(liveItem);
                         progressBar.setVisibility(View.GONE);
                     }
                     else if(post.getCategoryType().equals("MOVIES")){
-                        Live list2 = new Live();
-                        list2.setTitle(post.getDisplayName());
-                        list2.setLiveImageUrl(String.valueOf(post.getIconUrl()));
-                        list2.setId(post.getDisplayid());
-                        list2.setCategory(String.valueOf(post.getCategoryType()));
-                        listrowadapter2.add(list2);
+                        Live movieItem = new Live();
+                        movieItem.setTitle(post.getDisplayName());
+                        movieItem.setLiveImageUrl(String.valueOf(post.getIconUrl()));
+                        movieItem.setId(post.getDisplayid());
+                        movieItem.setCategory(String.valueOf(post.getCategoryType()));
+                        moviesRowAdapter.add(movieItem);
                     }
                     else if(post.getCategoryType().equals("SERIES")){
-                        Live list3 = new Live();
-                        list3.setTitle(post.getDisplayName());
-                        list3.setLiveImageUrl(String.valueOf(post.getIconUrl()));
-                        list3.setId(post.getDisplayid());
-                        list3.setCategory(String.valueOf(post.getCategoryType()));
-                        listrowadapter3.add(list3);
+                        Live series = new Live();
+                        series.setTitle(post.getDisplayName());
+                        series.setLiveImageUrl(String.valueOf(post.getIconUrl()));
+                        series.setId(post.getDisplayid());
+                        series.setCategory(String.valueOf(post.getCategoryType()));
+                        seriesRowAdapter.add(series);
                     }
 
                 }
@@ -169,17 +168,16 @@ public class MainFragment extends BrowseSupportFragment {
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
                 Toast.makeText(getActivity(), t.getMessage() , Toast.LENGTH_SHORT).show();
+                return;
             }
         });
         int k=0;
         HeaderItemModel header = new HeaderItemModel(k,MyHeaderList.HEADER_CATEGORY[k],MyHeaderList.HEADER_img[k]);
-        rowsAdapter.add(new ListRow(header, listRowAdapter1));
-        k++;
-        header = new HeaderItemModel(k,MyHeaderList.HEADER_CATEGORY[k],MyHeaderList.HEADER_img[k]);
-        rowsAdapter.add(new ListRow(header, listrowadapter2));
-        k++;
-        header = new HeaderItemModel(k,MyHeaderList.HEADER_CATEGORY[k],MyHeaderList.HEADER_img[k]);
-        rowsAdapter.add(new ListRow(header, listrowadapter3));
+        rowsAdapter.add(new ListRow(header, liveRowAdapter));
+        header = new HeaderItemModel(k+1,MyHeaderList.HEADER_CATEGORY[k+1],MyHeaderList.HEADER_img[k+1]);
+        rowsAdapter.add(new ListRow(header, moviesRowAdapter));
+        header = new HeaderItemModel(k+2,MyHeaderList.HEADER_CATEGORY[k+2],MyHeaderList.HEADER_img[k+2]);
+        rowsAdapter.add(new ListRow(header, seriesRowAdapter));
         setAdapter(rowsAdapter);
     }
 
