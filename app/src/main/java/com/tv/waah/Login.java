@@ -158,6 +158,10 @@ public class Login extends FragmentActivity {
                         SharedPreferences.Editor editorr = sharedPreferences1.edit();
                         editorr.putString("email", email);
                         editorr.apply();
+                        SharedPreferences sharedPreferences2 = getSharedPreferences("password", 0);
+                        SharedPreferences.Editor editorrr = sharedPreferences2.edit();
+                        editorrr.putString("password", password);
+                        editorrr.apply();
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
                         progressBar.setVisibility(View.GONE);

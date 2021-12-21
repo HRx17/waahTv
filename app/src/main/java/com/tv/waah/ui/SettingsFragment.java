@@ -127,13 +127,14 @@ public class SettingsFragment extends GuidedStepFragment {
                 // call the logout api
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("email", 0);
                 String email = sharedPreferences.getString("email",null);
-                LoginResponse loginResponse = new LoginResponse(email,null,null, null, null);
+                String pass = sharedPreferences.getString("password",null);
+                LoginResponse loginResponse = new LoginResponse(email,pass,null, null, null);
                 Call<LoginResponse> call = RetrofitClient.getInstance().getApi().logout(loginResponse);
                 call.enqueue(new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if (!response.isSuccessful())
-                            Toast.makeText(getActivity().getApplicationContext(), "Error when logging out.!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "logged out.!!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

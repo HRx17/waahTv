@@ -107,8 +107,6 @@ public class MainFragment extends BrowseSupportFragment {
     }
 
     private void loadRows() {
-        //List<Movie> list = MovieList.setupMovies();
-
         ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         LiveCatPresenter liveCatPresenter = new LiveCatPresenter();
 
@@ -187,7 +185,7 @@ public class MainFragment extends BrowseSupportFragment {
         mBackgroundManager.attach(requireActivity().getWindow());
         mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.images));
 
-        mDefaultBackground = ContextCompat.getDrawable(getActivity(), R.drawable.images);
+        mDefaultBackground = ContextCompat.getDrawable(requireActivity(), R.drawable.images);
         mMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
     }
