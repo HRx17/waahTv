@@ -20,6 +20,7 @@ import com.tv.waah.R;
  * @author steve
  *
  */
+
 public class OnUpdateDialog implements OnAppUpdateListener {
     private final Context mContext;
     private final CharSequence mAppName;
