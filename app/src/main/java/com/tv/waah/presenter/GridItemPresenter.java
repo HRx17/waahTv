@@ -29,10 +29,10 @@ import com.tv.waah.R;
 
 
 public abstract class GridItemPresenter extends Presenter {
-    private static int GRID_ITEM_WIDTH = 200;
-    private static int GRID_ITEM_HEIGHT = 200;
+    private static final int GRID_ITEM_WIDTH = 200;
+    private static final int GRID_ITEM_HEIGHT = 200;
 
-    private Fragment mainFragment;
+    private final Fragment mainFragment;
 
     public GridItemPresenter(Fragment fragment) {
         this.mainFragment = fragment;

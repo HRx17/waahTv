@@ -39,9 +39,6 @@ public class MainActivity extends FragmentActivity {
                 }
             }
 
-    public VerticalGridView getVerticalGridView(CustomHeadersFragment customHeadersFragment) { return null;
-    }
-
     public Object updateCurrentFragment(Fragment obj) { return null;
     }
 

@@ -102,7 +102,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         LiveCatPresenter liveCatPresenter = new LiveCatPresenter();
 
         RetrofitClient retrofitClient = new RetrofitClient();
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofitClient.getInstance().getApi();
+        JsonPlaceHolderApi jsonPlaceHolderApi = RetrofitClient.getInstance().getApi();
         Call<SubPost> call = jsonPlaceHolderApi.getSubPosts(Utils.getEncryptedDeviceId(getActivity().getApplicationContext()),MainActivity.USER,LiveDetail.LIVE);
         call.enqueue(new Callback<SubPost>() {
             @Override

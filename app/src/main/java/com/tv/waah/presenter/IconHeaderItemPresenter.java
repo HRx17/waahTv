@@ -35,9 +35,9 @@ public class IconHeaderItemPresenter extends RowHeaderPresenter {
         HeaderItemModel iconHeaderItem = (HeaderItemModel) ((ListRow) o).getHeaderItem();
         View rootView = viewHolder.view;
 
-        ImageView iconView = (ImageView) rootView.findViewById(R.id.header_icon);
+        ImageView iconView = rootView.findViewById(R.id.header_icon);
 
-        TextView label = (TextView) rootView.findViewById(R.id.header_label);
+        TextView label = rootView.findViewById(R.id.header_label);
         label.setText(iconHeaderItem.getName());
         iconView.setImageResource(iconHeaderItem.getIconResId());
     }

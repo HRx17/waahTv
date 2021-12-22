@@ -194,7 +194,7 @@ public class MainFragment extends BrowseSupportFragment {
     private void setupUIElements() {
 //        searchOrbView.getContext().getResources().getAssets();
 //        searchOrbView.setOrbIcon(null);
-        setBadgeDrawable(requireActivity().getResources().getDrawable(R.mipmap.ic_launcher_foreground));
+        setBadgeDrawable(requireActivity().getResources().getDrawable(R.drawable.waahtv_app));
         setTitle(getString(R.string.browse_title));
         // Badge, when set, takes precedent
         // over title
@@ -273,12 +273,7 @@ public class MainFragment extends BrowseSupportFragment {
                 requireActivity().startActivity(intent);
             }
             else if (item instanceof String) {
-                if (((String) item).contains(getString(R.string.error_fragment))) {
-                    Intent intent = new Intent(getActivity(), BrowseErrorActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), ((String) item), Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(getActivity(), ((String) item), Toast.LENGTH_SHORT).show();
             }
         }
     }

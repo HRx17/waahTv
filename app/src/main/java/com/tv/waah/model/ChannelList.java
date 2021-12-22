@@ -10,10 +10,10 @@ public class ChannelList {
 
     @SerializedName("channelName")
     @Expose
-    private String channelName;
+    private final String channelName;
     @SerializedName("channellogo")
     @Expose
-    private String channellogo;
+    private final String channellogo;
 
     public ChannelList(String channelName, String channellogo, String channelurl) {
         this.channelName = channelName;
@@ -23,7 +23,7 @@ public class ChannelList {
 
     @SerializedName("channelurl")
     @Expose
-    private String channelurl;
+    private final String channelurl;
     @SerializedName("seasons")
     @Expose
     private List<Seasons> seasons = null;

@@ -28,6 +28,8 @@ import android.widget.Toast;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import android.util.Base64;
+
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -129,7 +131,7 @@ public class Utils {
         if (encryptedDeviceId == "" || encryptedDeviceId == null) {
             try {
                 String tempDeviceId = getDeviceId(context);
-                byte[] data = deviceId.getBytes("UTF-8");
+                byte[] data = deviceId.getBytes(StandardCharsets.UTF_8);
                 encryptedDeviceId = Base64.encodeToString(data, Base64.NO_WRAP | Base64.URL_SAFE);
             } catch (Exception e) {
                 e.printStackTrace();

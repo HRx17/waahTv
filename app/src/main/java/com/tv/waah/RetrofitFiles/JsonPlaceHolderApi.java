@@ -19,6 +19,10 @@ public interface JsonPlaceHolderApi {
             @Query("email") String id
     );
 
+    @GET("api/serverversion")
+    Call<Update> autoUpdate(@Query("email") String id
+    );
+
     @GET("api/getChannelByCatUser")
     Call<SubPost> getSubPosts(@Header("access") String access,
             @Query("email") String id,
@@ -26,6 +30,9 @@ public interface JsonPlaceHolderApi {
 
     @POST("api/reportfailedchannel")
     Call<Void> response(@Header("access") String access,@Body FailResponse failResponse);
+
+    @POST("api/userproperties")
+    Call<Language> setLang(@Header("access") String access,@Body Language language);
 
     @POST("api/login")
     Call<LoginResponse> login(@Body LoginResponse loginResponse);

@@ -31,12 +31,10 @@ import java.util.List;
 public class SettingsFragment extends GuidedStepFragment {
 
     public static String LANG = "";
-    Switch aSwitch;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        aSwitch = getActivity().findViewById(R.id.switch1);
     }
 
     @NonNull
@@ -50,16 +48,25 @@ public class SettingsFragment extends GuidedStepFragment {
         actions.add(new GuidedAction.Builder()
                 .id(R.id.settings_category_id)
                 .infoOnly(true)
-                .title(getString(R.string.settings_category))
+                .title("Channel Languages:")
                 .focusable(true)
                 .build());
 
         actions.add(new GuidedAction.Builder()
                 .id(R.id.settings_toggle_nav_id)
-                .title("Channels")
-                .description("Channel Languages: "+LANG)
+                .title("Hindi")
+                .description("On")
                 .build());
-
+        actions.add(new GuidedAction.Builder()
+                .id(R.id.southi)
+                .title("South")
+                .description("On")
+                .build());
+        actions.add(new GuidedAction.Builder()
+                .id(R.id.marathi)
+                .title("Marathi")
+                .description("On")
+                .build());
         actions.add(new GuidedAction.Builder()
                 .id(R.id.logout)
                 .title("Logout")
@@ -73,49 +80,32 @@ public class SettingsFragment extends GuidedStepFragment {
     @SuppressLint("ResourceType")
     public void onGuidedActionClicked(final GuidedAction action) {
         switch ((int) action.getId()) {
-            case R.id.settings_toggle_nav_id :
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Channel language")
-                        .setMessage("Preferred languages for channels")
-                        .setPositiveButton("English, Hindi, South", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("language", 0);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("language","Hindi+South");
-                                LANG="English, Hindi, South";
-                                editor.apply();
-                                getActivity().finish();
-                                startActivity(getActivity().getIntent());
-                            }
-                        })
-                        .setNeutralButton("English, Hindi", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("language", 0);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("language","Hindi");
-                                LANG="English, Hindi";
-                                editor.apply();
-                                getActivity().finish();
-                                startActivity(getActivity().getIntent());
-                            }
-                        })
-                        .setNegativeButton("English (default)", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("language", 0);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("language",null);
-                                editor.apply();
-                                LANG="English (default)";
-                                dialog.dismiss();
-                                getActivity().finish();
-                                startActivity(getActivity().getIntent());
-                            }
-                        });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+            case R.id.southi:
+                System.out.println(findActionById(R.id.southi).getDescription().toString());
+                if(findActionById(R.id.southi).getDescription().toString().equals("On")) {
+                    findActionById(R.id.southi).setDescription("Off");
+                }
+                else{
+                    findActionById(R.id.southi).setDescription("On");
+                }
+                break;
+
+            case R.id.marathi:
+                if(findActionById(R.id.southi).getDescription().toString().equals("On")) {
+                    findActionById(R.id.southi).setDescription("Off");
+                }
+                else{
+                    findActionById(R.id.southi).setDescription("On");
+                }
+                break;
+
+            case R.id.settings_toggle_nav_id:
+                if(findActionById(R.id.southi).getDescription().toString().equals("On")) {
+                    findActionById(R.id.southi).setDescription("Off");
+                }
+                else{
+                    findActionById(R.id.southi).setDescription("On");
+                }
                 break;
             case R.id.logout:
                 SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("time", 0);
