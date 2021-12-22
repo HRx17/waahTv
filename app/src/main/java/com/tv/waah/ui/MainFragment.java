@@ -44,6 +44,7 @@ import com.tv.waah.model.Post;
 import com.tv.waah.presenter.IconHeaderItemPresenter;
 import com.tv.waah.presenter.LiveCatPresenter;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
@@ -125,7 +126,13 @@ public class MainFragment extends BrowseSupportFragment {
             public void onResponse(Call<List<Post>> call, retrofit2.Response<List<Post>> response) {
 
                 if(!response.isSuccessful()){
-                    Toast.makeText(getActivity(), "Failed to get response!", Toast.LENGTH_SHORT).show();
+                    String msg = null;
+                    try {
+                        msg = response.errorBody().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 List<Post> posts = response.body();
