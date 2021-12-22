@@ -166,8 +166,6 @@ public class SettingsFragment extends GuidedStepFragment {
                 SharedPreferences.Editor editor2 = sharedPreferences4.edit();
                 editor2.clear();
                 editor2.apply();
-                Intent intent = new Intent(getActivity(), Splash.class);
-                startActivity(intent);
                 // call the logout api
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("email", 0);
                 String email = sharedPreferences.getString("email",null);
@@ -177,8 +175,12 @@ public class SettingsFragment extends GuidedStepFragment {
                 call.enqueue(new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        if (!response.isSuccessful())
+                        if (!response.isSuccessful()) {
                             Toast.makeText(getActivity().getApplicationContext(), "logged out.!!", Toast.LENGTH_SHORT).show();
+                            getActivity().finish();
+                            Intent intent = new Intent(getActivity(), Splash.class);
+                            startActivity(intent);
+                        }
                     }
 
                     @Override
