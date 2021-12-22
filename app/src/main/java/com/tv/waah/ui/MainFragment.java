@@ -190,9 +190,9 @@ public class MainFragment extends BrowseSupportFragment {
 
         mBackgroundManager = BackgroundManager.getInstance(requireActivity());
         mBackgroundManager.attach(requireActivity().getWindow());
-        mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.images));
+        mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.mipmap.images));
 
-        mDefaultBackground = ContextCompat.getDrawable(requireActivity(), R.drawable.images);
+        mDefaultBackground = ContextCompat.getDrawable(requireActivity(), R.mipmap.images);
         mMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
     }
@@ -293,7 +293,7 @@ public class MainFragment extends BrowseSupportFragment {
                 RowPresenter.ViewHolder rowViewHolder,
                 Row row) {
             if(item instanceof Live) {
-                mBackgroundUri = R.drawable.images;
+                mBackgroundUri = R.mipmap.images;
                 startBackgroundTimer();
             }
         }

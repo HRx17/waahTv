@@ -157,7 +157,7 @@ public class SeriesDetailFragment extends BrowseSupportFragment {
 
         mBackgroundManager = BackgroundManager.getInstance(getActivity());
         mBackgroundManager.attach(getActivity().getWindow());
-        mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.images));
+        mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.mipmap.images));
 
         mDefaultBackground = ContextCompat.getDrawable(getActivity(), R.color.background_gradient_end);
         mMetrics = new DisplayMetrics();
@@ -237,7 +237,7 @@ public class SeriesDetailFragment extends BrowseSupportFragment {
                 Object item,
                 RowPresenter.ViewHolder rowViewHolder,
                 Row row) {
-            mBackgroundUri = R.drawable.images;
+            mBackgroundUri = R.mipmap.images;
             startBackgroundTimer();
         }
     }

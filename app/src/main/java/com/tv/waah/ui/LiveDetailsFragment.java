@@ -164,7 +164,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
 
         mBackgroundManager = BackgroundManager.getInstance(getActivity());
         mBackgroundManager.attach(getActivity().getWindow());
-        mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.images));
+        mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.mipmap.images));
 
         mDefaultBackground = ContextCompat.getDrawable(getActivity(), R.color.background_gradient_end);
         mMetrics = new DisplayMetrics();
@@ -251,7 +251,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                 RowPresenter.ViewHolder rowViewHolder,
                 Row row) {
             if(item instanceof Live) {
-                mBackgroundUri = R.drawable.images;
+                mBackgroundUri = R.mipmap.images;
                 startBackgroundTimer();
             }
         }

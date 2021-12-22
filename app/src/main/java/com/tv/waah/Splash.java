@@ -15,12 +15,15 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentActivity;
 
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.tv.waah.RetrofitFiles.JsonPlaceHolderApi;
 import com.tv.waah.RetrofitFiles.RetrofitClient;
 import com.tv.waah.RetrofitFiles.Update;
