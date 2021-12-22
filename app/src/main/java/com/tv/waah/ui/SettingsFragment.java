@@ -70,17 +70,17 @@ public class SettingsFragment extends GuidedStepFragment {
         actions.add(new GuidedAction.Builder()
                 .id(R.id.settings_toggle_nav_id)
                 .title("Hindi")
-                .description("On")
+                .description(SettingsFragment.HINDI)
                 .build());
         actions.add(new GuidedAction.Builder()
                 .id(R.id.southi)
                 .title("South")
-                .description("On")
+                .description(SettingsFragment.SOUTH)
                 .build());
         actions.add(new GuidedAction.Builder()
                 .id(R.id.marathi)
                 .title("Marathi")
-                .description("On")
+                .description(SettingsFragment.MARATHI)
                 .build());
         actions.add(new GuidedAction.Builder()
                 .id(R.id.logout)
@@ -97,55 +97,68 @@ public class SettingsFragment extends GuidedStepFragment {
         switch ((int) action.getId()) {
             case R.id.southi:
                 SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences("south", 0);
-                System.out.println(findActionById(R.id.southi).getDescription().toString());
                 if(findActionById(R.id.southi).getDescription().toString().equals("On")) {
-                    findActionById(R.id.southi).setDescription("Off");
                     SharedPreferences.Editor editor = sharedPreferences1.edit();
-                    editor.putString("South", "Off");
+                    editor.putString("south", "Off");
                     editor.apply();
-                    System.out.println(findActionById(R.id.southi));
+                    SettingsFragment.SOUTH = sharedPreferences1.getString("south","On");
+                    findActionById(R.id.southi).setEditDescription("Off");
+                    getActivity().finish();
+                    startActivity(getActivity().getIntent());
                 }
                 else{
                     SharedPreferences.Editor editor = sharedPreferences1.edit();
-                    editor.putString("South", "On");
+                    editor.putString("south", "On");
                     editor.apply();
+                    SettingsFragment.SOUTH = sharedPreferences1.getString("south","On");
                     findActionById(R.id.southi).setDescription("On");
+                    getActivity().finish();
+                    startActivity(getActivity().getIntent());
                 }
-                SettingsFragment.SOUTH = sharedPreferences1.getString("south","On");
                 break;
 
             case R.id.marathi:
-                SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("south", 0);
+                SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("marathi", 0);
                 if(findActionById(R.id.marathi).getDescription().toString().equals("On")) {
                     SharedPreferences.Editor editor = sharedPreferences2.edit();
-                    editor.putString("South", "Off");
+                    editor.putString("marathi", "Off");
                     editor.apply();
                     findActionById(R.id.marathi).setEditDescription("Off");
+                    SettingsFragment.MARATHI = sharedPreferences2.getString("marathi","On");
+                    getActivity().finish();
+                    startActivity(getActivity().getIntent());
                 }
                 else{
                     SharedPreferences.Editor editor = sharedPreferences2.edit();
-                    editor.putString("South", "On");
+                    editor.putString("marathi", "On");
                     editor.apply();
                     findActionById(R.id.marathi).setDescription("On");
+                    SettingsFragment.MARATHI = sharedPreferences2.getString("marathi","On");
+                    getActivity().finish();
+                    startActivity(getActivity().getIntent());
                 }
-                SettingsFragment.MARATHI = sharedPreferences2.getString("south","On");
                 break;
 
             case R.id.settings_toggle_nav_id:
-                SharedPreferences sharedPreferences3 = getActivity().getSharedPreferences("south", 0);
+                SharedPreferences sharedPreferences3 = getActivity().getSharedPreferences("hindi", 0);
                 if(findActionById(R.id.settings_toggle_nav_id).getDescription().toString().equals("On")) {
                     findActionById(R.id.settings_toggle_nav_id).setDescription("Off");
                     SharedPreferences.Editor editor = sharedPreferences3.edit();
-                    editor.putString("South", "Off");
+                    editor.putString("hindi", "Off");
                     editor.apply();
+                    SettingsFragment.HINDI = sharedPreferences3.getString("hindi","On");
+                    getActivity().finish();
+                    startActivity(getActivity().getIntent());
                 }
                 else{
                     SharedPreferences.Editor editor = sharedPreferences3.edit();
-                    editor.putString("South", "On");
+                    editor.putString("hindi", "On");
                     editor.apply();
                     findActionById(R.id.settings_toggle_nav_id).setDescription("On");
+                    SettingsFragment.HINDI = sharedPreferences3.getString("hindi","On");
+                    getActivity().finish();
+                    startActivity(getActivity().getIntent());
                 }
-                SettingsFragment.HINDI = sharedPreferences3.getString("south","On");
                 break;
 
             case R.id.logout:
