@@ -25,6 +25,7 @@ import com.tv.waah.RetrofitFiles.JsonPlaceHolderApi;
 import com.tv.waah.RetrofitFiles.RetrofitClient;
 import com.tv.waah.RetrofitFiles.Update;
 import com.tv.waah.ui.MainActivity;
+import com.tv.waah.ui.SettingsActivity;
 import com.tv.waah.ui.SettingsFragment;
 
 import java.util.Calendar;
@@ -61,7 +62,9 @@ public class Splash extends FragmentActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("time", 0);
         String userValidityDate = sharedPreferences.getString("time", null);
         email = sharedPreferences.getString("email", null);
-        SettingsFragment.LANG = sharedPreferences.getString("language", "English (default)");
+        SettingsFragment.HINDI = sharedPreferences.getString("hindi", "On");
+        SettingsFragment.SOUTH = sharedPreferences.getString("south", "On");
+        SettingsFragment.MARATHI = sharedPreferences.getString("marathi", "On");
 
         animFadeIn.reset();
         imageView.clearAnimation();
@@ -101,7 +104,7 @@ public class Splash extends FragmentActivity {
                         Intent intent = new Intent(Splash.this, MainActivity.class);
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(Splash.this, Login.class);
+                        Intent intent = new Intent(Splash.this, SettingsActivity.class);
                         startActivity(intent);
                     }
                 }

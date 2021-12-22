@@ -22,15 +22,30 @@ import retrofit2.Response;
 
 import com.tv.waah.Login;
 import com.tv.waah.R;
+import com.tv.waah.RetrofitFiles.JsonPlaceHolderApi;
+import com.tv.waah.RetrofitFiles.Language;
 import com.tv.waah.RetrofitFiles.LoginResponse;
 import com.tv.waah.RetrofitFiles.RetrofitClient;
+import com.tv.waah.RetrofitFiles.langs;
 import com.tv.waah.Splash;
+import com.tv.waah.Utils;
+import com.tv.waah.model.ChannelList;
+import com.tv.waah.model.Seasons;
+import com.tv.waah.model.SubPost;
 
+import org.apache.commons.codec.language.bm.Lang;
+import org.json.JSONException;
+import org.json.JSONStringer;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SettingsFragment extends GuidedStepFragment {
 
-    public static String LANG = "";
+    public static String HINDI = "";
+    public static String SOUTH = "";
+    public static String MARATHI = "";
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -81,35 +96,61 @@ public class SettingsFragment extends GuidedStepFragment {
     public void onGuidedActionClicked(final GuidedAction action) {
         switch ((int) action.getId()) {
             case R.id.southi:
+                SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences("south", 0);
                 System.out.println(findActionById(R.id.southi).getDescription().toString());
                 if(findActionById(R.id.southi).getDescription().toString().equals("On")) {
                     findActionById(R.id.southi).setDescription("Off");
+                    SharedPreferences.Editor editor = sharedPreferences1.edit();
+                    editor.putString("South", "Off");
+                    editor.apply();
+                    System.out.println(findActionById(R.id.southi));
                 }
                 else{
+                    SharedPreferences.Editor editor = sharedPreferences1.edit();
+                    editor.putString("South", "On");
+                    editor.apply();
                     findActionById(R.id.southi).setDescription("On");
                 }
+                SettingsFragment.SOUTH = sharedPreferences1.getString("south","On");
                 break;
 
             case R.id.marathi:
-                if(findActionById(R.id.southi).getDescription().toString().equals("On")) {
-                    findActionById(R.id.southi).setDescription("Off");
+                SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("south", 0);
+                if(findActionById(R.id.marathi).getDescription().toString().equals("On")) {
+                    SharedPreferences.Editor editor = sharedPreferences2.edit();
+                    editor.putString("South", "Off");
+                    editor.apply();
+                    findActionById(R.id.marathi).setEditDescription("Off");
                 }
                 else{
-                    findActionById(R.id.southi).setDescription("On");
+                    SharedPreferences.Editor editor = sharedPreferences2.edit();
+                    editor.putString("South", "On");
+                    editor.apply();
+                    findActionById(R.id.marathi).setDescription("On");
                 }
+                SettingsFragment.MARATHI = sharedPreferences2.getString("south","On");
                 break;
 
             case R.id.settings_toggle_nav_id:
-                if(findActionById(R.id.southi).getDescription().toString().equals("On")) {
-                    findActionById(R.id.southi).setDescription("Off");
+                SharedPreferences sharedPreferences3 = getActivity().getSharedPreferences("south", 0);
+                if(findActionById(R.id.settings_toggle_nav_id).getDescription().toString().equals("On")) {
+                    findActionById(R.id.settings_toggle_nav_id).setDescription("Off");
+                    SharedPreferences.Editor editor = sharedPreferences3.edit();
+                    editor.putString("South", "Off");
+                    editor.apply();
                 }
                 else{
-                    findActionById(R.id.southi).setDescription("On");
+                    SharedPreferences.Editor editor = sharedPreferences3.edit();
+                    editor.putString("South", "On");
+                    editor.apply();
+                    findActionById(R.id.settings_toggle_nav_id).setDescription("On");
                 }
+                SettingsFragment.HINDI = sharedPreferences3.getString("south","On");
                 break;
+
             case R.id.logout:
-                SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("time", 0);
-                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+                SharedPreferences sharedPreferences4 = getActivity().getSharedPreferences("time", 0);
+                SharedPreferences.Editor editor2 = sharedPreferences4.edit();
                 editor2.clear();
                 editor2.apply();
                 Intent intent = new Intent(getActivity(), Splash.class);
@@ -139,4 +180,32 @@ public class SettingsFragment extends GuidedStepFragment {
 
         super.onGuidedActionClicked(action);
     }
+
+    /*
+    String encryptedDeviceId = Utils.getEncryptedDeviceId(getActivity().getApplicationContext());
+    //List<langs> list = new ArrayList<>(3);
+    JSONStringer jsonStringer = null;
+    try{
+    JsonPlaceHolderApi jsonPlaceHolderApi = RetrofitClient.getInstance().getApi().setLang(encryptedDeviceId,);
+    Call<Language> call = jsonPlaceHolderApi.setLang(encryptedDeviceId,);
+        call.enqueue(new Callback<Language>() {
+        @Override
+        public void onResponse(Call<Language> call, Response<Language> response){
+            if (!response.isSuccessful()) {
+                Toast.makeText(getActivity(), "Failed to get Response!", Toast.LENGTH_SHORT).show();
+            }
+            List<ChannelList> posts = Objects.requireNonNull(response.body()).getChannelList();
+            System.out.println(posts);
+            for (ChannelList post : posts) {
+                if (post == null) {
+                    Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
+
+                } else if (post.getChannelName().equals()) {
+                    for (Seasons seasonsList : post.getSeasons()) {
+                    }
+                }
+            }
+        }
+        };
+}*/
 }

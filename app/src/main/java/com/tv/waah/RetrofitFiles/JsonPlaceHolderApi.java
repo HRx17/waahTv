@@ -1,7 +1,10 @@
 package com.tv.waah.RetrofitFiles;
 
+import com.google.gson.JsonObject;
 import com.tv.waah.model.Post;
 import com.tv.waah.model.SubPost;
+
+import org.json.JSONStringer;
 
 import java.util.List;
 
@@ -32,7 +35,7 @@ public interface JsonPlaceHolderApi {
     Call<Void> response(@Header("access") String access,@Body FailResponse failResponse);
 
     @POST("api/userproperties")
-    Call<Language> setLang(@Header("access") String access,@Body Language language);
+    Call<String> setLang(@Header("access") String access,@Body JSONStringer data);
 
     @POST("api/login")
     Call<LoginResponse> login(@Body LoginResponse loginResponse);

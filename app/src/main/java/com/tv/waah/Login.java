@@ -58,6 +58,19 @@ public class Login extends FragmentActivity {
         progressBar = findViewById(R.id.progress_log);
         progressBar.setVisibility(View.GONE);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("hindi", 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("hindi", "On");
+        editor.apply();
+        SharedPreferences sharedPreferences1 = getSharedPreferences("south", 0);
+        SharedPreferences.Editor editorr = sharedPreferences1.edit();
+        editorr.putString("south", "On");
+        editorr.apply();
+        SharedPreferences sharedPreferences2 = getSharedPreferences("marathi", 0);
+        SharedPreferences.Editor editorrr = sharedPreferences2.edit();
+        editorrr.putString("marathi", "On");
+        editorrr.apply();
+
         login.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {

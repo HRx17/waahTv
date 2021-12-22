@@ -105,7 +105,6 @@ public class SeriesDetailFragment extends BrowseSupportFragment {
         ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         LiveCatPresenter liveCatPresenter = new LiveCatPresenter();
 
-        RetrofitClient retrofitClient = new RetrofitClient();
         JsonPlaceHolderApi jsonPlaceHolderApi = RetrofitClient.getInstance().getApi();
         Call<SubPost> call = jsonPlaceHolderApi.getSubPosts(Utils.getEncryptedDeviceId(getActivity().getApplicationContext()),MainActivity.USER, LiveDetail.LIVE);
         call.enqueue(new Callback<SubPost>() {
