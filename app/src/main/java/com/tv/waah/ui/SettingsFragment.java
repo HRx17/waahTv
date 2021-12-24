@@ -177,7 +177,6 @@ public class SettingsFragment extends GuidedStepFragment {
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if (!response.isSuccessful()) {
                             Toast.makeText(getActivity().getApplicationContext(), "logged out.!!", Toast.LENGTH_SHORT).show();
-                            getActivity().finish();
                             Intent intent = new Intent(getActivity(), Splash.class);
                             startActivity(intent);
                         }

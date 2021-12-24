@@ -2,6 +2,9 @@ package com.tv.waah.ui;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -19,8 +22,26 @@ public class MainActivity extends FragmentActivity {
     public static String PREFS_ROOT;
     public static String USER;
 
-    public void onBackPressed(){
-        return;
+    boolean doubleBackToExitPressedOnce = false;
+
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     public static boolean isUsingStandardBrowseFragment() { return true;

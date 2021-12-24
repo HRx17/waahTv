@@ -1,5 +1,6 @@
 package com.tv.waah.RetrofitFiles;
 
+
 public class LoginResponse {
     public String ipAddress;
     public String deviceType;

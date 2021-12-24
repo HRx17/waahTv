@@ -7,6 +7,8 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -37,7 +39,7 @@ public class Login extends FragmentActivity {
     Button skiptoo;
     ProgressBar progressBar;
 
-    public void onBackPressed(){
+    /*public void onBackPressed(){
 
         View view = this.getCurrentFocus();
         if (view != null) {
@@ -45,6 +47,26 @@ public class Login extends FragmentActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
         return;
+    }*/
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
     @Override

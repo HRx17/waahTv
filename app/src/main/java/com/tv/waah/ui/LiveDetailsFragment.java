@@ -73,7 +73,7 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
         Log.i(TAG, "onCreate");
         super.onCreate(savedInstanceState);
 
-        progressBar = getActivity().findViewById(R.id.progres);
+        progressBar = getActivity().findViewById(R.id.progresswait);
         progressBar.setVisibility(View.VISIBLE);
         //mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.default_background));
 

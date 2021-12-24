@@ -13,10 +13,10 @@ public class SeriesDetailsActivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.seriesdetail);
+        setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.series_browse_fragment, new SeriesDetailFragment())
+                    .replace(R.id.main_browse_fragment, new SeriesDetailFragment())
                     .commitNow();
         }
     }

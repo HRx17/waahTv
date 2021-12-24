@@ -76,7 +76,7 @@ public class SeriesDetailFragment extends BrowseSupportFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate");
         super.onActivityCreated(savedInstanceState);
-        progressBar = getActivity().findViewById(R.id.progg);
+        progressBar = getActivity().findViewById(R.id.progresswait);
         progressBar.setVisibility(View.VISIBLE);
 
         //mBackgroundManager.setDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.default_background));

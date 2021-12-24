@@ -51,6 +51,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Calendar;
 
 import retrofit2.Call;
@@ -126,9 +128,11 @@ public class Splash extends FragmentActivity {
                     if (check != 0) {
                         Intent intent = new Intent(Splash.this, MainActivity.class);
                         startActivity(intent);
+                        finish();
                     } else {
                         Intent intent = new Intent(Splash.this, Login.class);
                         startActivity(intent);
+                        finish();
                     }
                 }
             }
@@ -148,71 +152,46 @@ public class Splash extends FragmentActivity {
                 public void onResponse(Call<Update> call, Response<Update> response) {
                     if (response.isSuccessful()) {
                         Update update = response.body();
-                        if (update.getVersionCode() != Currentversion) {
+                        assert update != null;
+                        if (!update.getVersionCode().equals(Currentversion)) {
+                            System.out.println(update.getVersionCode());
                             String upadte_url = update.getPackag();
                             String update_version = update.getChangelog();
                             Toast.makeText(context, "Downloading request on url :" + upadte_url, Toast.LENGTH_SHORT).show();
-
                             try {
 
-                                String PATH = Environment.getExternalStorageDirectory() + "/Downloader/";
+                                URL url = new URL(upadte_url);
+                                HttpURLConnection c = (HttpURLConnection) url.openConnection();
+                                c.setRequestMethod("GET");
+                                c.setDoOutput(true);
+                                c.connect();
+
+                                String PATH = Environment.getExternalStorageDirectory() + "/download/";
                                 File file = new File(PATH);
                                 file.mkdirs();
-                                // Create a file on the external storage under download
                                 File outputFile = new File(file, "app.apk");
                                 FileOutputStream fos = new FileOutputStream(outputFile);
 
-                                HttpGet m_httpGet = null;
-                                HttpResponse m_httpResponse = null;
+                                InputStream is = c.getInputStream();
 
-                                // Create a http client with the parameters
-                                HttpClient m_httpClient = setupHttpClient();
-                                String result = null;
-
-                                try {
-
-                                    // Create a get object
-                                    m_httpGet = new HttpGet(upadte_url);
-
-                                    // Execute the html request
-                                    m_httpResponse = m_httpClient.execute(m_httpGet);
-                                    HttpEntity entity = m_httpResponse.getEntity();
-
-                                    // See if we get a response
-                                    if (entity != null) {
-
-                                        InputStream instream = entity.getContent();
-                                        byte[] buffer = new byte[1024];
-
-                                        // Write out the file
-                                        int len1 = 0;
-                                        while ((len1 = instream.read(buffer)) != -1) {
-                                            fos.write(buffer, 0, len1);
-                                        }
-                                        fos.close();
-                                        instream.close();// till here, it works fine - .apk is download to my sdcard in download file
-
-                                    }
-
-                                } catch (ConnectTimeoutException cte) {
-                                    Toast.makeText(Splash.this, "Connection Timeout", Toast.LENGTH_SHORT).show();
-                                } catch (Exception e) {
-                                } finally {
-                                    m_httpClient.getConnectionManager().closeExpiredConnections();
+                                byte[] buffer = new byte[1024];
+                                int len1 = 0;
+                                while ((len1 = is.read(buffer)) != -1) {
+                                    fos.write(buffer, 0, len1);
                                 }
+                                fos.close();
+                                is.close();
 
                                 Intent intent = new Intent(Intent.ACTION_VIEW);
                                 intent.setDataAndType(
                                         Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/download/" + "app.apk")),
                                         "application/vnd.android.package-archive");
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                Splash.this.getApplicationContext().startActivity(intent);
+                                startActivity(intent);
 
                                 // System.exit(0);
 
-                            } catch (IOException e) {
-
-                            } catch (Exception e1) {
+                            }  catch (Exception e1) {
                             }
                            /*
                             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(upadte_url));
