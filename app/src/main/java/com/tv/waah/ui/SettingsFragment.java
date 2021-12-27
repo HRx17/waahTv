@@ -43,9 +43,6 @@ import java.util.Objects;
 
 public class SettingsFragment extends GuidedStepFragment {
 
-    public static String HINDI = "";
-    public static String SOUTH = "";
-    public static String MARATHI = "";
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -68,21 +65,6 @@ public class SettingsFragment extends GuidedStepFragment {
                 .build());
 
         actions.add(new GuidedAction.Builder()
-                .id(R.id.settings_toggle_nav_id)
-                .title("Hindi")
-                .description(SettingsFragment.HINDI)
-                .build());
-        actions.add(new GuidedAction.Builder()
-                .id(R.id.southi)
-                .title("South")
-                .description(SettingsFragment.SOUTH)
-                .build());
-        actions.add(new GuidedAction.Builder()
-                .id(R.id.marathi)
-                .title("Marathi")
-                .description(SettingsFragment.MARATHI)
-                .build());
-        actions.add(new GuidedAction.Builder()
                 .id(R.id.logout)
                 .title("Logout")
                 .checked(!MainActivity.isUsingStandardBrowseFragment())
@@ -95,77 +77,8 @@ public class SettingsFragment extends GuidedStepFragment {
     @SuppressLint("ResourceType")
     public void onGuidedActionClicked(final GuidedAction action) {
         switch ((int) action.getId()) {
-            case R.id.southi:
-                SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences("south", 0);
-                if(findActionById(R.id.southi).getDescription().toString().equals("On")) {
-                    SharedPreferences.Editor editor = sharedPreferences1.edit();
-                    editor.putString("south", "Off");
-                    editor.apply();
-                    SettingsFragment.SOUTH = sharedPreferences1.getString("south","On");
-                    findActionById(R.id.southi).setEditDescription("Off");
-                    getActivity().finish();
-                    startActivity(getActivity().getIntent());
-                }
-                else{
-                    SharedPreferences.Editor editor = sharedPreferences1.edit();
-                    editor.putString("south", "On");
-                    editor.apply();
-                    SettingsFragment.SOUTH = sharedPreferences1.getString("south","On");
-                    findActionById(R.id.southi).setDescription("On");
-                    getActivity().finish();
-                    startActivity(getActivity().getIntent());
-                }
-                break;
-
-            case R.id.marathi:
-                SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("marathi", 0);
-                if(findActionById(R.id.marathi).getDescription().toString().equals("On")) {
-                    SharedPreferences.Editor editor = sharedPreferences2.edit();
-                    editor.putString("marathi", "Off");
-                    editor.apply();
-                    findActionById(R.id.marathi).setEditDescription("Off");
-                    SettingsFragment.MARATHI = sharedPreferences2.getString("marathi","On");
-                    getActivity().finish();
-                    startActivity(getActivity().getIntent());
-                }
-                else{
-                    SharedPreferences.Editor editor = sharedPreferences2.edit();
-                    editor.putString("marathi", "On");
-                    editor.apply();
-                    findActionById(R.id.marathi).setDescription("On");
-                    SettingsFragment.MARATHI = sharedPreferences2.getString("marathi","On");
-                    getActivity().finish();
-                    startActivity(getActivity().getIntent());
-                }
-                break;
-
-            case R.id.settings_toggle_nav_id:
-                SharedPreferences sharedPreferences3 = getActivity().getSharedPreferences("hindi", 0);
-                if(findActionById(R.id.settings_toggle_nav_id).getDescription().toString().equals("On")) {
-                    findActionById(R.id.settings_toggle_nav_id).setDescription("Off");
-                    SharedPreferences.Editor editor = sharedPreferences3.edit();
-                    editor.putString("hindi", "Off");
-                    editor.apply();
-                    SettingsFragment.HINDI = sharedPreferences3.getString("hindi","On");
-                    getActivity().finish();
-                    startActivity(getActivity().getIntent());
-                }
-                else{
-                    SharedPreferences.Editor editor = sharedPreferences3.edit();
-                    editor.putString("hindi", "On");
-                    editor.apply();
-                    findActionById(R.id.settings_toggle_nav_id).setDescription("On");
-                    SettingsFragment.HINDI = sharedPreferences3.getString("hindi","On");
-                    getActivity().finish();
-                    startActivity(getActivity().getIntent());
-                }
-                break;
 
             case R.id.logout:
-                SharedPreferences sharedPreferences4 = getActivity().getSharedPreferences("time", 0);
-                SharedPreferences.Editor editor2 = sharedPreferences4.edit();
-                editor2.clear();
-                editor2.apply();
                 // call the logout api
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("email", 0);
                 String email = sharedPreferences.getString("email",null);
@@ -177,6 +90,19 @@ public class SettingsFragment extends GuidedStepFragment {
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if (!response.isSuccessful()) {
                             Toast.makeText(getActivity().getApplicationContext(), "logged out.!!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getActivity(), Splash.class);
+                            startActivity(intent);
+                            SharedPreferences sharedPreferences4 = getActivity().getSharedPreferences("time", 0);
+                            SharedPreferences.Editor editor2 = sharedPreferences4.edit();
+                            editor2.clear();
+                            editor2.apply();
+                        }
+                        else{
+                            SharedPreferences sharedPreferences4 = getActivity().getSharedPreferences("time", 0);
+                            SharedPreferences.Editor editor2 = sharedPreferences4.edit();
+                            editor2.clear();
+                            editor2.apply();
+                            Toast.makeText(getActivity(), response.message(), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getActivity(), Splash.class);
                             startActivity(intent);
                         }
@@ -194,32 +120,4 @@ public class SettingsFragment extends GuidedStepFragment {
 
         super.onGuidedActionClicked(action);
     }
-
-    /*
-    String encryptedDeviceId = Utils.getEncryptedDeviceId(getActivity().getApplicationContext());
-    //List<langs> list = new ArrayList<>(3);
-    JSONStringer jsonStringer = null;
-    try{
-    JsonPlaceHolderApi jsonPlaceHolderApi = RetrofitClient.getInstance().getApi().setLang(encryptedDeviceId,);
-    Call<Language> call = jsonPlaceHolderApi.setLang(encryptedDeviceId,);
-        call.enqueue(new Callback<Language>() {
-        @Override
-        public void onResponse(Call<Language> call, Response<Language> response){
-            if (!response.isSuccessful()) {
-                Toast.makeText(getActivity(), "Failed to get Response!", Toast.LENGTH_SHORT).show();
-            }
-            List<ChannelList> posts = Objects.requireNonNull(response.body()).getChannelList();
-            System.out.println(posts);
-            for (ChannelList post : posts) {
-                if (post == null) {
-                    Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
-
-                } else if (post.getChannelName().equals()) {
-                    for (Seasons seasonsList : post.getSeasons()) {
-                    }
-                }
-            }
-        }
-        };
-}*/
 }
