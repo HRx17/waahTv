@@ -208,12 +208,7 @@ public class Login extends FragmentActivity {
                 }
                 else{
                     try {
-                        String msg = "";
-                        if (response.code() == 403) {
-                            msg = "Server is not reachable, please try after sometime!!";
-                        } else {
-                            msg = response.errorBody().string();
-                        }
+                        String msg = response.errorBody().string();
                         Toast.makeText(Login.this, msg, Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                     } catch (Exception e) {
