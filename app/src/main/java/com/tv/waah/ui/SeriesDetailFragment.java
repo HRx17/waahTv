@@ -226,6 +226,8 @@ public class SeriesDetailFragment extends BrowseSupportFragment {
                 PlaybackActivity.NAME = live.getTitle();
                 Intent intent = new Intent(getActivity(), PlaybackActivity.class);
                 requireActivity().startActivity(intent);
+                PlaybackActivity.SERIES="0";
+                getActivity().finish();
             }
         }
     }

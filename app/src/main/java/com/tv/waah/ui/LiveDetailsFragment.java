@@ -174,8 +174,6 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
     @SuppressLint("UseCompatLoadingForDrawables")
     private void setupUIElements() {
         setTitle(LiveDetail.SHARED_ELEMENT_NAME);
-        // Badge, when set, takes precedent
-        // over title
         setHeadersState(HEADERS_DISABLED);
         setHeadersTransitionOnBackEnabled(false);
         // set fastLane (or headers) background color
@@ -233,12 +231,14 @@ public class LiveDetailsFragment extends BrowseSupportFragment {
                 PlaybackActivity.NAME = live.getTitle();
                 Intent intent = new Intent(getActivity(), PlaybackActivity.class);
                 requireActivity().startActivity(intent);
+                getActivity().finish();
             }
             else{
                 Live live = (Live) item;
                 SeriesDetailFragment.SERIESNAME = live.getTitle();
                 Intent intent = new Intent(getActivity(), SeriesDetailsActivity.class);
                 requireActivity().startActivity(intent);
+                getActivity().finish();
             }
         }
     }

@@ -266,16 +266,10 @@ public class MainFragment extends BrowseSupportFragment {
                 Live live = (Live) item;
                 Intent intent = new Intent(getActivity(), LiveDetail.class);
                 LiveDetail.LIVE = live.getId();
-                /*
-                LiveDetail.SHARED_ELEMENT_NAME = live.getId();
-                String[] parts = LiveDetail.SHARED_ELEMENT_NAME.split("_");
-                for(int i=0;i< parts.length;i++){
-                    LiveDetail.SHARED_ELEMENT_NAME = parts[i] + " ";
-                } */
                 LiveDetail.SHARED_ELEMENT_NAME = live.getTitle();
                 LiveDetail.NOTIFICATION_ID = live.getCategory();
-                //intent.putExtra(LiveDetail.LIVE, String.valueOf(((Live) item).id));
                 requireActivity().startActivity(intent);
+                getActivity().finish();
             }
             else if (item instanceof String) {
                 Toast.makeText(getActivity(), ((String) item), Toast.LENGTH_SHORT).show();
