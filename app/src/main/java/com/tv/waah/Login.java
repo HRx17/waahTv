@@ -38,22 +38,13 @@ public class Login extends FragmentActivity {
     Button login;
     Button skiptoo;
     ProgressBar progressBar;
-
-    /*public void onBackPressed(){
-
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-        return;
-    }*/
     boolean doubleBackToExitPressedOnce = false;
 
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
+            finish();
             return;
         }
 

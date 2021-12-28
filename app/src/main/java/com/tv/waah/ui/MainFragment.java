@@ -225,6 +225,7 @@ public class MainFragment extends BrowseSupportFragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(),SettingsActivity.class);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
 

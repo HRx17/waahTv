@@ -44,7 +44,6 @@ import java.util.Objects;
 
 public class SettingsFragment extends GuidedStepFragment {
 
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -89,13 +88,14 @@ public class SettingsFragment extends GuidedStepFragment {
                 call.enqueue(new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                            Toast.makeText(getActivity().getApplicationContext(), "logged out.!!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getActivity(), Login.class);
-                            startActivity(intent);
-                            SharedPreferences sharedPreferences4 = getActivity().getSharedPreferences("time", 0);
-                            SharedPreferences.Editor editor2 = sharedPreferences4.edit();
-                            editor2.clear();
-                            editor2.apply();
+                        Toast.makeText(getActivity().getApplicationContext(), "logged out.!!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), Login.class);
+                        startActivity(intent);
+                        SharedPreferences sharedPreferences4 = getActivity().getSharedPreferences("time", 0);
+                        SharedPreferences.Editor editor2 = sharedPreferences4.edit();
+                        editor2.clear();
+                        editor2.apply();
+                        getActivity().finish();
                     }
                     @Override
                     public void onFailure(Call<LoginResponse> call, Throwable t) {
