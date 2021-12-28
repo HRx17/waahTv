@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -88,26 +89,14 @@ public class SettingsFragment extends GuidedStepFragment {
                 call.enqueue(new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        if (!response.isSuccessful()) {
                             Toast.makeText(getActivity().getApplicationContext(), "logged out.!!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getActivity(), Splash.class);
+                            Intent intent = new Intent(getActivity(), Login.class);
                             startActivity(intent);
                             SharedPreferences sharedPreferences4 = getActivity().getSharedPreferences("time", 0);
                             SharedPreferences.Editor editor2 = sharedPreferences4.edit();
                             editor2.clear();
                             editor2.apply();
-                        }
-                        else{
-                            SharedPreferences sharedPreferences4 = getActivity().getSharedPreferences("time", 0);
-                            SharedPreferences.Editor editor2 = sharedPreferences4.edit();
-                            editor2.clear();
-                            editor2.apply();
-                            Toast.makeText(getActivity(), response.message(), Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getActivity(), Splash.class);
-                            startActivity(intent);
-                        }
                     }
-
                     @Override
                     public void onFailure(Call<LoginResponse> call, Throwable t) {
                         Toast.makeText(getActivity().getApplicationContext(), "Error when logging out!!", Toast.LENGTH_SHORT).show();
