@@ -129,6 +129,8 @@ public class Login extends FragmentActivity {
                     Toast.makeText(Login.this, "Please enter email and password!", Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    startActivity(intent);
                     if(userValid(log_email)) {
                         userLogin();
                         progressBar.setVisibility(View.VISIBLE);
@@ -167,6 +169,7 @@ public class Login extends FragmentActivity {
         String ip = Utils.getIPAddress();
 
         LoginResponse loginResponse = new LoginResponse(email,password,ip, deviceId, Build.DEVICE + ":" +Build.MODEL);
+
         Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(loginResponse);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
